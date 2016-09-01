@@ -1,0 +1,11 @@
+{
+  "Send SMS settings page"            : "Send SMS settings page",
+  "provider and login information"    : "provider and login information",
+  "Provider"                          : "Provider",
+  "Username"                          : "Username",
+  "Password"                          : "Password",
+  "From number"                       : "From number",
+  "Test number"                       : "Test number",
+  "Test message"                      : "Test message",
+  "Save"                              : "Save"
+}

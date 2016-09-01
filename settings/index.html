@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+    <head>
+      <script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
+    </head>
+    <body>
+        <h1 data-i18n="Send SMS settings page"> </h1>
+        <fieldset>
+            <legend data-i18n="provider and login information"> </legend>
+            <div class="field row">
+              <label for="provider" data-i18n="Provider"> </label>
+              <select id="provider" onchange="providerSelected()" >
+                <option value="http://textbelt.com/intl">Textbelt (Intl)</option>
+                <option value="http://textbelt.com/text">Textbelt (US)</option>
+                <option value="http://textbelt.com/canada">Textbelt (CN)</option>
+                <option value="https://www.12VoIP.com">12VoIP</option>
+                <option value="https://www.Actionvoip.com">Actionvoip</option>
+                <option value="https://www.BrowserCalls.com">BrowserCalls</option>
+                <option value="https://www.BudgetVoipCall.com">BudgetVoipCall</option>
+                <option value="https://www.Call2India.com">Call2India</option>
+                <option value="https://www.CallEasy.com">CallEasy</option>
+                <option value="https://www.CallingCredit.com">CallingCredit</option>
+                <option value="https://www.CallPirates.com">CallPirates</option>
+                <option value="https://www.CheapBuzzer.com">CheapBuzzer</option>
+                <option value="https://www.CheapVoip.com">CheapVoip</option>
+                <option value="https://www.CheapVoipCall.com">CheapVoipCall</option>
+                <option value="https://www.CosmoVoip.com">CosmoVoip</option>
+                <option value="https://www.DialCheap.com">DialCheap</option>
+                <option value="https://www.DialNow.com">DialNow</option>
+                <option value="https://www.DiscountCalling.com">DiscountCalling</option>
+                <option value="https://www.DiscountVoip.com">DiscountVoip</option>
+                <option value="https://www.EasyVoip.com">EasyVoip</option>
+                <option value="https://www.FreeCall.com">FreeCall</option>
+                <option value="https://www.FreeVoipDeal.com">FreeVoipDeal</option>
+                <option value="https://www.Frynga.com">Frynga</option>
+                <option value="https://www.GlobalFreecall.com">GlobalFreecall</option>
+                <option value="https://www.HotVoip.com">HotVoip</option>
+                <option value="https://www.Internetcalls.com">Internetcalls</option>
+                <option value="https://www.InterVoip.com">InterVoip</option>
+                <option value="https://www.Jumblo.com">Jumblo</option>
+                <option value="https://www.JustVoip.com">JustVoip</option>
+                <option value="https://www.Low-rate Voip.com">Low-rate Voip</option>
+                <option value="https://www.MegaVoip.com">MegaVoip</option>
+                <option value="https://www.MexicoBarato.com">MexicoBarato</option>
+                <option value="https://www.NairaCalls.com">NairaCalls</option>
+                <option value="https://www.Netappel.com">Netappel</option>
+                <option value="https://www.Nonoh.com">Nonoh</option>
+                <option value="https://www.PanggilanMalaysia.com">PanggilanMalaysia</option>
+                <option value="https://www.PennyConnect.com">PennyConnect</option>
+                <option value="https://www.PinoyDialer.com">PinoyDialer</option>
+                <option value="https://www.poivY.com">poivY</option>
+                <option value="https://www.PowerVoip.com">PowerVoip</option>
+                <option value="https://www.RebVoice.com">RebVoice</option>
+                <option value="https://www.Rynga.com">Rynga</option>
+                <option value="https://www.SIPDiscount.com">SIPDiscount</option>
+                <option value="https://www.SmartVoip.com">SmartVoip</option>
+                <option value="https://www.SMSDiscount.com">SMSDiscount</option>
+                <option value="https://www.SMSLISTO.com">SMSLISTO</option>
+                <option value="https://www.StuntCalls.com">StuntCalls</option>
+                <option value="https://www.Telbo.com">Telbo</option>
+                <option value="https://www.Voipblast.com">Voipblast</option>
+                <option value="https://www.VoipBlazer.com">VoipBlazer</option>
+                <option value="https://www.VoipBuster.com">VoipBuster</option>
+                <option value="https://www.VoipbusterPro.com">VoipbusterPro</option>
+                <option value="https://www.VoipCaptain.com">VoipCaptain</option>
+                <option value="https://www.VoIPCheap.com">VoIPCheap</option>
+                <option value="https://www.VoipCheap.com">VoipCheap</option>
+                <option value="https://www.VoipChief.com">VoipChief</option>
+                <option value="https://www.VoipDiscount.com">VoipDiscount</option>
+                <option value="https://www.VoipGain.com">VoipGain</option>
+                <option value="https://www.VoipJumper.com">VoipJumper</option>
+                <option value="https://www.VoipMove.com">VoipMove</option>
+                <option value="https://www.VoipRaider.com">VoipRaider</option>
+                <option value="https://www.VoipSmash.com">VoipSmash</option>
+                <option value="https://www.VoipStunt.com">VoipStunt</option>
+                <option value="https://www.VoipWise.com">VoipWise</option>
+                <option value="https://www.VoipZoom.com">VoipZoom</option>
+                <option value="https://www.WebCallDirect.com">WebCallDirect</option>
+              </select>
+            </div>
+            <div class="field row">
+                <label for="username" data-i18n="Username"> </label>
+                <input id="username" type="text" value="" />
+            </div>
+            <div class="field row">
+                <label for="password" data-i18n="Password"> </label>
+                <input id="password" type="password" value="" />
+            </div>
+            <div class="field row">
+                <label for="from" data-i18n="From number"> </label>
+                <input id="from" type="text" placeholder="optional" value="" />
+            </div>
+            <div class="field row">
+                <label for="to" data-i18n="Test number"> </label>
+                <input id="to" type="text" value="" />
+            </div>
+            <div class="field row">
+                <label for="testMessage" data-i18n="Test message"> </label>
+                <textarea id="testMessage"></textarea>
+            </div>
+            <div id="testresult"></div>
+        </fieldset>
+        <button class="right" id="button_save" onclick="save()" data-i18n="Save"> </button>
+
+        <script type="text/javascript">
+
+        var button_save = document.getElementById('button_save');
+        var saveData;
+
+        // triggered when user opens settings page
+        function onHomeyReady(){
+          document.getElementById('testresult').innerHTML = "";
+          button_save.disabled = true; // Disable save button until settings have been saved
+          document.getElementById('username').disabled=true;
+          document.getElementById('password').disabled=true;
+          document.getElementById('from').disabled=true;
+          Homey.get('settings', function(err, storedData) {
+            if (err) {
+              console.log(err)
+            } else {
+              //console.log('got data: ', storedData);
+              if (storedData != (null || undefined)) {
+                document.getElementById('provider').value = storedData.provider;
+                document.getElementById('username').value = storedData.username;
+                document.getElementById('password').value = storedData.password;
+                document.getElementById('from').value = storedData.from;
+                document.getElementById('to').value = storedData.to;
+                document.getElementById('testMessage').value = storedData.testMessage;
+              }
+            }
+            button_save.disabled = false;
+          });
+          Homey.ready();  //ready to show the settings page
+        }
+
+        function save() {
+          document.getElementById('testresult').innerHTML = "";
+
+          saveData = {
+            provider    : document.getElementById('provider').value,
+            username    : document.getElementById('username').value,
+            password    : document.getElementById('password').value,
+            from        : document.getElementById('from').value,
+            toTest      : document.getElementById('to').value,
+            testMessage : document.getElementById('testMessage').value,
+            url         : ''
+          };
+
+          Homey.set('testing',saveData, function (error, settings) {     //triggers an event in app.js
+            if (error) {return console.error(error)};
+          });
+
+          Homey.on( 'testing_ready', function( data ){   //receives testresults back from app.js
+            //console.log(data);
+            if (!data.error) {
+              document.getElementById('testresult').innerHTML = 'success: '+ data.result;
+//              setTimeout(function () {
+                Homey.set('settings', saveData, function (error, settings) {
+                  if (error) {return console.error(error)};
+                });  //also works without function, so why the callback?
+//              }, 2000) // and why the timeout?
+            } else {
+              document.getElementById('testresult').innerHTML = 'error: '+data.result;
+            };
+          });
+        }
+
+        function providerSelected() {
+          document.getElementById('testresult').innerHTML = "";
+          if (document.getElementById('provider').value.substr(0, 15)=='http://textbelt'){
+            document.getElementById('username').disabled=true;
+            document.getElementById('password').disabled=true;
+            document.getElementById('from').disabled=true;
+          } else {
+            document.getElementById('username').disabled=false;
+            document.getElementById('password').disabled=false;
+            document.getElementById('from').disabled=false;
+          }
+        }
+
+        </script>
+    </body>
+</html>

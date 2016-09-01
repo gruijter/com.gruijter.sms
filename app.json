@@ -1,0 +1,41 @@
+{
+  "id": "com.gruijter.sms",
+  "name": {
+      "en": "Send SMS"
+  },
+  "version": "0.0.1",
+  "compatibility": "0.9.x || 1.x",
+  "author": {
+      "name": "Robin Gruijter",
+      "email": "gruijter@hotmail.com"
+  },
+  "flow": {
+    "actions": [
+      {
+        "id": "send_sms",
+        "title": {
+            "en": "Send an SMS",
+            "nl": "Stuur een SMS"
+        },
+        "args": [
+          {
+            "name": "number",
+            "type": "text",
+            "placeholder": {
+              "en": "Number",
+              "nl": "Nummer"
+             }
+          },
+          {
+            "name": "msg",
+            "type": "text",
+            "placeholder": {
+              "en": "Text",
+              "nl": "Tekst"
+             }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "Send SMS settings page"            : "Send SMS instellingen",
+  "provider and login information"    : "provider en login informatie",
+  "Provider"                          : "Provider",
+  "Username"                          : "Gebruikersnaam",
+  "Password"                          : "Wachtwoord",
+  "From number"                       : "Van nummer",
+  "Test number"                       : "Test nummer",
+  "Test message"                      : "Test bericht",
+  "Save"                              : "Opslaan"
+}
