@@ -9,6 +9,15 @@
       "name": "Robin Gruijter",
       "email": "gruijter@hotmail.com"
   },
+  "category": "tools",
+  "description": {
+      "en": "Homey app to send text messages over SMS",
+      "nl": "Homey app om SMS te versturen"
+  },
+  "images": {
+  "large": "./assets/images/large.jpg",
+  "small": "./assets/images/small.jpg"
+  },
   "flow": {
     "actions": [
       {
