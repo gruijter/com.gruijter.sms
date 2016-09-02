@@ -13,6 +13,7 @@
                 <option value="http://textbelt.com/intl">Textbelt (Intl)</option>
                 <option value="http://textbelt.com/text">Textbelt (US)</option>
                 <option value="http://textbelt.com/canada">Textbelt (CN)</option>
+                <option value="https://api.clickatell.com">Clickatell</option>
                 <option value="https://www.12VoIP.com">12VoIP</option>
                 <option value="https://www.Actionvoip.com">Actionvoip</option>
                 <option value="https://www.BrowserCalls.com">BrowserCalls</option>
@@ -79,6 +80,10 @@
               </select>
             </div>
             <div class="field row">
+                <label for="api_id" data-i18n="Api ID"> </label>
+                <input id="api_id" type="text" value="" />
+            </div>
+            <div class="field row">
                 <label for="username" data-i18n="Username"> </label>
                 <input id="username" type="text" value="" />
             </div>
@@ -91,26 +96,29 @@
                 <input id="from" type="text" placeholder="optional" value="" />
             </div>
             <div class="field row">
-                <label for="to" data-i18n="Test number"> </label>
-                <input id="to" type="text" value="" />
+                <label for="toTest" data-i18n="Test number"> </label>
+                <input id="toTest" type="text" value="" />
             </div>
             <div class="field row">
                 <label for="testMessage" data-i18n="Test message"> </label>
                 <textarea id="testMessage"></textarea>
             </div>
             <div id="testresult"></div>
+
         </fieldset>
+        <button class="right" id="button_clear" onclick="empty()" data-i18n="Clear"> </button>
         <button class="right" id="button_save" onclick="save()" data-i18n="Save"> </button>
+
 
         <script type="text/javascript">
 
-        var button_save = document.getElementById('button_save');
         var saveData;
 
         // triggered when user opens settings page
         function onHomeyReady(){
           document.getElementById('testresult').innerHTML = "";
           button_save.disabled = true; // Disable save button until settings have been saved
+          document.getElementById('api_id').disabled=true;
           document.getElementById('username').disabled=true;
           document.getElementById('password').disabled=true;
           document.getElementById('from').disabled=true;
@@ -121,36 +129,50 @@
               //console.log('got data: ', storedData);
               if (storedData != (null || undefined)) {
                 document.getElementById('provider').value = storedData.provider;
+                document.getElementById('api_id').value = storedData.api_id;
                 document.getElementById('username').value = storedData.username;
                 document.getElementById('password').value = storedData.password;
                 document.getElementById('from').value = storedData.from;
-                document.getElementById('to').value = storedData.to;
+                document.getElementById('toTest').value = storedData.toTest;
                 document.getElementById('testMessage').value = storedData.testMessage;
               }
             }
             button_save.disabled = false;
           });
           Homey.ready();  //ready to show the settings page
+          providerSelected();
         }
+
+        function empty() {
+          document.getElementById('provider').value = "";
+          document.getElementById('api_id').value = "";
+          document.getElementById('username').value = "";
+          document.getElementById('password').value = "";
+          document.getElementById('from').value = "";
+          document.getElementById('toTest').value = "";
+          document.getElementById('testMessage').value = "";
+          document.getElementById('testresult').innerHTML = "";
+        };
 
         function save() {
           document.getElementById('testresult').innerHTML = "";
-
           saveData = {
             provider    : document.getElementById('provider').value,
             username    : document.getElementById('username').value,
+            api_id      : document.getElementById('api_id').value,
             password    : document.getElementById('password').value,
             from        : document.getElementById('from').value,
-            toTest      : document.getElementById('to').value,
+            toTest      : document.getElementById('toTest').value,
             testMessage : document.getElementById('testMessage').value,
             url         : ''
           };
 
-          Homey.set('testing',saveData, function (error, settings) {     //triggers an event in app.js
+//triggers an event in app.js to start test SMS
+          Homey.set('testing',saveData, function (error, settings) {
             if (error) {return console.error(error)};
           });
-
-          Homey.on( 'testing_ready', function( data ){   //receives testresults back from app.js
+//receive testresults back from app.js
+          Homey.on( 'testing_ready', function( data ){
             //console.log(data);
             if (!data.error) {
               document.getElementById('testresult').innerHTML = 'success: '+ data.result;
@@ -164,17 +186,21 @@
             };
           });
         }
-
+//disable fields that are not relevant for selected provider
         function providerSelected() {
           document.getElementById('testresult').innerHTML = "";
+          document.getElementById('api_id').disabled=true;
+          document.getElementById('username').disabled=false;
+          document.getElementById('password').disabled=false;
+          document.getElementById('from').disabled=false;
           if (document.getElementById('provider').value.substr(0, 15)=='http://textbelt'){
+            document.getElementById('api_id').disabled=true;
             document.getElementById('username').disabled=true;
             document.getElementById('password').disabled=true;
             document.getElementById('from').disabled=true;
-          } else {
-            document.getElementById('username').disabled=false;
-            document.getElementById('password').disabled=false;
-            document.getElementById('from').disabled=false;
+          } else
+          if (document.getElementById('provider').value.substr(0, 22)=='https://api.clickatell'){
+            document.getElementById('api_id').disabled=false;
           }
         }
 

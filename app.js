@@ -35,24 +35,31 @@ Homey.manager('settings').on( 'set', function(changedKey){
 	}
 })
 
-
 function send (service, number, msg, callback) {
-  if (service.provider.substr(0, 15)=='http://textbelt'){   //provider is textbelt
-    service.url=service.provider;
-    textBelt (service, number, msg, function (err, result){
-			var error = err || !result.success;
-			Homey.log('error: ',err, error, result);
-			if (error) {var message = result.message}
-			else {var message = result.success};
-      callback (error, message);
-    })
-  } else {	//provider is a dellMont brand
-		service.url=service.provider;
-    dellMont (service, number, msg, function (err, result){
-     	Homey.log(err, result);
-      callback (err, result)
-    })
-  }
+  switch (service.provider.substr(0, 20)) {
+		case 'http://textbelt.com/':		//provider is textbelt
+			service.url=service.provider;
+			textBelt (service, number, msg, function (err, result){
+				var error = err || !result.success;
+				Homey.log('error: ',err, error, result);
+				if (error) {var message = result.message}
+				else {var message = result.success};
+				callback (error, message);
+			});
+			break;
+		case 'https://api.clickate':		//provider is clickatell
+			service.url=service.provider;
+			clickatell (service, number, msg, function (err, result){
+				Homey.log(err, result);
+				callback (err, result)
+			});
+			break;
+		default:												//provider is a dellMont brand
+			dellMont (service, number, msg, function (err, result){
+				Homey.log(err, result);
+				callback (err, result)
+			});
+	}
 }
 
 function dellMont(service, number, msg, callback) {
@@ -76,6 +83,25 @@ function dellMont(service, number, msg, callback) {
         	callback(err, null)
 				}
       })
+	  } else {
+      callback(error, body);
+      Homey.log("error from server:"+error)
+    }
+	})
+}
+
+function clickatell(service, number, msg, callback) {
+  Homey.log('Clickatell sending SMS to', number);
+	var url = service.url+'/http/sendmsg?user='+service.username+'&password='
+						+service.password+'&api_id='+service.api_id+'&to='+number+'&text='+msg+'&from='+service.from;
+	request(url, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+	    Homey.log(body);
+			var err = false;
+			if (body.substr(0, 4) != 'ID: ') {
+				err = true;
+			};
+			callback(err, body);
 	  } else {
       callback(error, body);
       Homey.log("error from server:"+error)
@@ -112,73 +138,6 @@ function textBelt(service, number, msg, callback) {
 		}
 	})
 }
-
-
-var dellMontProviders = [
-'12VoIP',
-'Actionvoip',
-'BrowserCalls',
-'BudgetVoipCall',
-'Call2India',
-'CallEasy',
-'CallingCredit',
-'CallPirates',
-'CheapBuzzer',
-'CheapVoip',
-'CheapVoipCall',
-'CosmoVoip',
-'DialCheap',
-'DialNow',
-'DiscountCalling',
-'DiscountVoip',
-'EasyVoip',
-'FreeCall',
-'FreeVoipDeal',
-'Frynga',
-'GlobalFreecall',
-'HotVoip',
-'Internetcalls',
-'InterVoip',
-'Jumblo',
-'JustVoip',
-'Low-rate Voip',
-'MegaVoip',
-'MexicoBarato',
-'NairaCalls',
-'Netappel',
-'Nonoh',
-'PanggilanMalaysia',
-'PennyConnect',
-'PinoyDialer',
-'poivY',
-'PowerVoip',
-'RebVoice',
-'Rynga',
-'SIPDiscount',
-'SmartVoip',
-'SMSDiscount',
-'SMSLISTO',
-'StuntCalls',
-'Telbo',
-'Voipblast',
-'VoipBlazer',
-'VoipBuster',
-'VoipbusterPro',
-'VoipCaptain',
-'VoIPCheap',
-'VoipCheap',
-'VoipChief',
-'VoipDiscount',
-'VoipGain',
-'VoipJumper',
-'VoipMove',
-'VoipRaider',
-'VoipSmash',
-'VoipStunt',
-'VoipWise',
-'VoipZoom',
-'WebCallDirect'
-]
 
 
 // ***************TEXTBELT************************************* //

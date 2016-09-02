@@ -7,6 +7,7 @@ The app supports a large number of SMS providers:
 
 TextBelt: Free sending of SMS for US, Canada, and International. You will have
           to try if it works for the numbers you want to reach...
+
 DellMont: This includes more than 60 voipservices like Voipbuster, Freecall,
           Cheapvoip, etc. These are paid services, so you need an account and
           credit to use it. Also for these providers some numbers might not be
@@ -16,9 +17,9 @@ After setting up the SMS-service provider you want to use, you have the
 possibility to send messages via an action flow card.
 
 ### Known limitations: ###
-The implemented SMS providers use an API that sends the message requests as
-clear text over the internet. Attention: this also means the username and
-password are sent in an unsecure way!
+TextBelt uses an API that sends the message requests as clear text over the
+internet. The other SMS providers use 'https get' and are therefore more
+secure.
 You can only set/use one SMS provider at the same time.
 
 ##### Donate: #####
@@ -34,6 +35,7 @@ the forum.
 
 Version changelog
 ```
+v0.0.2  2016.09.02 Added Clickatell as SMS service
 v0.0.1  2016.09.01 Initial release
 ```
 
