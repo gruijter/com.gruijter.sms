@@ -35,7 +35,7 @@ the forum.
 
 Version changelog
 ```
-v0.0.2  2016.09.02 Added Clickatell as SMS service
+v0.0.2  2016.09.02 Added Clickatell and VoiceTrading as SMS service
 v0.0.1  2016.09.01 Initial release
 ```
 
