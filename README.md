@@ -8,6 +8,8 @@ The app supports a large number of SMS providers:
 TextBelt: Free sending of SMS for US, Canada, and International. You will have
           to try if it works for the numbers you want to reach...
 
+Clickatell: A paid SMS service
+
 DellMont: This includes more than 60 voipservices like Voipbuster, Freecall,
           Cheapvoip, etc. These are paid services, so you need an account and
           credit to use it. Also for these providers some numbers might not be
@@ -35,6 +37,7 @@ the forum.
 
 Version changelog
 ```
+v0.0.3  2016.09.04 Fixed broken DellMont. Testbutton added.
 v0.0.2  2016.09.02 Added Clickatell and VoiceTrading as SMS service
 v0.0.1  2016.09.01 Initial release
 ```

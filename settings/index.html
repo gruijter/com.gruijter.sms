@@ -107,7 +107,8 @@
             <div id="testresult"></div>
 
         </fieldset>
-        <button class="right" id="button_clear" onclick="empty()" data-i18n="Clear"> </button>
+        <button class="left" id="button_clear" onclick="empty()" data-i18n="Clear"> </button>
+        <button class="left" id="button_test" onclick="test()" data-i18n="Test"> </button>
         <button class="right" id="button_save" onclick="save()" data-i18n="Save"> </button>
 
 
@@ -155,7 +156,7 @@
           document.getElementById('testresult').innerHTML = "";
         };
 
-        function save() {
+        function test() {
           document.getElementById('testresult').innerHTML = "";
           saveData = {
             provider    : document.getElementById('provider').value,
@@ -165,7 +166,7 @@
             from        : document.getElementById('from').value,
             toTest      : document.getElementById('toTest').value,
             testMessage : document.getElementById('testMessage').value,
-            url         : ''
+            url         : document.getElementById('provider').value
           };
 
 //triggers an event in app.js to start test SMS
@@ -187,6 +188,24 @@
             };
           });
         }
+
+        function save() {
+          document.getElementById('testresult').innerHTML = "";
+          saveData = {
+            provider    : document.getElementById('provider').value,
+            username    : document.getElementById('username').value,
+            api_id      : document.getElementById('api_id').value,
+            password    : document.getElementById('password').value,
+            from        : document.getElementById('from').value,
+            toTest      : document.getElementById('toTest').value,
+            testMessage : document.getElementById('testMessage').value,
+            url         : document.getElementById('provider').value
+          };
+          Homey.set('settings', saveData, function (error, settings) {
+            if (error) {return console.error(error)};
+          });  //also works without function, so why the callback?
+        }
+
 //disable fields that are not relevant for selected provider
         function providerSelected() {
           document.getElementById('testresult').innerHTML = "";

@@ -38,7 +38,6 @@ Homey.manager('settings').on( 'set', function(changedKey){
 function send (service, number, msg, callback) {
   switch (service.provider.substr(0, 20)) {
 		case 'http://textbelt.com/':		//provider is textbelt
-			service.url=service.provider;
 			textBelt (service, number, msg, function (err, result){
 				var error = err || !result.success;
 				Homey.log('error: ',err, error, result);
@@ -48,7 +47,6 @@ function send (service, number, msg, callback) {
 			});
 			break;
 		case 'https://api.clickate':		//provider is clickatell
-			service.url=service.provider;
 			clickatell (service, number, msg, function (err, result){
 				Homey.log(err, result);
 				callback (err, result)
