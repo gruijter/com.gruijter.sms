@@ -24,15 +24,16 @@ Homey.manager('flow').on('action.send_sms', function( callback, args ){
 
 // Fired when a setting has been changed
 Homey.manager('settings').on( 'set', function(changedKey){
-	Homey.log('test event received in app.js');
+	//Homey.log(changedKey);
 	if (changedKey === 'testing'){		// save button is pressed, testing can start
+		Homey.log('test event received in app.js');
 		var testService=Homey.manager('settings').get('testing');
 		Homey.log(testService);
 		send (testService, testService.toTest, testService.testMessage, function(error, result){
 			Homey.log('the message was sent',error, result);
 			Homey.manager('api').realtime('testing_ready', { error : error, result : result }); // send result back to settings html
 		});
-	}
+	} else {Homey.log("settings have changed")}
 })
 
 function send (service, number, msg, callback) {

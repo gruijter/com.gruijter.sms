@@ -178,11 +178,6 @@
             //console.log(data);
             if (!data.error) {
               document.getElementById('testresult').innerHTML = 'success: '+ data.result;
-//              setTimeout(function () {
-                Homey.set('settings', saveData, function (error, settings) {
-                  if (error) {return console.error(error)};
-                });  //also works without function, so why the callback?
-//              }, 2000) // and why the timeout?
             } else {
               document.getElementById('testresult').innerHTML = 'error: '+data.result;
             };
