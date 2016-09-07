@@ -2,13 +2,14 @@
   "Send SMS settings page"            : "Send SMS instellingen",
   "provider and login information"    : "provider en login informatie",
   "Provider"                          : "Provider",
-  "Api ID"                            : "Api ID",
+  "Provider URL"                      : "Provider website",
+  "Api ID"                            : "Api ID/handle",
   "Username"                          : "Gebruikersnaam",
-  "Password"                          : "Wachtwoord",
+  "Password"                          : "Wachtwoord/id",
   "From number"                       : "Van nummer",
   "Test number"                       : "Test nummer",
   "Test message"                      : "Test bericht",
   "Save"                              : "Opslaan",
   "Clear"                             : "Wissen",
-  "Test"                              : "Test"   
+  "Test"                              : "Test"
 }

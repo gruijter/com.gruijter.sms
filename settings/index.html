@@ -14,6 +14,7 @@
                 <option value="http://textbelt.com/text">Textbelt (US)</option>
                 <option value="http://textbelt.com/canada">Textbelt (CN)</option>
                 <option value="https://api.clickatell.com">Clickatell</option>
+                <option value="http://www.targetsms.nl">TargetSMS</option>
                 <option value="https://www.12VoIP.com">12VoIP</option>
                 <option value="https://www.Actionvoip.com">Actionvoip</option>
                 <option value="https://www.BrowserCalls.com">BrowserCalls</option>
@@ -79,6 +80,7 @@
                 <option value="https://www.VoipZoom.com">VoipZoom</option>
                 <option value="https://www.WebCallDirect.com">WebCallDirect</option>
               </select>
+              <a id="provider_url" target="_blank">  Website</a>
             </div>
             <div class="field row">
                 <label for="api_id" data-i18n="Api ID"> </label>
@@ -118,8 +120,9 @@
 
         // triggered when user opens settings page
         function onHomeyReady(){
-          document.getElementById('testresult').innerHTML = "";
+          document.getElementById('testresult').innerHTML = " ";
           button_save.disabled = true; // Disable save button until settings have been saved
+          document.getElementById("provider_url").setAttribute("href", "http://textbelt.com");
           document.getElementById('api_id').disabled=true;
           document.getElementById('username').disabled=true;
           document.getElementById('password').disabled=true;
@@ -131,6 +134,7 @@
               //console.log('got data: ', storedData);
               if (storedData != (null || undefined)) {
                 document.getElementById('provider').value = storedData.provider;
+                document.getElementById("provider_url").setAttribute("href", storedData.provider);
                 document.getElementById('api_id').value = storedData.api_id;
                 document.getElementById('username').value = storedData.username;
                 document.getElementById('password').value = storedData.password;
@@ -139,25 +143,27 @@
                 document.getElementById('testMessage').value = storedData.testMessage;
               }
             }
+            providerSelected();
             button_save.disabled = false;
           });
-          Homey.ready();  //ready to show the settings page
           providerSelected();
+          Homey.ready();  //ready to show the settings page
         }
 
         function empty() {
           document.getElementById('provider').value = "";
+          document.getElementById("provider_url").setAttribute("href", " ");
           document.getElementById('api_id').value = "";
           document.getElementById('username').value = "";
           document.getElementById('password').value = "";
           document.getElementById('from').value = "";
           document.getElementById('toTest').value = "";
           document.getElementById('testMessage').value = "";
-          document.getElementById('testresult').innerHTML = "";
+          document.getElementById('testresult').innerHTML = " ";
         };
 
         function test() {
-          document.getElementById('testresult').innerHTML = "";
+          document.getElementById('testresult').innerHTML = " ";
           saveData = {
             provider    : document.getElementById('provider').value,
             username    : document.getElementById('username').value,
@@ -179,13 +185,13 @@
             if (!data.error) {
               document.getElementById('testresult').innerHTML = 'success: '+ data.result;
             } else {
-              document.getElementById('testresult').innerHTML = 'error: '+data.result;
+              document.getElementById('testresult').innerHTML = 'error: '+data.error+data.result;
             };
           });
         }
 
         function save() {
-          document.getElementById('testresult').innerHTML = "";
+          document.getElementById('testresult').innerHTML = " ";
           saveData = {
             provider    : document.getElementById('provider').value,
             username    : document.getElementById('username').value,
@@ -203,18 +209,25 @@
 
 //disable fields that are not relevant for selected provider
         function providerSelected() {
-          document.getElementById('testresult').innerHTML = "";
+          document.getElementById('testresult').innerHTML = " ";
+          document.getElementById("provider_url").setAttribute("href", document.getElementById('provider').value);
           document.getElementById('api_id').disabled=true;
           document.getElementById('username').disabled=false;
           document.getElementById('password').disabled=false;
           document.getElementById('from').disabled=false;
           if (document.getElementById('provider').value.substr(0, 15)=='http://textbelt'){
+            document.getElementById("provider_url").setAttribute("href", "http://www.textbelt.com");
             document.getElementById('api_id').disabled=true;
             document.getElementById('username').disabled=true;
             document.getElementById('password').disabled=true;
             document.getElementById('from').disabled=true;
           } else
           if (document.getElementById('provider').value.substr(0, 22)=='https://api.clickatell'){
+            document.getElementById("provider_url").setAttribute("href", "https://www.clickatell.com");
+            document.getElementById('api_id').disabled=false;
+          } else
+          if (document.getElementById('provider').value.substr(0, 20)=='http://www.targetsms'){
+            document.getElementById("provider_url").setAttribute("href", "http://www.targetsms.nl");
             document.getElementById('api_id').disabled=false;
           }
         }

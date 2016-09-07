@@ -2,13 +2,14 @@
   "Send SMS settings page"            : "Send SMS settings page",
   "provider and login information"    : "provider and login information",
   "Provider"                          : "Provider",
-  "Api ID"                            : "Api ID",
+  "Provider URL"                      : "Provider website",
+  "Api ID"                            : "Api ID/handle",
   "Username"                          : "Username",
-  "Password"                          : "Password",
+  "Password"                          : "Password/id",
   "From number"                       : "From number",
   "Test number"                       : "Test number",
   "Test message"                      : "Test message",
   "Save"                              : "Save",
   "Clear"                             : "Clear",
-  "Test"                              : "Test"  
+  "Test"                              : "Test"
 }
