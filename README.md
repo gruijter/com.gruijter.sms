@@ -8,6 +8,8 @@ The app supports a large number of SMS providers:
 TextBelt: Free sending of SMS for US, Canada, and International. You will have
           to try if it works for the numbers you want to reach...
 
+smsGate: use your own android phone as SMS gateway. (note: from-number=deviceID)
+
 Clickatell and TargetSMS: These are paid SMS services where you need an account
 
 DellMont: This includes more than 60 voipservices like Voipbuster, Freecall,
@@ -37,8 +39,8 @@ the forum.
 
 Version changelog
 ```
-v0.0.4  2016.09.05 ***WIP*** fix crash provider undefined. Added targetsms as
-        SMS service. Added website link in settings.
+v0.0.4  2016.09.08 Added targetsms and smsGate.me as SMS service. Added website
+        link in settings. Fix crash undefined provider.
 v0.0.3  2016.09.04 Fixed broken DellMont. Testbutton added.
 v0.0.2  2016.09.02 Added Clickatell and VoiceTrading as SMS service
 v0.0.1  2016.09.01 Initial release

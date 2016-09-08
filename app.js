@@ -60,6 +60,12 @@ function send (service, number, msg, callback) {
 					callback (err, result)
 				});
 				break;
+			case 'https://smsgateway.m':		//provider is smsgateway.me
+				smsGatewayMe (service, number, msg, function (err, result){
+					Homey.log(err, result);
+					callback (err, result)
+				});
+				break;
 			default:												//provider is a dellMont brand
 				dellMont (service, number, msg, function (err, result){
 					Homey.log(err, result);
@@ -208,6 +214,141 @@ function targetSms(service, number, msg, callback) {
 	})
 }
 
+
+function smsGatewayMe(service, number, msg, callback) {
+	var options = {
+		headers: {'content-type' : 'application/json'},
+		url: service.url+'/api/v3/messages/send',
+		json: {
+		 email		: service.username,
+		 password	: service.password,
+		 device		: service.from,
+		 number		: number,
+		 message	: msg
+		 }
+	};
+	request.post(options, function(err, resp, body){
+		Homey.log (body);
+//		Homey.log(util.inspect(body.result.success[0]));
+		if (!err) {								// error in website
+			if (body.success==false) {
+					if(body.errors!=undefined){
+						callback('error', JSON.stringify(body.errors));
+						return;
+					}
+				};
+			if (body.result.success[0]!=undefined){
+				if (body.result.success[0].error==''){			// success
+//					Homey.log("succes sending the message:"+util.inspect(body.result.success[0]));
+					callback(null, body.result.success[0].status);
+					return;
+				} else {			// error sending message
+//					Homey.log("error sending message:"+util.inspect(body.result.success[0]));
+					callback('error', JSON.stringify(body.result.success[0].error));
+					return;
+				};
+			};
+			if (body.result.fails[0]!=undefined){ // error sending message
+//				Homey.log("error sending message:"+util.inspect(body.result.fails[0]));
+				callback('error', JSON.stringify(body.result.fails[0].errors));
+				return;
+			}
+			//unknown error
+//			Homey.log("error sending message:" + "unknown");
+			callback('error', 'unknown');
+		} else {
+			callback(err, JSON.stringify(body));
+			Homey.log("error from server:"+err)
+		 }
+	})
+}
+
+
+
+// ***************smsgateway.me************************************* //
+/*
+function sendMessageToNumber($to, $message, $device, $options=[]) {
+		$query = array_merge(['number'=>$to, 'message'=>$message, 'device' => $device], $options);
+		return $this->makeRequest('/api/v3/messages/send','POST',$query);
+}
+
+# Send message to number
+The most popular use of SMS Gateway API is sending messages. You can use our service to programmatically send a message through your Android phone.
+
+API Reference
+
+API Endpoint
+URL:	http://smsgateway.me/api/v3/messages/send
+Method:	POST
+
+Request Parameters
+Parameter						Required						Description
+email								YES									Your username for the site
+password						YES									Your password for the site
+device							YES									The ID of device you wish to send the message from
+number							YES									The number to send the message to
+message							YES									The content of the message to be sent
+send_at							NO									Time to send the message in Unix Time format
+expires_at					NO									Time to give up trying to send the message at in Unix Time format
+
+Success Response
+Status Code:	200 OK
+Content Type:	application/json
+Output format:	See Example
+
+Failed Response
+Status Code:	200 OK
+Content Type:	application/json
+Output format:	See Example
+
+{
+"success": true,
+"result": {
+	"success": [
+		{
+		"id": "308",
+		"device_id": "4",
+		"message": "hello world!",
+		"status": "pending",
+		"send_at": "1414624856",
+		"queued_at": "0",
+		"sent_at": "0",
+		"delivered_at": "0",
+		"expires_at": "1414634856",
+		"canceled_at": "0",
+		"failed_at": "0",
+		"received_at": "0",
+		"error": "None",
+		"created_at": "1414624856",
+		"contact": {
+			"id": "14",
+			"name": "Phyllis Turner",
+			"number": "+447791064713"
+			}
+		}
+		],
+	"fails": [
+	]
+	}
+}
+
+{
+"success": true,
+"result": {
+	"success": [
+	],
+	"fails": [
+		"number": "+44771232343"
+		"message": "hello world!",
+		"device": 1
+		"errors": {
+			"device": ["The selected device is invalid"],
+			}
+		]
+	}
+}
+
+*/
 
 // ***************TEXTBELT************************************* //
   /*  Send a text message to the provided
