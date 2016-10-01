@@ -2,8 +2,8 @@
 
 Homey app to send text messages over SMS.
 
-In this age of IoT there is still a need to be able to send messages by SMS.
-The app supports a large number of SMS providers:
+In this age of IoT there is still a need to send messages by SMS. The app
+supports a large number of SMS providers:
 
 TextBelt: Free sending of SMS for US, Canada, and International. You will have
           to try if it works for the numbers you want to reach...
@@ -39,6 +39,7 @@ the forum.
 
 Version changelog
 ```
+v0.0.5  2016.10.01 Compatibility to fw 0.10.1. added www icon.
 v0.0.4  2016.09.08 Added targetsms and smsGate.me as SMS service. Added website
         link in settings. Fix crash undefined provider.
 v0.0.3  2016.09.04 Fixed broken DellMont. Testbutton added.

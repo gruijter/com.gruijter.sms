@@ -81,7 +81,9 @@
                 <option value="https://www.VoipZoom.com">VoipZoom</option>
                 <option value="https://www.WebCallDirect.com">WebCallDirect</option>
               </select>
-              <a id="provider_url" target="_blank">  Website</a>
+              <a id="provider_url" target="_blank">
+                <i class="fa fa-external-link" aria-hidden="true"></i>
+              </a>
             </div>
             <div class="field row">
                 <label for="api_id" data-i18n="Api ID"> </label>
@@ -142,13 +144,12 @@
                 document.getElementById('from').value = storedData.from;
                 document.getElementById('toTest').value = storedData.toTest;
                 document.getElementById('testMessage').value = storedData.testMessage;
-              }
+              } else {document.getElementById('provider').value = "http://textbelt.com/intl"};
             }
             providerSelected();
             button_save.disabled = false;
+            Homey.ready();  //ready to show the settings page
           });
-          providerSelected();
-          Homey.ready();  //ready to show the settings page
         }
 
         function empty() {
