@@ -39,6 +39,7 @@ the forum.
 
 Version changelog
 ```
+v0.0.6  2016.11.08 Fix crash undefined provider.
 v0.0.5  2016.10.01 Compatibility to fw 0.10.1. added www icon.
 v0.0.4  2016.09.08 Added targetsms and smsGate.me as SMS service. Added website
         link in settings. Fix crash undefined provider.

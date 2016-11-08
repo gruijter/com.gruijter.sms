@@ -37,40 +37,42 @@ Homey.manager('settings').on( 'set', function(changedKey){
 })
 
 function send (service, number, msg, callback) {
-	if (service.provider!=undefined){
-	  switch (service.provider.substr(0, 20)) {
-			case 'http://textbelt.com/':		//provider is textbelt
-				textBelt (service, number, msg, function (err, result){
-					var error = err || !result.success;
-					Homey.log('error: ',err, error, result);
-					if (error) {var message = result.message}
-					else {var message = result.success};
-					callback (error, message);
-				});
-				break;
-			case 'https://api.clickate':		//provider is clickatell
-				clickatell (service, number, msg, function (err, result){
-					Homey.log(err, result);
-					callback (err, result)
-				});
-				break;
-			case 'http://www.targetsms':		//provider is targetsms
-				targetSms (service, number, msg, function (err, result){
-					Homey.log(err, result);
-					callback (err, result)
-				});
-				break;
-			case 'https://smsgateway.m':		//provider is smsgateway.me
-				smsGatewayMe (service, number, msg, function (err, result){
-					Homey.log(err, result);
-					callback (err, result)
-				});
-				break;
-			default:												//provider is a dellMont brand
-				dellMont (service, number, msg, function (err, result){
-					Homey.log(err, result);
-					callback (err, result)
-				});
+	if (service!=undefined){
+		if (service.provider!=undefined){
+		  switch (service.provider.substr(0, 20)) {
+				case 'http://textbelt.com/':		//provider is textbelt
+					textBelt (service, number, msg, function (err, result){
+						var error = err || !result.success;
+						Homey.log('error: ',err, error, result);
+						if (error) {var message = result.message}
+						else {var message = result.success};
+						callback (error, message);
+					});
+					break;
+				case 'https://api.clickate':		//provider is clickatell
+					clickatell (service, number, msg, function (err, result){
+						Homey.log(err, result);
+						callback (err, result)
+					});
+					break;
+				case 'http://www.targetsms':		//provider is targetsms
+					targetSms (service, number, msg, function (err, result){
+						Homey.log(err, result);
+						callback (err, result)
+					});
+					break;
+				case 'https://smsgateway.m':		//provider is smsgateway.me
+					smsGatewayMe (service, number, msg, function (err, result){
+						Homey.log(err, result);
+						callback (err, result)
+					});
+					break;
+				default:												//provider is a dellMont brand
+					dellMont (service, number, msg, function (err, result){
+						Homey.log(err, result);
+						callback (err, result)
+					});
+				}
 			}
 		}
 }
