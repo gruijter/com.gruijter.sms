@@ -3,13 +3,13 @@
   "name": {
       "en": "Send SMS"
   },
-  "version": "0.0.6",
-  "compatibility": ">= 0.10.x || 1.x",
+  "version": "1.0.0",
+  "compatibility": ">= 1.x",
   "author": {
       "name": "Robin Gruijter",
       "email": "gruijter@hotmail.com"
   },
-  "category": "tools",
+  "category": ["tools","internet"],
   "description": {
       "en": "Homey app to send text messages over SMS",
       "nl": "Homey app om SMS te versturen"

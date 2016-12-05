@@ -1,9 +1,9 @@
 "use strict";
 
-var util = require('util');
-var request = require('request');
-var parseString = require('xml2js').parseString;
-var settings;
+const util = require('util');
+const request = require('request');
+const parseString = require('xml2js').parseString;
+let settings;
 
 module.exports.send = send;
 module.exports.init = init;
@@ -27,7 +27,7 @@ Homey.manager('settings').on( 'set', function(changedKey){
 	//Homey.log(changedKey);
 	if (changedKey === 'testing'){		// save button is pressed, testing can start
 		Homey.log('test event received in app.js');
-		var testService=Homey.manager('settings').get('testing');
+		let testService=Homey.manager('settings').get('testing');
 		Homey.log(testService);
 		send (testService, testService.toTest, testService.testMessage, function(error, result){
 			Homey.log('send test completed',error, result);
@@ -42,10 +42,11 @@ function send (service, number, msg, callback) {
 		  switch (service.provider.substr(0, 20)) {
 				case 'http://textbelt.com/':		//provider is textbelt
 					textBelt (service, number, msg, function (err, result){
-						var error = err || !result.success;
+						let message;
+						let error = err || !result.success;
 						Homey.log('error: ',err, error, result);
-						if (error) {var message = result.message}
-						else {var message = result.success};
+						if (error) {message = result.message}
+						else {message = result.success};
 						callback (error, message);
 					});
 					break;
@@ -79,7 +80,7 @@ function send (service, number, msg, callback) {
 
 function dellMont(service, number, msg, callback) {
   Homey.log('DellMont sending SMS to', number);
-	var url = service.url+'/myaccount/sendsms.php?username='+service.username+'&password='
+	let url = service.url+'/myaccount/sendsms.php?username='+service.username+'&password='
 						+service.password+'&from='+service.from+'&to='+number+'&text='+msg;
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
@@ -107,12 +108,12 @@ function dellMont(service, number, msg, callback) {
 
 function clickatell(service, number, msg, callback) {
   Homey.log('Clickatell sending SMS to', number);
-	var url = service.url+'/http/sendmsg?user='+service.username+'&password='
+	let url = service.url+'/http/sendmsg?user='+service.username+'&password='
 						+service.password+'&api_id='+service.api_id+'&to='+number+'&text='+msg+'&from='+service.from;
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 	    Homey.log(body);
-			var err = false;
+			let err = false;
 			if (body.substr(0, 4) != 'ID: ') {
 				err = true;
 			};
@@ -126,11 +127,11 @@ function clickatell(service, number, msg, callback) {
 
 function textBelt(service, number, msg, callback) {
   Homey.log('TextBelt sending SMS to', number);
-	var body = "number="
+	let body = "number="
 						 +number
 						 +"&message="
 						 +msg;
-	var options = {
+	let options = {
 		headers: {'content-type' : 'application/x-www-form-urlencoded'},
 		url: service.url,
 		body: body
@@ -141,7 +142,7 @@ function textBelt(service, number, msg, callback) {
 		}
 		else if (resp) {
 			try {
-				var payload = JSON.parse(body);
+				let payload = JSON.parse(body);
 				callback(null, payload)
 			}
 			catch(e) {
@@ -156,12 +157,12 @@ function textBelt(service, number, msg, callback) {
 
 function targetSms(service, number, msg, callback) {
   Homey.log('TargetSMS sending SMS to', number);
-	var url = service.url+'/service/sendsms?username='+service.username+'&handle='+service.api_id+'&aff='
+	let url = service.url+'/service/sendsms?username='+service.username+'&handle='+service.api_id+'&aff='
 						+service.password+'&soort=sms&originator='+service.from+'&to='+number+'&message='+msg;
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
 	    Homey.log(body);
-			var err = false;
+			let err = false;
 			if (body.substr(0, 5) != '45000') {
 					switch (body.substr(0, 5)) {
 					case '45001':
@@ -218,7 +219,7 @@ function targetSms(service, number, msg, callback) {
 
 
 function smsGatewayMe(service, number, msg, callback) {
-	var options = {
+	let options = {
 		headers: {'content-type' : 'application/json'},
 		url: service.url+'/api/v3/messages/send',
 		json: {
