@@ -68,6 +68,18 @@ function send (service, number, msg, callback) {
 						callback (err, result)
 					});
 					break;
+				case 'https://api.spryngsm':		//provider is Spryng
+					spryngSms (service, number, msg, function (err, result){
+						Homey.log(err, result);
+						callback (err, result)
+					});
+						break;
+				case 'https://api.twilio.c':		//provider is Twilio
+					twilio (service, number, msg, function (err, result){
+						Homey.log(err, result);
+						callback (err, result)
+					});
+						break;
 				default:												//provider is a dellMont brand
 					dellMont (service, number, msg, function (err, result){
 						Homey.log(err, result);
@@ -267,6 +279,292 @@ function smsGatewayMe(service, number, msg, callback) {
 }
 
 
+function spryngSms(service, number, msg, callback) {
+  Homey.log('spryngSMS sending SMS to', number);
+	let url = service.url+'/api/send.php?USERNAME='+service.username+'&PASSWORD='+service.password
+						+'&SENDER='+service.from.replace("+", "")+'&DESTINATION='+number.replace("+", "")+'&BODY='+msg;
+	request(url, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+	    Homey.log(body);
+			let err = false;
+			if (body.substr(0, 3) != '1') {
+					switch (body.substr(0, 5)) {
+					case '100':
+						body='Missende parameter';
+					break;
+					case '101':
+						body = 'Gebruikersnaam te lang';
+					break;
+					case '102':
+						body='Gebruikersnaam te kort';
+					break;
+					case '103':
+						body = 'Wachtwoord te kort';
+					break;
+					case '104':
+						body='Wachtwoord te lang';
+					break;
+					case '105':
+						body = 'Bestemming te kort, gebruik test nummer formaat vb: 31641041106';
+					break;
+					case '106':
+						body='Bestemming te lang, gebruik test nummer formaat vb: 31641041106';
+					break;
+					case '107':
+						body = 'Afzender te lang, gebruik van nummer formaat vb: 0031641041106';
+					break;
+					case '108':
+						body='Afzender te kort, gebruik van nummer formaat vb: 0031641041106';
+					break;
+					case '109':
+						body = 'Inhoud te lang';
+					break;
+					case '110':
+						body='Inhoud te kort';
+					break;
+					case '200':
+						body = 'Veiligheidsfout';
+					break;
+					case '201':
+						body='Onbekende route';
+					break;
+					case '202':
+						body='Route toegang overtreding';
+					break;
+					case '203':
+						body = 'Onvoldoende credits';
+					break;
+					case '800':
+						body='Technische fout';
+					break;
+					default:
+						body = 'Unkown error '+body.substr(0, 30);
+					};
+				err = true;
+			};
+			callback(err, body);
+	  } else {
+      callback(error, body);
+      Homey.log("error from server:"+error)
+    }
+	})
+}
+
+function twilio(service, number, msg, callback) {
+
+	let accountSid = service.api_id;
+	let authToken = service.password;
+	//require the Twilio module and create a REST client
+	let client = require('twilio')(accountSid, authToken);
+
+	client.messages.create({
+	 to: number,
+	 from: service.from,
+	 body: msg,
+	}, function(err, message) {
+		Homey.log(err);
+	 	Homey.log(message);
+
+		if (!err) {
+	    Homey.log(message);
+			callback(null, message.status);
+	  } else {
+      callback(true, err.message);
+      Homey.log("error from server:"+err)
+    }
+	});
+}
+
+
+
+// ***************twilio.com************************************* //
+
+/*
+HTTP POST to Messages
+
+To send a new outgoing message, make an HTTP POST to your Messages list resource URI:
+
+https://{AccountSid}:{AuthToken}@api.twilio.com/2010-04-01/Accounts
+
+/2010-04-01/Accounts/{AccountSid}/Messages
+
+accountSid 'ACe8c22f1ab67a5351050345c0284b64c5'; //testaccount
+authToken  'your_auth_token';
+
+To		The destination phone number. Format with a '+' and country code e.g., +16175551212 (E.164 format).
+From 	A Twilio phone number
+Body	The text of the message you want to send, limited to 1600 characters.
+
+Error codes:
+30001	Queue overflow	You tried to send too many messages too quickly and your message queue overflowed. Try sending your message again after waiting some time.
+30002	Account suspended	Your account was suspended between the time of message send and delivery. Please contact Twilio.
+30003	Unreachable destination handset	The destination handset you are trying to reach is switched off or otherwise unavailable.
+30004	Message blocked	The destination number you are trying to reach is blocked from receiving this message (e.g. due to blacklisting).
+30005	Unknown destination handset	The destination number you are trying to reach is unknown and may no longer exist.
+30006	Landline or unreachable carrier	The destination number is unable to receive this message. Potential reasons could include trying to reach a landline or, in the case of short codes, an unreachable carrier.
+30007	Carrier violation	Your message was flagged as objectionable by the carrier. In order to protect their subscribers, many carriers have implemented content or spam filtering. Learn more about carrier filtering
+30008	Unknown error	The error does not fit into any of the above categories.
+30009	Missing segment	One or more segments associated with your multi-part inbound message was not received.
+30010	Message price exceeds max price.	The price of your message exceeds the max price parameter.
+
+*/
+
+// ***************spryng.com************************************* //
+/*
+Koppelen aan de gateway
+Om een bericht te verzenden kan er een HTTP GET of HTTP POST call uitgevoerd worden naar het volgende adres: " https://api.spryngsms.com/api/send.php "
+
+Parameter
+USERNAME	Gekozen door gebruiker bij aanmelding op http://www.spryng.nl
+PASSWORD	Gekozen door gebruiker bij aanmelding op http://www.spryng.nl
+REFERENCE	Unieke referentie voor delivery reports
+DESTINATION	Nummer(s) bestemming
+SENDER	Afzender van het bericht
+BODY	Inhoud van de SMS
+SERVICE	Referentie tag die toegevoegd kan worden om tussen eindgebruikers te differentiëren
+ROUTE	Om de Spryng Business, Spryng Economy route of een speciale route te gebruiken
+ALLOWLONG	Als u Long SMS wenst te versturen
+
+Username
+Gekozen door gebruikers bij aanmelding op http://www.spryng.nl
+Optie
+Vereist	ja
+Type	Alfanumeriek, Case gevoelig
+Min lengte	2
+Max lengte	32
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	USERNAME=username
+
+Password
+Gekozen door gebruikers bij aanmelding op http://www.spryng.nl
+Optie
+Vereist	ja
+Type	Alfanumeriek, Case gevoelig
+Min lengte	6
+Max lengte	32
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	PASSWORD=password
+References
+Optie
+Vereist	Alleen wanneer u delivery reports wenst te ontvangen
+Type	Alfanumeriek
+Min lengte	1
+Max lengte	256
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	REFERENCE=abc123
+Opmerkingen	Moet uniek zijn
+
+Destination
+Nummer(s) bestemming
+Optie
+Vereist	ja
+Type	MSISDN-numeriek (internationaal format zonder “00” of
+“+”)
+Min lengte	1 MSISDN
+Max lengte	1.000 MSISDN
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	DESTINATION=31641041106,31612345678
+Opmerkingen	Meer details over foutafhandeling zie “Return Values” onderaan de pagina
+
+Sender
+Afzender van het bericht
+Optie
+Vereist	ja
+Type	Numeriek of Alfanumeriek
+Min lengte	1
+Max lengte	14 voor numeriek of 11 voor alfanumeriek
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	SENDER=0031641041106
+Opmerkingen	Meer details over foutafhandeling zie “Return Values” onderaan de pagina
+
+Body
+Inhoud van de SMS
+Optie
+Vereist	ja
+Type	GSM 7-bit alfabet voor tekstberichten
+Min lengte	1
+Max lengte	160 karakters voor tekst bericht (default : ALLOWLONG=0) 612 karakters (ALLOWLONG=1)
+Wanneer u Long SMS gebruikt, zal het systeem het bericht automatisch verdelen in 153 karakters per sms.
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	BODY=This%20is%20a%20test%20SMS
+Opmerkingen	Meer details over karakters zie “Field types” onderaan de pagina
+
+Service
+Referentie tag kan gebruikt worden om een filter in statistieken te creëren.
+Optie
+Vereist	nee
+Type	Alfanumeriek
+Min lengte	1
+Max lengte	10
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	SERVICE=Client1
+
+Route
+Om de Spryng Business, Spryng Economy of Specific User route te selecteren.
+Optie
+Vereist	ja
+Type	Vooraf gedefinieerd
+Min lengte	<na>
+Max lengte	<na>
+Min waarde	<na>
+Max waarde	<na>
+Waardes	BUSINESS, ECONOMY, 0-9 (Specific User route)
+Default waarde	BUSINESS
+Voorbeeld	ROUTE=BUSINESS
+
+Allowlong
+Als u Long SMS wenst te versturen
+Optie
+Vereist	Alleen als u Long SMS wenst te versturen
+Type	Vooraf gedefinieerd
+Min lengte	<na>
+Max lengte	<na>
+Min waarde	<na>
+Max waarde	<na>
+Waardes	0,1
+Default waardes	0
+Voorbeeld	ALLOWLONG=1
+Opmerkingen	Wanneer u Long SMS gebruikt, zal het systeem het bericht automatisch verdelen in 153 karakters per sms.
+
+Return Values
+Return Waarde
+1	Succesvol ontvangen
+100	Missende parameter
+101	Gebruikersnaam te lang
+102	Gebruikersnaam te kort
+103	Wachtwoord te kort
+104	Wachtwoord te lang
+105	Bestemming te kort
+106	Bestemming te lang
+107	Afzender te lang
+108	Afzender te kort
+109	Inhoud te lang
+110	Inhoud te kort
+200	Veiligheidsfout
+201	Onbekende route
+202	Route toegang overtreding
+203	Onvoldoende credits
+800	Technische fout
+*/
 
 // ***************smsgateway.me************************************* //
 /*

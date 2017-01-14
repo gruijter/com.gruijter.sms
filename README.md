@@ -10,7 +10,8 @@ TextBelt: Free sending of SMS for US, Canada, and International. You will have
 
 smsGate: use your own android phone as SMS gateway. (note: from-number=deviceID)
 
-Clickatell and TargetSMS: These are paid SMS services where you need an account
+Clickatell, TargetSMS, Twilio and Spryng:
+          These are paid SMS services where you need an account
 
 DellMont: This includes more than 60 voipservices like Voipbuster, Freecall,
           Cheapvoip, etc. These are paid services, so you need an account and
@@ -22,14 +23,13 @@ possibility to send messages via an action flow card.
 
 ### Known limitations: ###
 TextBelt and TargetSMS use an API that sends the message requests as clear text
-over the internet. The other SMS providers use 'https get' and are therefore
-more secure.
+unsecure over the internet. The other SMS providers use the secured https method.
 You can only set/use one SMS provider at the same time.
 
 ##### Donate: #####
 
 If you like the app you can show your appreciation by posting it in the [forum],
-and if you really like it you can donate. Feature requests can also be placed on
+and if you really like it you can buy me a beer. Feature requests can be placed on
 the forum.
 
 [![Paypal donate][pp-donate-image]][pp-donate-link]
@@ -39,6 +39,7 @@ the forum.
 
 Version changelog
 ```
+v1.0.1  2017.01.14 added SpryngSMS and Twilio
 v1.0.0  2016.12.05 Xml2js updated to 0.4.17. Request updated to 2.79.0. Minor
         code changes.
 v0.0.6  2016.11.08 Fix crash undefined provider.

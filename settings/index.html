@@ -15,7 +15,9 @@
                 <option value="http://textbelt.com/canada">Textbelt (CN)</option>
                 <option value="https://api.clickatell.com">Clickatell</option>
                 <option value="https://smsgateway.me">smsGateway</option>
+                <option value="https://api.spryngsms.com">SpryngSMS</option>
                 <option value="http://www.targetsms.nl">TargetSMS</option>
+                <option value="https://api.twilio.com">Twilio</option>
                 <option value="https://www.12VoIP.com">12VoIP</option>
                 <option value="https://www.Actionvoip.com">Actionvoip</option>
                 <option value="https://www.BrowserCalls.com">BrowserCalls</option>
@@ -234,6 +236,14 @@
           } else
           if (document.getElementById('provider').value.substr(0, 20)=='https://smsgateway.m'){
             document.getElementById("provider_url").setAttribute("href", "http://smsgateway.me");
+          } else
+          if (document.getElementById('provider').value.substr(0, 20)=='https://api.spryngsm'){
+            document.getElementById("provider_url").setAttribute("href", "http://www.spryng.nl");
+          } else
+          if (document.getElementById('provider').value.substr(0, 20)=='https://api.twilio.c'){
+            document.getElementById("provider_url").setAttribute("href", "https://www.twilio.com");
+            document.getElementById('api_id').disabled=false;
+            document.getElementById('username').disabled=true;
           }
         }
 
