@@ -3,7 +3,7 @@
   "name": {
       "en": "Send SMS"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">= 1.x",
   "author": {
       "name": "Robin Gruijter",

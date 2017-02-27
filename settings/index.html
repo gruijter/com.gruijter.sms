@@ -14,10 +14,12 @@
                 <option value="http://textbelt.com/text">Textbelt (US)</option>
                 <option value="http://textbelt.com/canada">Textbelt (CN)</option>
                 <option value="https://api.clickatell.com">Clickatell</option>
+                <option value="https://sgw01.cm.nl">CM Direct</option>
                 <option value="https://smsgateway.me">smsGateway</option>
                 <option value="https://api.spryngsms.com">SpryngSMS</option>
                 <option value="http://www.targetsms.nl">TargetSMS</option>
                 <option value="https://api.twilio.com">Twilio</option>
+                <option value="https://www.12VoIP.com">==== DellMont Providers ====</option>
                 <option value="https://www.12VoIP.com">12VoIP</option>
                 <option value="https://www.Actionvoip.com">Actionvoip</option>
                 <option value="https://www.BrowserCalls.com">BrowserCalls</option>
@@ -101,7 +103,7 @@
             </div>
             <div class="field row">
                 <label for="from" data-i18n="From number"> </label>
-                <input id="from" type="text" placeholder="optional" value="" />
+                <input id="from" type="text" placeholder="" value="" />
             </div>
             <div class="field row">
                 <label for="toTest" data-i18n="Test number"> </label>
@@ -114,8 +116,8 @@
             <div id="testresult"></div>
 
         </fieldset>
-        <button class="left" id="button_clear" onclick="empty()" data-i18n="Clear"> </button>
         <button class="left" id="button_test" onclick="test()" data-i18n="Test"> </button>
+        <button class="right" id="button_restore" onclick="onHomeyReady()" data-i18n="Restore"> </button>
         <button class="right" id="button_save" onclick="save()" data-i18n="Save"> </button>
 
 
@@ -222,9 +224,13 @@
           if (document.getElementById('provider').value.substr(0, 15)=='http://textbelt'){
             document.getElementById("provider_url").setAttribute("href", "http://www.textbelt.com");
             document.getElementById('api_id').disabled=true;
+            document.getElementById('api_id').value = "";
             document.getElementById('username').disabled=true;
+            document.getElementById('username').value = "";
             document.getElementById('password').disabled=true;
+            document.getElementById('password').value = "";
             document.getElementById('from').disabled=true;
+            document.getElementById('from').value = "";
           } else
           if (document.getElementById('provider').value.substr(0, 22)=='https://api.clickatell'){
             document.getElementById("provider_url").setAttribute("href", "https://www.clickatell.com");
@@ -244,6 +250,15 @@
             document.getElementById("provider_url").setAttribute("href", "https://www.twilio.com");
             document.getElementById('api_id').disabled=false;
             document.getElementById('username').disabled=true;
+            document.getElementById('username').value = "";
+          }else
+          if (document.getElementById('provider').value.substr(0, 19)=='https://sgw01.cm.nl'){
+            document.getElementById("provider_url").setAttribute("href", "https://www.cm.nl");
+            document.getElementById('api_id').disabled=false;
+            document.getElementById('username').disabled=true;
+            document.getElementById('username').value = "";
+            document.getElementById('password').disabled=true;
+            document.getElementById('password').value = "";
           }
         }
 

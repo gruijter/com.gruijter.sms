@@ -44,7 +44,7 @@ function send (service, number, msg, callback) {
 					textBelt (service, number, msg, function (err, result){
 						let message;
 						let error = err || !result.success;
-						Homey.log('error: ',err, error, result);
+//						Homey.log('error: ',err, error, result);
 						if (error) {message = result.message}
 						else {message = result.success};
 						callback (error, message);
@@ -76,6 +76,12 @@ function send (service, number, msg, callback) {
 						break;
 				case 'https://api.twilio.c':		//provider is Twilio
 					twilio (service, number, msg, function (err, result){
+						Homey.log(err, result);
+						callback (err, result)
+					});
+						break;
+				case 'https://sgw01.cm.nl':			//provider is cm.nl
+					cm (service, number, msg, function (err, result){
 						Homey.log(err, result);
 						callback (err, result)
 					});
@@ -149,6 +155,7 @@ function textBelt(service, number, msg, callback) {
 		body: body
 	};
 	request.post(options, function(err, resp, body){
+
 		if (err) {
 			callback(err, null);
 		}
@@ -158,11 +165,13 @@ function textBelt(service, number, msg, callback) {
 				callback(null, payload)
 			}
 			catch(e) {
-				callback(e, null)
+				let payload = {message : 'Textbelt service down?' };
+				callback(true, payload);
 			}
 		}
 		else {
-			callback(new Error('an unknown error occurred'), null);
+			let payload = {message : 'an unknown error occurred' };
+			callback(true, payload);
 		}
 	})
 }
@@ -374,6 +383,60 @@ function twilio(service, number, msg, callback) {
     }
 	});
 }
+
+
+function cm(service, number, msg, callback) {
+  Homey.log('CM sending SMS to', number);
+	let url = service.url+'/gateway.ashx?producttoken='+service.api_id+'&body='+msg+'&to='+number.replace("+", "00")+'&from='+service.from ;
+	request(url, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+	    Homey.log(body);
+			let err = false;
+			if (body != '') {
+				err = true;
+			};
+			callback(err, body);
+	  } else {
+      callback(error, body);
+      Homey.log("error from server:"+error)
+    }
+	})
+}
+
+
+// ***************https://www.cm.nl/************************************* //
+/*
+
+HTTP GET
+We also maintain a gateway interface that can be addressed using a HTTP GET method.
+This call is limited in its features and only supports the basic parameters (FROM, TO, BODY and REFERENCE),
+options such as concatenation (multipart), unicode, and hybrid messaging are not supported.
+We advise to use our HTTP POST call if possible.
+https://sgw01.cm.nl/gateway.ashx?producttoken=00000000-0000-0000-0000-000000000000&body=Example+message+text&to=00447911123456&from=SenderName&reference=your_reference
+
+Parameter
+Description
+
+PRODUCTTOKEN
+Required. This is the product token that was sent to you by email. Example: 00000000-0000-0000-0000-000000000000'
+
+MSG
+Required. The msg-tag signals the start of a message and should comprise of at least a from, to and body-tag. One HTTP-call can support up to 1000 msg elements.
+
+FROM
+Required. This is the sender name. The maximum length is 11 alphanumerical characters or 16 digits. Example: 'CM Telecom'
+
+TO
+Required. This is the destination mobile number. Restrictions: this value should be in international format. A single mobile number per request. Example: '00447911123456'
+
+BODY
+Required. This is the message text. Restrictions: the maximum length is 160 characters.
+
+REFERENCE
+Here you can include your message reference. This information will be returned in a status report so you can match the message and it's status.
+It should be included in the XML when posting. Restrictions: 1 - 32 alphanumeric characters and reference will not work for demo accounts.
+
+*/
 
 
 

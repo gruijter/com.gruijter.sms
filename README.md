@@ -10,7 +10,7 @@ TextBelt: Free sending of SMS for US, Canada, and International. You will have
 
 smsGate: use your own android phone as SMS gateway. (note: from-number=deviceID)
 
-Clickatell, TargetSMS, Twilio and Spryng:
+Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
           These are paid SMS services where you need an account
 
 DellMont: This includes more than 60 voipservices like Voipbuster, Freecall,
@@ -39,14 +39,15 @@ the forum.
 
 Version changelog
 ```
+v1.0.2  2017.02.27 added CM Direct. Usability improvements. Minor bug fixes
 v1.0.1  2017.01.14 added SpryngSMS and Twilio
 v1.0.0  2016.12.05 Xml2js updated to 0.4.17. Request updated to 2.79.0. Minor
         code changes.
-v0.0.6  2016.11.08 Fix crash undefined provider.
-v0.0.5  2016.10.01 Compatibility to fw 0.10.1. added www icon.
+v0.0.6  2016.11.08 Fix crash undefined provider
+v0.0.5  2016.10.01 Compatibility to fw 0.10.1. added www icon
 v0.0.4  2016.09.08 Added targetsms and smsGate.me as SMS service. Added website
         link in settings. Fix crash undefined provider.
-v0.0.3  2016.09.04 Fixed broken DellMont. Testbutton added.
+v0.0.3  2016.09.04 Fixed broken DellMont. Testbutton added
 v0.0.2  2016.09.02 Added Clickatell and VoiceTrading as SMS service
 v0.0.1  2016.09.01 Initial release
 ```
