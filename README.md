@@ -39,6 +39,7 @@ the forum.
 
 Version changelog
 ```
+v1.0.3  2017.04.08 Request updated to 2.81.0
 v1.0.2  2017.02.27 added CM Direct. Usability improvements. Minor bug fixes
 v1.0.1  2017.01.14 added SpryngSMS and Twilio
 v1.0.0  2016.12.05 Xml2js updated to 0.4.17. Request updated to 2.79.0. Minor
