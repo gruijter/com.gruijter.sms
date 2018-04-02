@@ -1,13 +1,13 @@
 # Send SMS #
 
-Homey app to send text messages over SMS.
+A small Homey app to send text messages via 80 SMS providers.
 
 In this age of IoT there is still a need to send messages by SMS. This small app
-supports a large number of SMS providers:
+supports about 80 SMS providers:
 
 smsGate: use your own android phone as SMS gateway. (note: from-number=deviceID)
 
-AspSMS, Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
+AspSMS, BulkSMS, Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
           These are paid SMS services where you need an account
 
 TextBelt: Unfortunately the free sending of SMS is not working anymore. You now
