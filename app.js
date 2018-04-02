@@ -86,6 +86,9 @@ class SendSMSApp extends Homey.App {
 					case 'http://textbelt.com/':	// provider is textbelt
 						result = await this.textBelt(service, number, msg);
 						break;
+					case 'https://www.bulksms.':	// provider is bulksms
+						result = await this.bulkSms(service, number, msg);
+						break;
 					case 'https://api.clickate':	// provider is clickatell
 						result = await this.clickatell(service, number, msg);
 						break;
@@ -114,6 +117,42 @@ class SendSMSApp extends Homey.App {
 				return resolve(result);
 			} catch (error) {
 				this.log(error);
+				return reject(error);
+			}
+		});
+	}
+
+	bulkSms(service, number, msg) {
+		// this.log('bulkSMS sending SMS to', number);
+		return new Promise(async (resolve, reject) => {
+			try {
+				const headers = {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Cache-Control': 'no-cache',
+				};
+				const options = {
+					hostname: 'bulksms.vsms.net', // 'bulksms.2way.co.za',
+					// port: 5567,
+					path: '/eapi/submission/send_sms/2/2.0',
+					headers,
+					method: 'POST',
+				};
+				const postData = {
+					username: service.username,
+					password: service.password,
+					message: msg,
+					msisdn: number,
+					// sender: service.from,
+				};
+				const result = await this._makeHttpsRequest(options, qs.stringify(postData));
+				if (result.statusCode !== 200) {
+					return reject(Error(`${result.statusCode}: ${result.body}`));
+				}
+				if (result.body[0] !== '0') {
+					return reject(Error(result.body));
+				}
+				return resolve(result.body);
+			} catch (error) {
 				return reject(error);
 			}
 		});

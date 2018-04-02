@@ -40,7 +40,7 @@ the forum.
 Version changelog
 ```
 v2.0.0  2018.04.02 Rewrite to sdk2. Less memory usage (removed xml2js and request).
-        Added AspSMS and DellMont SMS services. Added logger.
+        Added AspSMS, BulkSMS and DellMont SMS services. Added logger.
 v1.0.3  2017.04.08 Request updated to 2.81.0
 v1.0.2  2017.02.27 added CM Direct. Usability improvements. Minor bug fixes
 v1.0.1  2017.01.14 added SpryngSMS and Twilio

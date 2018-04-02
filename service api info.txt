@@ -1,4 +1,76 @@
 
+// ***************https://www.bulksms.com/************************************* //
+/*
+
+submission/send_sms
+Allows you to send a single message to one or more recipients or groups (as defined in your phone book).
+
+Example (to two UK recipients, text Hi Mom & Dad - note URL-encoding):
+
+«EAPI URL»/submission/send_sms/2/2.0?username=john&password=abcd1234&message=Hi+Mom+%26+Dad&msisdn=44123123456,44123123457
+This example is so simple that it can be pasted into a browser’s location bar. However, please do not use HTTP GET in production - use only POST. To ensure that you are using POST correctly, please use the Code Samples as a basis.
+
+Unable to connect? Experiencing connection timeouts? See the FAQ
+
+Required parameters
+(Parameter values should be encoded in ISO-8859-1)
+
+parameter	required	default	description
+username	✓
+password	✓
+message	✓	 	max 160 chars for text, max 280 chars for 8bit
+and one of
+msisdn	✓	 	cell phone number. single recipient, or comma-separated list of recipients
+dest_group_id	✓	 	comma-seperated list of numeric group ids
+sender	 	 	sender id / origin address (if alphanumeric, max 11 characters). this facility becomes available after credits have been purchased for the first time. To request a sender id, log onto your account, go to User Account and click Change Sender ID. Alphanumeric sender id is a route-specific feature. sender is not compatible with repliable messages, either via the repliable parameter or for some cases of accounts with default repliable enabled (see the repliability section below for more). If specifying sender, set repliable=0 to be safe.
+msg_class	 	2	0 (flash SMS), 1, 2 (normal SMS, stored to SIM card), 3 - default 2
+dca	 	7bit	Data Coding Alphabet: 7bit, 8bit, 16bit, default 7bit (normal text message). For 8bit (ringtones, logos) or 16bit (Unicode), a message containing only hexadecimal octets, to a maximum of 140 octets (where an octet is e.g. ff), must be submitted (the UDHI is always set for 8-bit messages) 16-bit is a route-specific feature.
+want_report	 	1	0 or 1, default 1
+routing_group	 	 	(previously known as cost_route, which still works to be backwards compatible) - possible values are 1, 2, 3 (it is possible but unlikely that these values could change - if they do, you should be contacted first). The current default is 2, but you would be wise to not depend on this remaining so. Routing groups group delivery routes by cost or quality.
+source_id	 	 	an alphanumeric (plus other common characters) id, for your own accounting purposes (e.g. useful if you have subaccounts that you send messages on behalf of, or even if you have your own unique id that you want to associate with the message). Max 20 characters. Reply messages that are pushed to you will include this parameter, based on the original message that they are in reply to.
+repliable	 	 	1 to enable, 0 to disable, default is not set, which means that your User Profile’s default repliable setting will prevail. Also see descussion on repliability below.
+strip_dup_recipients	 	0	set to 1 to enable, default is 0. Normally we return an error if your list of recipients is not unique. This setting causes the duplicates to rather be stripped and the messages be sent. Not recommended: you should rather validate your data properly.
+stop_dup_id	 	 	see section on eliminating duplicates below.
+send_time	 	 	scheduled send time (see section on scheduling below), in format yyyy-mm-dd hh:mm:ss, relative to the time zone specified for your account.
+send_time_unixtime	 	 	scheduled send time in integer format. This is an alternative to send_time, and represents the number of seconds since 1 Jan 1970 UTC (GMT+0), also known as unixtime.
+send_time_seconds	 	 	a flawed version of send_time_unixtime, provided only for backwards compatibility to clients already using it.
+scheduling_description	 	 	if using scheduling, you could provide a description of the scheduled job here to later help identify it.
+test_always_succeed	 	0	for testing purposes - if set to 1, does basic validation (username, password, etc) of your submission, but stops short of actually submitting the messages, and returns a successful status code as if it had submitted them successfully.
+test_always_fail	 	0	as for test_always_succeed, but after basic validation, always returns a failure code.
+allow_concat_text_sms	 	0	enable sending of messages longer than 160 characters (see Concatenation of long messages below). This is a route-specific feature. Set to 1 to enable, default is 0.
+concat_text_sms_max_parts	 	2	maximum number of message parts to allow when concatenating (default: 2, max: 127).
+replace_msg_id	 	 	valid range 1 to 7. Can be used to overwrite a previous message on the handset. See Overwriting messages on the handset below.
+protocol_id	 	 	See Protocol ID below.
+Returns:
+status_code|status_description|batch_id
+(where batch_id is optional, depending on the error)
+
+Possible values for status_code are:
+
+status_code	description
+0	In progress (a normal message submission, with no error encountered so far).
+1	Scheduled (see Scheduling below).
+22	Internal fatal error
+23	Authentication failure
+24	Data validation failed
+25	You do not have sufficient credits
+26	Upstream credits not available
+27	You have exceeded your daily quota
+28	Upstream quota exceeded
+40	Temporarily unavailable
+201	Maximum batch size exceeded
+You should never depend on the value of status_description - only depend on status_code, which is a constant. However, status_description can contain useful information about the nature of failures when you are developing your initial application. batch_id is guaranteed to be a positive integer > 0, if present.
+
+Note: you should attempt to resend if you receive status code 40. You could also do so if you receive 26 or 28, which might have been resolved after several resend attempts. All other errors should be considered fatal.
+
+Any HTTP status code other than 200 should be considered transient, i.e. you should attempt to resend after some interval.
+
+URL
+The current url is:
+
+«EAPI URL»/submission/send_sms/2/2.0
+(please also read the notes on versioning)
+
 
 // ***************https://www.cm.nl/************************************* //
 /*

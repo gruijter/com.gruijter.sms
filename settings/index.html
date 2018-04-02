@@ -19,7 +19,8 @@
             <div class="field row">
               <label for="provider" data-i18n="Provider"> </label>
               <select id="provider" onchange="providerSelected()" >
-                <option value="https://json.aspsms.com/">aspSMS</option>
+                <option value="https://json.aspsms.com">aspSMS</option>
+								<option value="https://www.bulksms.com">bulkSMS</option>
                 <option value="https://api.clickatell.com">Clickatell</option>
                 <option value="https://sgw01.cm.nl">CM Direct</option>
                 <option value="https://smsgateway.me">smsGateway</option>
@@ -291,8 +292,12 @@
             document.getElementById("provider_url").setAttribute("href", "https://www.aspsms.com");
             document.getElementById('api_id').disabled=false;
             document.getElementById('username').disabled=true;
+          } else
+					if (document.getElementById('provider').value.substr(0, 20)=='https://www.bulksms.'){
+            document.getElementById('from').disabled=true;
           }
-        }
+
+      	}
 
         function showLogs() {
          HomeyAPI.api('GET', 'getlogs/', function(err, result) {
