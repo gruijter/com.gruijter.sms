@@ -1,0 +1,464 @@
+
+
+// ***************https://www.cm.nl/************************************* //
+/*
+
+HTTP GET
+We also maintain a gateway interface that can be addressed using a HTTP GET method.
+This call is limited in its features and only supports the basic parameters (FROM, TO, BODY and REFERENCE),
+options such as concatenation (multipart), unicode, and hybrid messaging are not supported.
+We advise to use our HTTP POST call if possible.
+https://sgw01.cm.nl/gateway.ashx?producttoken=00000000-0000-0000-0000-000000000000&body=Example+message+text&to=00447911123456&from=SenderName&reference=your_reference
+
+Parameter
+Description
+
+PRODUCTTOKEN
+Required. This is the product token that was sent to you by email. Example: 00000000-0000-0000-0000-000000000000'
+
+MSG
+Required. The msg-tag signals the start of a message and should comprise of at least a from, to and body-tag. One HTTP-call can support up to 1000 msg elements.
+
+FROM
+Required. This is the sender name. The maximum length is 11 alphanumerical characters or 16 digits. Example: 'CM Telecom'
+
+TO
+Required. This is the destination mobile number. Restrictions: this value should be in international format. A single mobile number per request. Example: '00447911123456'
+
+BODY
+Required. This is the message text. Restrictions: the maximum length is 160 characters.
+
+REFERENCE
+Here you can include your message reference. This information will be returned in a status report so you can match the message and it's status.
+It should be included in the XML when posting. Restrictions: 1 - 32 alphanumeric characters and reference will not work for demo accounts.
+
+*/
+
+
+// ***************twilio.com************************************* //
+
+/*
+HTTP POST to Messages
+
+To send a new outgoing message, make an HTTP POST to your Messages list resource URI:
+
+https://{AccountSid}:{AuthToken}@api.twilio.com/2010-04-01/Accounts
+
+/2010-04-01/Accounts/{AccountSid}/Messages
+
+accountSid 'ACe8c22f1ab67a5351050345c0284b64c5'; //testaccount
+authToken  'your_auth_token';
+
+To		The destination phone number. Format with a '+' and country code e.g., +16175551212 (E.164 format).
+From 	A Twilio phone number
+Body	The text of the message you want to send, limited to 1600 characters.
+
+Error codes:
+30001	Queue overflow	You tried to send too many messages too quickly and your message queue overflowed. Try sending your message again after waiting some time.
+30002	Account suspended	Your account was suspended between the time of message send and delivery. Please contact Twilio.
+30003	Unreachable destination handset	The destination handset you are trying to reach is switched off or otherwise unavailable.
+30004	Message blocked	The destination number you are trying to reach is blocked from receiving this message (e.g. due to blacklisting).
+30005	Unknown destination handset	The destination number you are trying to reach is unknown and may no longer exist.
+30006	Landline or unreachable carrier	The destination number is unable to receive this message. Potential reasons could include trying to reach a landline or, in the case of short codes, an unreachable carrier.
+30007	Carrier violation	Your message was flagged as objectionable by the carrier. In order to protect their subscribers, many carriers have implemented content or spam filtering. Learn more about carrier filtering
+30008	Unknown error	The error does not fit into any of the above categories.
+30009	Missing segment	One or more segments associated with your multi-part inbound message was not received.
+30010	Message price exceeds max price.	The price of your message exceeds the max price parameter.
+
+*/
+
+// ***************spryng.com************************************* //
+/*
+Koppelen aan de gateway
+Om een bericht te verzenden kan er een HTTP GET of HTTP POST call uitgevoerd worden naar het volgende adres: " https://api.spryngsms.com/api/send.php "
+
+Parameter
+USERNAME	Gekozen door gebruiker bij aanmelding op http://www.spryng.nl
+PASSWORD	Gekozen door gebruiker bij aanmelding op http://www.spryng.nl
+REFERENCE	Unieke referentie voor delivery reports
+DESTINATION	Nummer(s) bestemming
+SENDER	Afzender van het bericht
+BODY	Inhoud van de SMS
+SERVICE	Referentie tag die toegevoegd kan worden om tussen eindgebruikers te differentiëren
+ROUTE	Om de Spryng Business, Spryng Economy route of een speciale route te gebruiken
+ALLOWLONG	Als u Long SMS wenst te versturen
+
+Username
+Gekozen door gebruikers bij aanmelding op http://www.spryng.nl
+Optie
+Vereist	ja
+Type	Alfanumeriek, Case gevoelig
+Min lengte	2
+Max lengte	32
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	USERNAME=username
+
+Password
+Gekozen door gebruikers bij aanmelding op http://www.spryng.nl
+Optie
+Vereist	ja
+Type	Alfanumeriek, Case gevoelig
+Min lengte	6
+Max lengte	32
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	PASSWORD=password
+References
+Optie
+Vereist	Alleen wanneer u delivery reports wenst te ontvangen
+Type	Alfanumeriek
+Min lengte	1
+Max lengte	256
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	REFERENCE=abc123
+Opmerkingen	Moet uniek zijn
+
+Destination
+Nummer(s) bestemming
+Optie
+Vereist	ja
+Type	MSISDN-numeriek (internationaal format zonder “00” of
+“+”)
+Min lengte	1 MSISDN
+Max lengte	1.000 MSISDN
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	DESTINATION=31641041106,31612345678
+Opmerkingen	Meer details over foutafhandeling zie “Return Values” onderaan de pagina
+
+Sender
+Afzender van het bericht
+Optie
+Vereist	ja
+Type	Numeriek of Alfanumeriek
+Min lengte	1
+Max lengte	14 voor numeriek of 11 voor alfanumeriek
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	SENDER=0031641041106
+Opmerkingen	Meer details over foutafhandeling zie “Return Values” onderaan de pagina
+
+Body
+Inhoud van de SMS
+Optie
+Vereist	ja
+Type	GSM 7-bit alfabet voor tekstberichten
+Min lengte	1
+Max lengte	160 karakters voor tekst bericht (default : ALLOWLONG=0) 612 karakters (ALLOWLONG=1)
+Wanneer u Long SMS gebruikt, zal het systeem het bericht automatisch verdelen in 153 karakters per sms.
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	BODY=This%20is%20a%20test%20SMS
+Opmerkingen	Meer details over karakters zie “Field types” onderaan de pagina
+
+Service
+Referentie tag kan gebruikt worden om een filter in statistieken te creëren.
+Optie
+Vereist	nee
+Type	Alfanumeriek
+Min lengte	1
+Max lengte	10
+Min waarde	<na>
+Max waarde	<na>
+Waardes	<na>
+Default waarde	<none>
+Voorbeeld	SERVICE=Client1
+
+Route
+Om de Spryng Business, Spryng Economy of Specific User route te selecteren.
+Optie
+Vereist	ja
+Type	Vooraf gedefinieerd
+Min lengte	<na>
+Max lengte	<na>
+Min waarde	<na>
+Max waarde	<na>
+Waardes	BUSINESS, ECONOMY, 0-9 (Specific User route)
+Default waarde	BUSINESS
+Voorbeeld	ROUTE=BUSINESS
+
+Allowlong
+Als u Long SMS wenst te versturen
+Optie
+Vereist	Alleen als u Long SMS wenst te versturen
+Type	Vooraf gedefinieerd
+Min lengte	<na>
+Max lengte	<na>
+Min waarde	<na>
+Max waarde	<na>
+Waardes	0,1
+Default waardes	0
+Voorbeeld	ALLOWLONG=1
+Opmerkingen	Wanneer u Long SMS gebruikt, zal het systeem het bericht automatisch verdelen in 153 karakters per sms.
+
+Return Values
+Return Waarde
+1	Succesvol ontvangen
+100	Missende parameter
+101	Gebruikersnaam te lang
+102	Gebruikersnaam te kort
+103	Wachtwoord te kort
+104	Wachtwoord te lang
+105	Bestemming te kort
+106	Bestemming te lang
+107	Afzender te lang
+108	Afzender te kort
+109	Inhoud te lang
+110	Inhoud te kort
+200	Veiligheidsfout
+201	Onbekende route
+202	Route toegang overtreding
+203	Onvoldoende credits
+800	Technische fout
+*/
+
+// ***************smsgateway.me************************************* //
+/*
+function sendMessageToNumber($to, $message, $device, $options=[]) {
+		$query = array_merge(['number'=>$to, 'message'=>$message, 'device' => $device], $options);
+		return $this->makeRequest('/api/v3/messages/send','POST',$query);
+}
+
+# Send message to number
+The most popular use of SMS Gateway API is sending messages. You can use our service to programmatically send a message through your Android phone.
+
+API Reference
+
+API Endpoint
+URL:	http://smsgateway.me/api/v3/messages/send
+Method:	POST
+
+Request Parameters
+Parameter						Required						Description
+email								YES									Your username for the site
+password						YES									Your password for the site
+device							YES									The ID of device you wish to send the message from
+number							YES									The number to send the message to
+message							YES									The content of the message to be sent
+send_at							NO									Time to send the message in Unix Time format
+expires_at					NO									Time to give up trying to send the message at in Unix Time format
+
+Success Response
+Status Code:	200 OK
+Content Type:	application/json
+Output format:	See Example
+
+Failed Response
+Status Code:	200 OK
+Content Type:	application/json
+Output format:	See Example
+
+{
+"success": true,
+"result": {
+	"success": [
+		{
+		"id": "308",
+		"device_id": "4",
+		"message": "hello world!",
+		"status": "pending",
+		"send_at": "1414624856",
+		"queued_at": "0",
+		"sent_at": "0",
+		"delivered_at": "0",
+		"expires_at": "1414634856",
+		"canceled_at": "0",
+		"failed_at": "0",
+		"received_at": "0",
+		"error": "None",
+		"created_at": "1414624856",
+		"contact": {
+			"id": "14",
+			"name": "Phyllis Turner",
+			"number": "+447791064713"
+			}
+		}
+		],
+	"fails": [
+	]
+	}
+}
+
+{
+"success": true,
+"result": {
+	"success": [
+	],
+	"fails": [
+		"number": "+44771232343"
+		"message": "hello world!",
+		"device": 1
+		"errors": {
+			"device": ["The selected device is invalid"],
+			}
+		]
+	}
+}
+
+*/
+
+// ***************TEXTBELT************************************* //
+/*  Send a text message to the provided
+		phone number.
+		Message limit details on http://textbelt.com
+		Internal errors will be provided in first param
+		of callback.
+		Params:
+			number: phone number to send to
+			msg: text message which will be sent
+			callback(err, result): callback to be called
+*/
+
+// ***************DellMont (Voipbuster, Freecall, Cheapvoip, etc)************************************* //
+
+/*
+see list and tariffs: https://www.voipkredi.com/page.php?page=betamax-dellmont
+or: http://progx.ch/home-voip-prixbetamax-3-1-1.html
+or: http://www.voipconnect.com/about
+
+https://www.voipbuster.com/myaccount/sendsms.php?username=xxxxxxxxxx&password=xxxxxxxxxx&from=xxxxxxxxxx&to=xxxxxxxxxx&text=xxxxxxxxxx
+https://www.freecall.com/myaccount/sendsms.php?username=xxxxxxxxxx&password=xxxxxxxxxx&from=xxxxxxxxxx&to=xxxxxxxxxx&text=xxxxxxxxxx
+https://www.cheapvoip.com/myaccount/sendsms.php?username=xxxxxxxxxx&password=xxxxxxxxxx&from=xxxxxxxxxx&to=xxxxxxxxxx&text=xxxxxxxxxx
+Explanation of the variables:
+	username: your username
+	password: your password
+	from: your username or your verified phone number. Always use international format for the number starting with +, for instance +491701234567
+	to: the number you wish to send the sms to. Always use international format starting with +, for instance +491701234567
+	text: the message you want to send
+
+https://www.freecall.com/myaccount/sendsms.php?username=gruijter&password=ljcgmiypq&from=+31612862971&to=+31612862971&text="hello world'
+*/
+
+
+// ***************clickatell************************************* //
+/*
+http://www.domoticz.com/wiki/SMS_Notifications
+
+API Key: is the ID that was assigned to your (http) api
+User ID: the same that use use to login into Clickatell's webpage.
+Password: the same that use use to login into Clickatell's webpage.
+From: enter your own phone number. The one that you authenticated as a valid sender id for your account. If you fail to register any sender id with Clickatell, your message will still be delivered, but with a default sender id.
+To: one or more mobile numbers can be entered, separated by a comma. You can either use an international format (with the + sign), or a local number if you set up your clickatell account to automatically convert mobile numbers to International format. A message will be sent out to each of the numbers listed here. Example: +316123456789,6421876543.
+
+Now click on the "Test" button and see what happens.
+If no sms message arrives, try to debug the problem by manually sending an sms message via your browser. Use the link:
+
+https://api.clickatell.com/http/sendmsg?user=xxxxxx&password=xxxxxxxx&api_id=xxxxxx&to=15XXXXXXX&text=test&from=13XXXXXXXXX
+
+A successful submission should yield: "ID: (some number)". In case of an error, it will be displayed.
+
+
+*/
+
+// ***************TargetSMS************************************* //
+/*
+To send Normal SMS messages, your server must call the following URL with HTTP GET:
+
+http://www.targetsms.nl/service/sendsms
+
+The following variables apply:
+Variable 			Description 							Format 						Mandatory 			Example
+username 			TargetSMS username 				Alphanumerical 		Yes 						test
+ndle 				TargetSMS handle 					Alphanumerical 		Yes 						d6861a8 f669 7a28342
+aff 					TargetSMS customer ID 		Alphanumerical 		Yes							12345
+soort					SMS type: sms,WAP push		'sms', 'push',		Yes							push
+							or flash 									’flash’
+originator 		Number to use as sender 	Alphanumerical 		Yes/No** 				31612345678
+filetype 			Type of recipients list 	Numerical 				No
+to 						Recipients phonenumber		Alphanumerical 		Yes 						31611112222
+							or URL to recipients list
+message 			Message to send 					Alphanumerical 		Yes 						Hello world
+deliverydate Time to sent 							Numerical 				No 							3112072359
+url 					URL of the WAP push				Alphanumerical 		Yes/No* 				http://www.test.nl
+							message
+pushexpires 	Expiring of the push			 Numerical 				Yes/No* 				7
+							message
+
+* : These are mandatory when sending WAP push messages.
+**: Omitted when sending WAP push messages.
+
+Explanation:
+- username: The username of your TargetSMS account;
+- handle: Hash ID that belongs to your TargetSMS account. This is not your TargetSMS login password. You can find it on www.targetsms.nl/handle (after log in)
+- aff: Your TargetSMS affiliate ID;
+- soort: Use 'sms' for a standard text message or 'push' for a WAP push or ‘flash’ for a flash message
+- originator: the value to use as sender. This may be either a phonenumber or a short text. Please note:
+		o This value is omitted when sending a WAP push message, there is no 'sender'field for WAP push messages;
+		o When using a textstring as originator, the maximum length is 11 characters. Do not use other characters than A-Z, a-z and 0-9. E.g. no diacritical characters.
+		o When using a phonenumber as originator, the maximum length is 16 characters. A '+' will be placed before the phonenumber automatically.
+- filetype: This field is optional. When you want to send a large batch or more than 1000 messages, you can fill in an URL instead of a list with phonenumbers for the 'to' field. The phonenumbers will be downloaded from that URL. In filetype you need to specify the format of the file with phonenumbers:
+	o Use 1 when the recipients are separated by semi-colons;
+	o Use 2 for comma-separated;
+	o Use 3 when the phonenumbers are separated by newlines (CRLF, \r\n)
+- to: Phonenumber of the recipient with country-prefix, without dashes. For example: 31612345678. You can specify up to 1000 recipients in the to field, separate them with commas. When filetype is filled in, an URL to the list with recipients is expected.
+- message: text of the message to send. A normal text message cannot be longer than 160 characters. You can use the following characters: a-z, A-Z, 0-9, +%#()*+,/:;<=>?_£¥§ÄÅÜäèéìñòöùü=”€’  note: The € sign is encoded as %80 and counts for 2 characters
+- deliverydate: when the SMS message should not be sent instantly, the date and time of sending can be specified in the following format: DDMMYYHHMM.
+- url: URL to send in the WAP push message. The length of the messagetext and URL combined may be no more than 80 characters. This applies only to WAP push messages.
+- pushexpires: the number of days that the WAP push message will remain valid after receipt by the end-user. Note that the SMS gateway will send this field as a date to the end-user. If the end-user has a wrong date/time setting, the WAP push link will not work.
+
+Example:
+http://www.targetsms.nl/service/sendsms?username=test&handle=d6861a8 f669 f67a28&aff=12345&soort=push&originator=31612345678&to=31611112222&message=Hello +World&deliverydate=3112072359&url=http%3A%2F%2Fwww.test.nl&pushexpires=7
+
+Response:
+When the message has been sent, the response will be:  45000
+
+Errors:
+If not OK, one of the following error-codes will be returned:
+
+45001 Recipient incorrect (check the 'to'-field)
+45002 Message to long, absent or contains illegal characters
+45003 Destination is blocked by smsinfofilter
+45004 Destination is blocked by STOP message
+45005 Last MO message is expired
+45011 Incorrect or no affiliate ID (check 'aff')
+45012 Incorrect originator
+45019 Not allowed to send Normal SMS
+45020 Message and URL combined are too long
+45021 No URL given (check 'url')
+45022 Deliverydate must be numerical and have 10 digits
+45023 Deliverydate is in the past
+45024 Non-numerical value given for pushexpires
+45025 Incorrect filetype for recipient list
+45045 Server down, please try again later
+50010 No SMS credits or credit has expired
+
+
+*****************ASPSMS***********************************
+https://www.aspsms.com
+
+SendSimpleTextSMS
+Description:	Send single or multipart text messages in GSM 7-bit or Unicode.
+HTTP-POST URL:	https://json.aspsms.com/SendSimpleTextSMS
+JSON Request Object:	{
+  "UserName": "",
+  "Password": "",
+  "Originator": "",
+  "Recipients": "",
+  "MessageText": "",
+  "ForceGSM7bit": false
+}
+Parameter Info:
+UserName: Your ASPSMS Userkey.
+Password: Your ASPSMS Password. To retrieve your lost Password use this link.
+Originator: You can use a phone number or up to 11 Alphabetic characters (e.g. 'MYBUSINESS') as Originator. In order to use a phone number (e.g. '+4176000000') you must unlock it first using the UnlockOriginator method.
+Recipients: Add Recipients as JSON Array ["number1:transaction-id1","number2:transaction-id3", ... ] (e.g. ["+4170000000:76532","+4170000001:HT763t", ...]. We recommend E.164 phone number formatting: [+][country code][subscriber number including area code] (eg. '+41780000000'). The Transaction-ID is not mandatory, it's used as reference in the delivery notifications. The maximum number of recipients per request is 1000.
+MessageText: The message text property accepts UTF8 encoding. Long messages get concatenated automatically. Encoding is detected automatically. If Unicode Characters are used the maximum multipart message length is 603 Characters = 9 concatenated messages. For GSM 7-bit the maximum multipart message length is 1377 = 9 concatenated messages.
+ForceGSM7bit: Force sending GSM7bit characters only to avoid extra cost by acidentally using Unicode Characters
+JSON Response Object:	{
+  "StatusCode": "",
+  "StatusInfo": ""
+}
+
+*/

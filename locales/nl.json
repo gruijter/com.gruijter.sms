@@ -1,5 +1,9 @@
 {
   "Send SMS settings page"            : "Send SMS instellingen",
+  "loggingTitle"					            : "Debug logs",
+  "deletelogs"                        : "logs verwijderen",
+  "getlogs"                           : "logs verversen",
+  "settingsTitle"					            : "Instellingen",
   "provider and login information"    : "provider en login informatie",
   "Provider"                          : "Provider",
   "Provider URL"                      : "Provider website",
@@ -10,6 +14,8 @@
   "Test number"                       : "Test nummer",
   "Test message"                      : "Test bericht",
   "Save"                              : "Opslaan",
-  "Restore"                           : "Herstellen",
-  "Test"                              : "Test"
+  "Reset"                             : "Herstelen",
+  "Test"                              : "Test",
+  "settingsSaved"                     : "Provider instellingen zijn opgeslagen",
+  "testOk"                            : "OK! Sla de instellingen nu op.\r\n__result__"
 }

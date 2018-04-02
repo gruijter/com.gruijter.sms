@@ -1,24 +1,36 @@
-
+const Homey = require('homey');
 
 module.exports = [
-
-  {
-
-  }
-
-
-]
-
-/*        //To call the api (e.g. in settings html:)
-          Homey.api('GET', '/validate?' + $.param(saveData), function(err, result) {
-            //console.log(err, result);
-            document.getElementById('testresult').innerHTML = result;
-            if (!err){
-              setTimeout(function () {
-                Homey.set('settings', saveData, function (error, settings) {
-                  if (error) {return console.error(error)}
-                });  //also works without function, so why the callback?
-              }, 2000) // and why the timeout?
-            }
-          })
-*/
+	{
+		description: 'Test sending an SMS from frontend',
+		method: 'POST',
+		path: '/testSMS',
+		fn: async function fn(args, callback) {
+			const result = await Homey.app.testSMS(args.body);
+			if (result instanceof Error) return callback(result);
+			return callback(null, result);
+		},
+	},
+	{
+		description: 'Show loglines',
+		method: 'GET',
+		path: '/getlogs/',
+		requires_authorization: true,
+		role: 'owner',
+		fn: function fn(args, callback) {
+			const result = Homey.app.getLogs();
+			callback(null, result);
+		},
+	},
+	{
+		description: 'Delete logs',
+		method: 'GET',
+		path: '/deletelogs/',
+		requires_authorization: true,
+		role: 'owner',
+		fn: function fn(args, callback) {
+			const result = Homey.app.deleteLogs();
+			callback(null, result);
+		},
+	},
+];

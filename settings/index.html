@@ -1,31 +1,41 @@
 <!doctype html>
 <html>
-    <head>
-      <script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
-    </head>
+  <head>
+    <!-- The '/homey.js' script must be included in your settings view to work -->
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    <script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
+  </head>
     <body>
         <h1 data-i18n="Send SMS settings page"> </h1>
+        <div id="panel-buttons">
+          <button id="panel-button-1" class="button panel-button" onclick="showPanel(1)" data-i18n="settingsTitle">Settings</button>&nbsp;
+          <button id="panel-button-2" class="button panel-button" onclick="showPanel(2)" data-i18n="loggingTitle">Logging</button>&nbsp;
+          <br><br>
+        </div>
+        <!-- Settings panel -->
+        <div id="panel-1" class="panel">
         <fieldset>
             <legend data-i18n="provider and login information"> </legend>
             <div class="field row">
               <label for="provider" data-i18n="Provider"> </label>
               <select id="provider" onchange="providerSelected()" >
-                <option value="http://textbelt.com/intl">Textbelt (Intl)</option>
-                <option value="http://textbelt.com/text">Textbelt (US)</option>
-                <option value="http://textbelt.com/canada">Textbelt (CN)</option>
+                <option value="https://json.aspsms.com/">aspSMS</option>
                 <option value="https://api.clickatell.com">Clickatell</option>
                 <option value="https://sgw01.cm.nl">CM Direct</option>
                 <option value="https://smsgateway.me">smsGateway</option>
                 <option value="https://api.spryngsms.com">SpryngSMS</option>
                 <option value="http://www.targetsms.nl">TargetSMS</option>
+                <option value="http://textbelt.com/">Textbelt</option>
                 <option value="https://api.twilio.com">Twilio</option>
                 <option value="https://www.12VoIP.com">==== DellMont Providers ====</option>
                 <option value="https://www.12VoIP.com">12VoIP</option>
                 <option value="https://www.Actionvoip.com">Actionvoip</option>
                 <option value="https://www.BrowserCalls.com">BrowserCalls</option>
+                <option value="https://www.BudgetVoip.com">BudgetVoip</option>
                 <option value="https://www.BudgetVoipCall.com">BudgetVoipCall</option>
                 <option value="https://www.Call2India.com">Call2India</option>
                 <option value="https://www.CallEasy.com">CallEasy</option>
+                <option value="https://www.CallingCardBuster.com">CallingCardBuster</option>
                 <option value="https://www.CallingCredit.com">CallingCredit</option>
                 <option value="https://www.CallPirates.com">CallPirates</option>
                 <option value="https://www.CheapBuzzer.com">CheapBuzzer</option>
@@ -46,7 +56,7 @@
                 <option value="https://www.InterVoip.com">InterVoip</option>
                 <option value="https://www.Jumblo.com">Jumblo</option>
                 <option value="https://www.JustVoip.com">JustVoip</option>
-                <option value="https://www.Low-rate Voip.com">Low-rate Voip</option>
+                <option value="https://www.LowRateVoip.com">Low-Rate Voip</option>
                 <option value="https://www.MegaVoip.com">MegaVoip</option>
                 <option value="https://www.MexicoBarato.com">MexicoBarato</option>
                 <option value="https://www.NairaCalls.com">NairaCalls</option>
@@ -55,17 +65,19 @@
                 <option value="https://www.PanggilanMalaysia.com">PanggilanMalaysia</option>
                 <option value="https://www.PennyConnect.com">PennyConnect</option>
                 <option value="https://www.PinoyDialer.com">PinoyDialer</option>
-                <option value="https://www.poivY.com">poivY</option>
+                <option value="https://www.PoivY.com">PoivY</option>
                 <option value="https://www.PowerVoip.com">PowerVoip</option>
                 <option value="https://www.RebVoice.com">RebVoice</option>
                 <option value="https://www.Rynga.com">Rynga</option>
                 <option value="https://www.SIPDiscount.com">SIPDiscount</option>
                 <option value="https://www.SmartVoip.com">SmartVoip</option>
-                <option value="https://www.SMSDiscount.com">SMSDiscount</option>
+                <option value="https://www.SMSDiscount.com">SMS Discount</option>
                 <option value="https://www.SMSLISTO.com">SMSLISTO</option>
                 <option value="https://www.StuntCalls.com">StuntCalls</option>
+                <option value="https://www.SuperVoip.com">SuperVoip</option>
                 <option value="https://www.Telbo.com">Telbo</option>
                 <option value="https://www.VoiceTrading.com">VoiceTrading</option>
+                <option value="https://www.VoipaLot.com">VoipaLot</option>
                 <option value="https://www.Voipblast.com">Voipblast</option>
                 <option value="https://www.VoipBlazer.com">VoipBlazer</option>
                 <option value="https://www.VoipBuster.com">VoipBuster</option>
@@ -78,10 +90,12 @@
                 <option value="https://www.VoipGain.com">VoipGain</option>
                 <option value="https://www.VoipJumper.com">VoipJumper</option>
                 <option value="https://www.VoipMove.com">VoipMove</option>
+                <option value="https://www.VoipR.com">VoipR</option>
                 <option value="https://www.VoipRaider.com">VoipRaider</option>
                 <option value="https://www.VoipSmash.com">VoipSmash</option>
                 <option value="https://www.VoipStunt.com">VoipStunt</option>
                 <option value="https://www.VoipWise.com">VoipWise</option>
+                <option value="https://www.VoipYo.com">VoipYo</option>
                 <option value="https://www.VoipZoom.com">VoipZoom</option>
                 <option value="https://www.WebCallDirect.com">WebCallDirect</option>
               </select>
@@ -114,32 +128,54 @@
                 <textarea id="testMessage"></textarea>
             </div>
             <div id="testresult"></div>
-
         </fieldset>
         <button class="left" id="button_test" onclick="test()" data-i18n="Test"> </button>
-        <button class="right" id="button_restore" onclick="onHomeyReady()" data-i18n="Restore"> </button>
+        <button class="right" id="button_restore" onclick="reload()" data-i18n="Reset"> </button>
         <button class="right" id="button_save" onclick="save()" data-i18n="Save"> </button>
+        </div>
 
+        <!-- Debug logs panel -->
+        <div id="panel-2" class="panel">
+          <button type="button" class="right" id="button_deletelog" onclick="deleteLogs()" data-i18n="deletelogs">Delete Logs</button>
+          <button type="button" class="right" id="button_getlog" onclick="showLogs()" data-i18n="getlogs">Get Logs</button>
+          <div id="loglines"></div>
+        </div>
 
         <script type="text/javascript">
 
+        function showPanel(panel) {
+          $('.panel').hide()
+          $('.panel-button').removeClass('panel-button-active').addClass('panel-button-inactive')
+          $('#panel-button-' + panel).removeClass('panel-button-inactive').addClass('panel-button-active')
+          $('#panel-' + panel).show()
+          if (panel === 2) {
+            showLogs();
+          }
+        }
+
         var saveData;
+        var HomeyAPI = null;
 
         // triggered when user opens settings page
-        function onHomeyReady(){
+        function onHomeyReady(Homey){
+    			HomeyAPI = Homey;
+					var providerUrlElement = document.getElementById('provider_url');
+          providerUrlElement.addEventListener('click', function(e) {
+            Homey.openURL(providerUrlElement.href);
+          });
           document.getElementById('testresult').innerHTML = " ";
           button_save.disabled = true; // Disable save button until settings have been saved
-          document.getElementById("provider_url").setAttribute("href", "http://textbelt.com");
+          // document.getElementById("provider_url").setAttribute("href", "http://textbelt.com");
           document.getElementById('api_id').disabled=true;
           document.getElementById('username').disabled=true;
           document.getElementById('password').disabled=true;
           document.getElementById('from').disabled=true;
           Homey.get('settings', function(err, storedData) {
             if (err) {
-              console.log(err)
+              return Homey.alert( err );
             } else {
               //console.log('got data: ', storedData);
-              if (storedData != (null || undefined)) {
+              if ((storedData != null) && (storedData != undefined)) {
                 document.getElementById('provider').value = storedData.provider;
                 document.getElementById("provider_url").setAttribute("href", storedData.provider);
                 document.getElementById('api_id').value = storedData.api_id;
@@ -148,24 +184,17 @@
                 document.getElementById('from').value = storedData.from;
                 document.getElementById('toTest').value = storedData.toTest;
                 document.getElementById('testMessage').value = storedData.testMessage;
-              } else {document.getElementById('provider').value = "http://textbelt.com/intl"};
+              } else {document.getElementById('provider').value = "http://textbelt.com"};
             }
             providerSelected();
             button_save.disabled = false;
+            showPanel(1);
             Homey.ready();  //ready to show the settings page
           });
         }
 
-        function empty() {
-          document.getElementById('provider').value = "";
-          document.getElementById("provider_url").setAttribute("href", " ");
-          document.getElementById('api_id').value = "";
-          document.getElementById('username').value = "";
-          document.getElementById('password').value = "";
-          document.getElementById('from').value = "";
-          document.getElementById('toTest').value = "";
-          document.getElementById('testMessage').value = "";
-          document.getElementById('testresult').innerHTML = " ";
+        function reload() {
+          location.reload();
         };
 
         function test() {
@@ -180,20 +209,14 @@
             testMessage : document.getElementById('testMessage').value,
             url         : document.getElementById('provider').value
           };
-
-//triggers an event in app.js to start test SMS
-          Homey.set('testing',saveData, function (error, settings) {
-            if (error) {return console.error(error)};
-          });
-//receive testresults back from app.js
-          Homey.on( 'testing_ready', function( data ){
-            //console.log(data);
-            if (!data.error) {
-              document.getElementById('testresult').innerHTML = 'success: '+ data.result;
-            } else {
-              document.getElementById('testresult').innerHTML = 'error: '+data.error+data.result;
-            };
-          });
+          HomeyAPI.api('POST', '/testSMS', saveData, function(error, result) {
+  					if (error) {
+  						HomeyAPI.alert(error, 'error');
+  					}
+  					else {
+  						HomeyAPI.alert(result, 'info');
+  					}
+  				});
         }
 
         function save() {
@@ -208,9 +231,13 @@
             testMessage : document.getElementById('testMessage').value,
             url         : document.getElementById('provider').value
           };
-          Homey.set('settings', saveData, function (error, settings) {
-            if (error) {return console.error(error)};
-          });  //also works without function, so why the callback?
+          HomeyAPI.set('settings', saveData, function (error) {
+            if (error) {
+              HomeyAPI.alert(error, 'error');
+            } else {
+              HomeyAPI.alert(HomeyAPI.__("settingsSaved"), 'info');
+            }
+          });
         }
 
 //disable fields that are not relevant for selected provider
@@ -223,7 +250,7 @@
           document.getElementById('from').disabled=false;
           if (document.getElementById('provider').value.substr(0, 15)=='http://textbelt'){
             document.getElementById("provider_url").setAttribute("href", "http://www.textbelt.com");
-            document.getElementById('api_id').disabled=true;
+            document.getElementById('api_id').disabled=false;
             document.getElementById('api_id').value = "";
             document.getElementById('username').disabled=true;
             document.getElementById('username').value = "";
@@ -259,7 +286,31 @@
             document.getElementById('username').value = "";
             document.getElementById('password').disabled=true;
             document.getElementById('password').value = "";
+          } else
+          if (document.getElementById('provider').value.substr(0, 20)=='https://json.aspsms.'){
+            document.getElementById("provider_url").setAttribute("href", "https://www.aspsms.com");
+            document.getElementById('api_id').disabled=false;
+            document.getElementById('username').disabled=true;
           }
+        }
+
+        function showLogs() {
+         HomeyAPI.api('GET', 'getlogs/', function(err, result) {
+            if (!err) {
+               document.getElementById('loglines').innerHTML = '';
+               for (var i=(result.length - 1); i >= 0; i--) {
+                  document.getElementById('loglines').innerHTML += result[i];
+                  document.getElementById('loglines').innerHTML += "<br />";
+               }
+            };
+         });
+        }
+        function deleteLogs() {
+           HomeyAPI.api('GET', 'deletelogs/', function(err, result) {
+             if (err) {
+               HomeyAPI.alert( err.message, 'error' ); // [, String icon], Function callback )
+             } else { HomeyAPI.alert( 'Logs deleted!', 'info' ); }
+           });
         }
 
         </script>

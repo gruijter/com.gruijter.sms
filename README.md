@@ -2,16 +2,16 @@
 
 Homey app to send text messages over SMS.
 
-In this age of IoT there is still a need to send messages by SMS. The app
+In this age of IoT there is still a need to send messages by SMS. This small app
 supports a large number of SMS providers:
-
-TextBelt: Free sending of SMS for US, Canada, and International. You will have
-          to try if it works for the numbers you want to reach...
 
 smsGate: use your own android phone as SMS gateway. (note: from-number=deviceID)
 
-Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
+AspSMS, Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
           These are paid SMS services where you need an account
+
+TextBelt: Unfortunately the free sending of SMS is not working anymore. You now
+          need to buy credit to use it.
 
 DellMont: This includes more than 60 voipservices like Voipbuster, Freecall,
           Cheapvoip, etc. These are paid services, so you need an account and
@@ -22,8 +22,8 @@ After setting up the SMS-service provider you want to use, you have the
 possibility to send messages via an action flow card.
 
 ### Known limitations: ###
-TextBelt and TargetSMS use an API that sends the message requests as clear text
-unsecure over the internet. The other SMS providers use the secured https method.
+TargetSMS uses an API that sends the message requests as clear text unsecure
+over the internet. The other SMS providers use the secured https method.
 You can only set/use one SMS provider at the same time.
 
 ##### Donate: #####
@@ -39,6 +39,8 @@ the forum.
 
 Version changelog
 ```
+v2.0.0  2018.04.02 Rewrite to sdk2. Less memory usage (removed xml2js and request).
+        Added AspSMS and DellMont SMS services. Added logger.
 v1.0.3  2017.04.08 Request updated to 2.81.0
 v1.0.2  2017.02.27 added CM Direct. Usability improvements. Minor bug fixes
 v1.0.1  2017.01.14 added SpryngSMS and Twilio
