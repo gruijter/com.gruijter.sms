@@ -179,18 +179,14 @@ class SendSMSApp extends Homey.App {
 				};
 				const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 				if (result.statusCode !== 200) {
-					// this.error(result.body);
 					return reject(Error(`${result.statusCode}: ${result.body}`));
 				}
 				const textbeltStatus = JSON.parse(result.body);
-				if (!textbeltStatus.sending) {
-					// this.error(textbeltStatus);
+				if (!textbeltStatus.success) {
 					return reject(Error(JSON.stringify(textbeltStatus)));
 				}
-				// this.log(textbeltStatus);
 				return resolve(JSON.stringify(textbeltStatus));
 			} catch (error) {
-				// this.error(error);
 				return reject(error);
 			}
 		});
