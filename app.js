@@ -51,7 +51,7 @@ class SendSMSApp extends Homey.App {
 		const sendSMS = new Homey.FlowCardAction('send_sms');
 		sendSMS
 			.register()
-			.registerRunListener(async (args, state) => {
+			.registerRunListener(async (args) => {
 				const service = Homey.ManagerSettings.get('settings');
 				const result = await this.sendSMS(service, args.number, args.msg);
 				return Promise.resolve(result);
@@ -332,14 +332,14 @@ class SendSMSApp extends Homey.App {
 				};
 				const options = {
 					hostname: service.url.replace('https://', ''),
-					path: '/api/v3/messages/send',
+					path: '/api/v4/messages/send',
 					headers,
 					method: 'POST',
 				};
 				const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 				if ((result.statusCode !== 200)) {
 					// this.error(result.statusCode, result.body);
-					return reject(Error(`error: ${result.statusCode} ${result.body.substr(0, 20)}`));
+					return reject(Error(`error: ${result.statusCode} ${result.body.substr(0, 100)}`));
 				}
 				const smsGatewayResponse = JSON.parse(result.body);
 				// this.log(util.inspect(smsGatewayResponse, { depth: null }));
