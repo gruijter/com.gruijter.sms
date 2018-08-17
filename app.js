@@ -319,20 +319,21 @@ class SendSMSApp extends Homey.App {
 		// this.log('smsGateway sending SMS to', number);
 		return new Promise(async (resolve, reject) => {
 			try {
-				const postData = {
-					email: service.username,
-					password: service.password,
-					device: service.from,
-					number,
-					message: msg,
-				};
+				const postData = [
+					{
+						phone_number: number,
+						message: msg,
+						device_id: service.from,
+					},
+				];
 				const headers = {
 					'Content-Type': 'application/json',
+					Authorization: service.api_id,
 					'Cache-Control': 'no-cache',
 				};
 				const options = {
-					hostname: service.url.replace('https://', ''),
-					path: '/api/v4/messages/send',
+					hostname: 'smsgateway.me', // service.url.replace('https://', ''),
+					path: '/api/v4/message/send',
 					headers,
 					method: 'POST',
 				};
@@ -343,14 +344,10 @@ class SendSMSApp extends Homey.App {
 				}
 				const smsGatewayResponse = JSON.parse(result.body);
 				// this.log(util.inspect(smsGatewayResponse, { depth: null }));
-				if (smsGatewayResponse.result.fails.length >= 1) {
-					const fails = smsGatewayResponse.result.fails[0].errors;
-					const err = fails[Object.keys(fails)[0]];
-					// this.error(err);
-					return reject(Error(`error: ${err}`));
+				if (smsGatewayResponse.status) { // === 'fail') {
+					return reject(Error(`error: ${smsGatewayResponse.message}`));
 				}
-				// this.log(smsGatewayResponse.result.success[0].status);
-				return resolve(smsGatewayResponse.result.success[0].status);
+				return resolve(smsGatewayResponse[0].status);
 			} catch (error) {
 				// this.error(error);
 				return reject(error);
