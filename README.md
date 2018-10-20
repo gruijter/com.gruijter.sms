@@ -7,7 +7,7 @@ supports about 80 SMS providers:
 
 smsGate: use your own android phone as SMS gateway. (note: from-number=deviceID)
 
-AspSMS, BulkSMS, Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
+46elks, AspSMS, BulkSMS, Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
           These are paid SMS services where you need an account
 
 TextBelt: Unfortunately the free sending of SMS is not working anymore. You now
@@ -39,6 +39,7 @@ the forum.
 
 Version changelog
 ```
+v2.0.2  2018.10.20 Added 46elks.se
 v2.0.1  2018.08.14 smsGateway.me fix. Textbelt settings page fix.
 v2.0.0  2018.04.02 Rewrite to sdk2. Less memory usage (removed xml2js and request).
         Added AspSMS, BulkSMS and DellMont SMS services. Added logger.
@@ -56,6 +57,6 @@ v0.0.2  2016.09.02 Added Clickatell and VoiceTrading as SMS service
 v0.0.1  2016.09.01 Initial release
 ```
 
-[forum]: https://forum.athom.com/discussion/1906
+[forum]: https://community.athom.com/t/send-sms/3025
 [pp-donate-link]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZKU3U2V3P2YJ2
 [pp-donate-image]: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif

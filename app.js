@@ -83,6 +83,9 @@ class SendSMSApp extends Homey.App {
 				this.log(`${service.provider.replace('https://', '')} to ${number}: ${msg}`);
 				let result = null;
 				switch (service.provider.substr(0, 20)) {
+					case 'https://46elks.com':	// provider is 46Elks
+						result = await this._46Elks(service, number, msg);
+						break;
 					case 'http://textbelt.com/':	// provider is textbelt
 						result = await this.textBelt(service, number, msg);
 						break;
@@ -120,6 +123,39 @@ class SendSMSApp extends Homey.App {
 				return reject(error);
 			}
 		});
+	}
+
+	async _46Elks(service, number, msg) {
+		// this.log('24Elks sending SMS to', number);
+		try {
+			const headers = {
+			};
+			const options = {
+				hostname: 'api.46elks.com',
+				path: '/a1/SMS',
+				headers,
+				auth: `${service.username}:${service.password}`,
+				method: 'POST',
+			};
+			const postData = {
+				from: service.from,
+				to: number,
+				message: msg,
+			};
+			const result = await this._makeHttpsRequest(options, qs.stringify(postData));
+			if (result.statusCode !== 200) {
+				throw Error(`${result.statusCode}: ${result.body.substr(0, 20)}`);
+			}
+			const _46ElksStatus = JSON.parse(result.body);
+			if (!_46ElksStatus.status || _46ElksStatus.status === 'failed') {
+				throw Error(_46ElksStatus);
+			}
+			this.log(_46ElksStatus);
+			return Promise.resolve(JSON.stringify(_46ElksStatus));
+		} catch (error) {
+			this.error(error);
+			return Promise.reject(error);
+		}
 	}
 
 	bulkSms(service, number, msg) {
@@ -319,25 +355,26 @@ class SendSMSApp extends Homey.App {
 		// this.log('smsGateway sending SMS to', number);
 		return new Promise(async (resolve, reject) => {
 			try {
-				const postData = [
+				const postData = JSON.stringify([
 					{
 						phone_number: number,
 						message: msg,
 						device_id: service.from,
 					},
-				];
+				]);
 				const headers = {
 					'Content-Type': 'application/json',
 					Authorization: service.api_id,
-					'Cache-Control': 'no-cache',
+					// 'Content-Length': postData.length,
+					// 'Cache-Control': 'no-cache',
 				};
 				const options = {
-					hostname: 'smsgateway.me', // service.url.replace('https://', ''),
+					hostname: 'smsgateway.me',
 					path: '/api/v4/message/send',
 					headers,
 					method: 'POST',
 				};
-				const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
+				const result = await this._makeHttpsRequest(options, postData);
 				if ((result.statusCode !== 200)) {
 					// this.error(result.statusCode, result.body);
 					return reject(Error(`error: ${result.statusCode} ${result.body.substr(0, 100)}`));
