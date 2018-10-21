@@ -129,6 +129,8 @@ class SendSMSApp extends Homey.App {
 		// this.log('24Elks sending SMS to', number);
 		try {
 			const headers = {
+				'Content-Type': 'application/json',
+				'Cache-Control': 'no-cache',
 			};
 			const options = {
 				hostname: 'api.46elks.com',
@@ -142,9 +144,9 @@ class SendSMSApp extends Homey.App {
 				to: number,
 				message: msg,
 			};
-			const result = await this._makeHttpsRequest(options, qs.stringify(postData));
+			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 			if (result.statusCode !== 200) {
-				throw Error(`${result.statusCode}: ${result.body.substr(0, 20)}`);
+				throw Error(`${result.statusCode}: ${result.body.substr(0, 250)}`);
 			}
 			const _46ElksStatus = JSON.parse(result.body);
 			if (!_46ElksStatus.status || _46ElksStatus.status === 'failed') {
@@ -355,18 +357,17 @@ class SendSMSApp extends Homey.App {
 		// this.log('smsGateway sending SMS to', number);
 		return new Promise(async (resolve, reject) => {
 			try {
-				const postData = JSON.stringify([
+				const postData = [
 					{
 						phone_number: number,
 						message: msg,
 						device_id: service.from,
 					},
-				]);
+				];
 				const headers = {
 					'Content-Type': 'application/json',
 					Authorization: service.api_id,
-					// 'Content-Length': postData.length,
-					// 'Cache-Control': 'no-cache',
+					'Cache-Control': 'no-cache',
 				};
 				const options = {
 					hostname: 'smsgateway.me',
@@ -374,7 +375,7 @@ class SendSMSApp extends Homey.App {
 					headers,
 					method: 'POST',
 				};
-				const result = await this._makeHttpsRequest(options, postData);
+				const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 				if ((result.statusCode !== 200)) {
 					// this.error(result.statusCode, result.body);
 					return reject(Error(`error: ${result.statusCode} ${result.body.substr(0, 100)}`));

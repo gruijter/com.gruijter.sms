@@ -39,7 +39,7 @@ the forum.
 
 Version changelog
 ```
-v2.0.2  2018.10.20 Added 46elks.se
+v2.0.2  2018.10.20 Added 46elks.
 v2.0.1  2018.08.14 smsGateway.me fix. Textbelt settings page fix.
 v2.0.0  2018.04.02 Rewrite to sdk2. Less memory usage (removed xml2js and request).
         Added AspSMS, BulkSMS and DellMont SMS services. Added logger.
