@@ -8,7 +8,7 @@
       "en": "Homey app to send text messages over SMS",
       "nl": "Homey app om SMS te versturen"
   },
-  "version": "2.0.2",
+  "version": "2.1.0",
   "sdk": 2,
   "compatibility": ">= 1.5",
   "author": {

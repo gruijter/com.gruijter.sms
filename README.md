@@ -1,11 +1,9 @@
 # Send SMS #
 
-A small Homey app to send text messages via 80 SMS providers.
+A small Homey app to send text messages via a choice of over 80 SMS providers.
 
 In this age of IoT there is still a need to send messages by SMS. This small app
 supports about 80 SMS providers:
-
-smsGate: use your own android phone as SMS gateway. (note: from-number=deviceID)
 
 46elks, AspSMS, BulkSMS, Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
           These are paid SMS services where you need an account
@@ -39,6 +37,7 @@ the forum.
 
 Version changelog
 ```
+v2.1.0  2019.01.20 Added Easycallback. Removed smsGate.
 v2.0.2  2018.10.20 Added 46elks.
 v2.0.1  2018.08.14 smsGateway.me fix. Textbelt settings page fix.
 v2.0.0  2018.04.02 Rewrite to sdk2. Less memory usage (removed xml2js and request).

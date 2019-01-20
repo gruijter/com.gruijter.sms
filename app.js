@@ -1,5 +1,5 @@
 /*
-Copyright 2016 - 2018, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2016 - 2019, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.sms.
 
@@ -62,9 +62,11 @@ class SendSMSApp extends Homey.App {
 	deleteLogs() {
 		return this.logger.deleteLogs();
 	}
+
 	getLogs() {
 		return this.logger.logArray;
 	}
+
 	async testSMS(service) {
 		// this.log(service);
 		try {
@@ -152,10 +154,8 @@ class SendSMSApp extends Homey.App {
 			if (!_46ElksStatus.status || _46ElksStatus.status === 'failed') {
 				throw Error(_46ElksStatus);
 			}
-			this.log(_46ElksStatus);
 			return Promise.resolve(JSON.stringify(_46ElksStatus));
 		} catch (error) {
-			this.error(error);
 			return Promise.reject(error);
 		}
 	}
