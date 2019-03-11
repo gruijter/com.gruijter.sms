@@ -1,21 +1,29 @@
 {
-  "Send SMS settings page"            : "Send SMS settings page",
-  "loggingTitle"					            : "Debug logs",
-  "deletelogs"                        : "Delete logs",
-  "getlogs"                           : "Refresh logs",
-  "settingsTitle"					            : "Settings",
-  "provider and login information"    : "provider and login information",
-  "Provider"                          : "Provider",
-  "Provider URL"                      : "Provider website",
-  "Api ID"                            : "Api ID/handle",
-  "Username"                          : "Username",
-  "Password"                          : "Password/id",
-  "From number"                       : "From number",
-  "Test number"                       : "Test number",
-  "Test message"                      : "Test message",
-  "Save"                              : "Save",
-  "Reset"                             : "Reset",
-  "Test"                              : "Test",
-  "settingsSaved"                     : "Provider settings are saved",
-  "testOk"                            : "OK! Now save the settings.\r\n__result__"
+  "settings": {
+    "benefit": "Let Homey send SMS text messages from a flow",
+    "tab1": {
+      "title": "Settings",
+      "instructionsTitle": "Instructions",
+      "instructions": "Select a provider and fill in your account data. Send a test SMS to verify if the settings are correct, and save the settings. Now you can start sending text messages from a flow.",
+      "provider": "Provider",
+      "openURL": "Provider website",
+      "loadSettings": "Reload stored settings",
+      "apiID": "Api ID/handle",
+      "username": "Username",
+      "password": "Password/id",
+      "from": "From",
+      "toTest": "To",
+      "testMessage": "Message",
+      "test": "Send test message",
+      "testingNow": "Testing now. Hang on........",
+      "testResult": "Test result",
+      "testOk": "OK! Now save the settings.\r\n__result__",
+      "save": "Save",
+      "settingsSaved": "Provider settings are saved"
+    },
+    "tab2": {
+      "title": "Logs",
+      "deleteLogs": "Delete logs"
+    }
+  }
 }

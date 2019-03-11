@@ -1,21 +1,29 @@
 {
-  "Send SMS settings page"            : "Send SMS instellingen",
-  "loggingTitle"					            : "Debug logs",
-  "deletelogs"                        : "logs verwijderen",
-  "getlogs"                           : "logs verversen",
-  "settingsTitle"					            : "Instellingen",
-  "provider and login information"    : "provider en login informatie",
-  "Provider"                          : "Provider",
-  "Provider URL"                      : "Provider website",
-  "Api ID"                            : "Api ID/handle",
-  "Username"                          : "Gebruikersnaam",
-  "Password"                          : "Wachtwoord/id",
-  "From number"                       : "Van nummer",
-  "Test number"                       : "Test nummer",
-  "Test message"                      : "Test bericht",
-  "Save"                              : "Opslaan",
-  "Reset"                             : "Herstel",
-  "Test"                              : "Test",
-  "settingsSaved"                     : "Provider instellingen zijn opgeslagen",
-  "testOk"                            : "OK! Sla de instellingen nu op.\r\n__result__"
+  "settings": {
+    "benefit": "Laat Homey SMS-jes versturen vanuit een flow",
+    "tab1": {
+      "title": "Instellingen",
+      "instructionsTitle": "Instructies",
+      "instructions": "Selecteer een provider en vul je account gegevens in. Stuur een test SMS om de instellingen te verifieren, en sla ze op. Nu kun je SMS gaan versturen vanuit een flow.",
+      "provider": "Provider",
+      "openURL": "Provider website",
+      "loadSettings": "Herlaad opgeslagen instellingen",
+      "apiID": "Api ID/handle",
+      "username": "Gebruikersnaam",
+      "password": "Wachtwoord/id",
+      "from": "Van",
+      "toTest": "Naar",
+      "testMessage": "Bericht",
+      "test": "Stuur test bericht",
+      "testingNow": "Test loopt. Moment geduld........",
+      "testResult": "Test resultaat",
+      "testOk": "OK! Sla de instellingen nu op.\r\n__result__",
+      "save": "Opslaan",
+      "settingsSaved": "Provider instellingen zijn opgeslagen"
+    },
+    "tab2": {
+      "title": "Logs",
+      "deleteLogs": "Verwijder logs"
+    }
+  }
 }

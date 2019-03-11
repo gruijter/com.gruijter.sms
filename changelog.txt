@@ -1,0 +1,20 @@
+Version changelog
+
+v2.2.0  2019.03.11 Settings page optimized for Homey V2 Mobile.
+v2.1.0  2019.01.20 Added Easycallback. Removed smsGate.
+v2.0.2  2018.10.20 Added 46elks.
+v2.0.1  2018.08.14 smsGateway.me fix. Textbelt settings page fix.
+v2.0.0  2018.04.02 Rewrite to sdk2. Less memory usage (removed xml2js and request).
+        Added AspSMS, BulkSMS and DellMont SMS services. Added logger.
+v1.0.3  2017.04.08 Request updated to 2.81.0
+v1.0.2  2017.02.27 added CM Direct. Usability improvements. Minor bug fixes
+v1.0.1  2017.01.14 added SpryngSMS and Twilio
+v1.0.0  2016.12.05 Xml2js updated to 0.4.17. Request updated to 2.79.0. Minor
+        code changes.
+v0.0.6  2016.11.08 Fix crash undefined provider
+v0.0.5  2016.10.01 Compatibility to fw 0.10.1. added www icon
+v0.0.4  2016.09.08 Added targetsms and smsGate.me as SMS service. Added website
+        link in settings. Fix crash undefined provider.
+v0.0.3  2016.09.04 Fixed broken DellMont. Testbutton added
+v0.0.2  2016.09.02 Added Clickatell and VoiceTrading as SMS service
+v0.0.1  2016.09.01 Initial release

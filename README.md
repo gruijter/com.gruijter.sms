@@ -35,8 +35,11 @@ the forum.
 
 ===============================================================================
 
+Version changelog: [changelog.txt]
+
 Version changelog
 ```
+v2.2.0  2019.03.11 Settings page optimized for Homey V2 Mobile.
 v2.1.0  2019.01.20 Added Easycallback. Removed smsGate.
 v2.0.2  2018.10.20 Added 46elks.
 v2.0.1  2018.08.14 smsGateway.me fix. Textbelt settings page fix.
@@ -56,6 +59,7 @@ v0.0.2  2016.09.02 Added Clickatell and VoiceTrading as SMS service
 v0.0.1  2016.09.01 Initial release
 ```
 
-[forum]: https://community.athom.com/t/send-sms/3025
+[forum]: https://community.athom.com/t/3025
 [pp-donate-link]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZKU3U2V3P2YJ2
 [pp-donate-image]: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
+[changelog.txt]: https://github.com/gruijter/com.gruijter.sms/blob/master/changelog.txt

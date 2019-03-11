@@ -4,11 +4,14 @@ module.exports = [
 	{
 		description: 'Test sending an SMS from frontend',
 		method: 'POST',
-		path: '/testSMS',
+		path: '/runTest/',
 		fn: async function fn(args, callback) {
 			const result = await Homey.app.testSMS(args.body);
-			if (result instanceof Error) return callback(result);
-			return callback(null, result);
+			if (result instanceof Error) {
+				callback(result);
+				return;
+			}
+			callback(null, result);
 		},
 	},
 	{
