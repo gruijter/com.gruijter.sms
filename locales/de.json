@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "benefit": "Lass Homey SMS Text Nachrichten über einen Flow senden"
+      "title": "Einstellungen",
+      "instructionsTitle": "Anweisungen",
+      "instructions": "Wähle einen Provider und ergänze deine Account Daten. Sende eine Testnachricht, um deine Eingaben zu überprüfen, und speichere abschließend deine Einstellungen.Nun kannst Textnachrichten über einen Flow versenden.",
+      "provider": "Provider",
+      "openURL": "Provider Webseite",
+      "loadSettings": "Aktualisiere die gespeicherten Einstellungen",
+      "apiID": "Api ID/Kürzel",
+      "username": "Benutzername",
+      "password": "Passwort/ID",
+      "from": "Absender",
+      "toTest": "Empfänger",
+      "testMessage": "Nachricht",
+      "test": "Sende Testnachricht",
+      "testingNow": "Teste gerade. Bitte warten........",
+      "testResult": "Test Ergebnis",
+      "testOk": "OK! Nun speichere die Einstellungen.\r\n__Ergebnis__",
+      "save": "Speichern",
+      "settingsSaved": "Provider Einstellungen wurden gespeichert"
+    },
+    "tab2": {
+      "title": "Logs",
+      "deleteLogs": "lösche Logs"
+    }
+  }
+}
