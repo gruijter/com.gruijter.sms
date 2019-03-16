@@ -1,5 +1,6 @@
 Version changelog
 
+v2.2.1  2019.03.16 German translation added.
 v2.2.0  2019.03.11 Settings page optimized for Homey V2 Mobile.
 v2.1.0  2019.01.20 Added Easycallback. Removed smsGate.
 v2.0.2  2018.10.20 Added 46elks.
