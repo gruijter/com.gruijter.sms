@@ -2,10 +2,12 @@
   "id": "com.gruijter.sms",
   "name": {
       "en": "Send SMS",
+      "de": "Sende SMS",
       "nl": "Stuur SMS"
   },
   "description": {
       "en": "Homey app to send text messages over SMS",
+      "de": "Homey App zum senden von Textnachrichten via SMS",
       "nl": "Homey app om SMS te versturen"
   },
   "version": "2.2.1",
@@ -46,6 +48,7 @@
         "id": "send_sms",
         "title": {
             "en": "Send an SMS",
+	    "de": "Sende eine SMS",
             "nl": "Stuur een SMS"
         },
         "args": [
@@ -54,6 +57,7 @@
             "type": "text",
             "placeholder": {
               "en": "Number",
+	      "de": "Nummer",
               "nl": "Nummer"
              }
           },
@@ -62,6 +66,7 @@
             "type": "text",
             "placeholder": {
               "en": "Text",
+	      "de": "Text",
               "nl": "Tekst"
              }
           }
