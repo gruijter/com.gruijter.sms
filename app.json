@@ -48,7 +48,7 @@
         "id": "send_sms",
         "title": {
             "en": "Send an SMS",
-	    "de": "Sende eine SMS",
+            "de": "Sende eine SMS",
             "nl": "Stuur een SMS"
         },
         "args": [
@@ -57,7 +57,7 @@
             "type": "text",
             "placeholder": {
               "en": "Number",
-	      "de": "Nummer",
+              "de": "Nummer",
               "nl": "Nummer"
              }
           },
@@ -66,7 +66,7 @@
             "type": "text",
             "placeholder": {
               "en": "Text",
-	      "de": "Text",
+              "de": "Text",
               "nl": "Tekst"
              }
           }
