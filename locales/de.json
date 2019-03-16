@@ -1,6 +1,6 @@
 {
   "settings": {
-    "benefit": "Lass Homey SMS Text Nachrichten über einen Flow senden"
+    "benefit": "Lass Homey SMS Text Nachrichten über einen Flow senden",
       "title": "Einstellungen",
       "instructionsTitle": "Anweisungen",
       "instructions": "Wähle einen Provider und ergänze deine Account Daten. Sende eine Testnachricht, um deine Eingaben zu überprüfen, und speichere abschließend deine Einstellungen.Nun kannst Textnachrichten über einen Flow versenden.",
