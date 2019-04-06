@@ -10,7 +10,12 @@
       "de": "Homey App zum senden von Textnachrichten via SMS",
       "nl": "Homey app om SMS te versturen"
   },
-  "version": "2.2.1",
+  "tags": {
+    "en": [ "Text messages", "SMS" ],
+    "de": [ "Nachrichten", "SMS" ],  
+    "nl": [ "Berichten", "SMS"]
+  },
+  "version": "2.2.2",
   "sdk": 2,
   "compatibility": ">= 1.5",
   "author": {
@@ -20,12 +25,9 @@
   "copyright": "Robin de Gruijter (gruijter@hotmail.com)",
   "license": " GPL-3.0-or-later",
   "contributors": {
-		"translators": [
-				{
-						"name": "DE: Tino"
-				}
-		]
-},
+		"developers": [{"name": "Robin de Gruijter","email": "gruijter@hotmail.com"}],
+		"translators": [{"name": "🇬🇧 Robin"},{"name": "🇳🇱 Robin"},{"name": "🇩🇪 Tino"}]
+	},
   "contributing": {
     "donate": {
       "paypal": {

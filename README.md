@@ -5,7 +5,7 @@ A small Homey app to send text messages via a choice of over 80 SMS providers.
 In this age of IoT there is still a need to send messages by SMS. This small app
 supports about 80 SMS providers:
 
-46elks, AspSMS, BulkSMS, Clickatell, CM Direct, TargetSMS, Twilio and Spryng:
+46elks, AspSMS, BulkSMS, Clickatell, CM Direct, Messagebird, TargetSMS, Twilio and Spryng:
           These are paid SMS services where you need an account
 
 TextBelt: Unfortunately the free sending of SMS is not working anymore. You now

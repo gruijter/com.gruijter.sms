@@ -13,6 +13,12 @@ function providerSelected() {
 	$('#from').prop('disabled', true);
 
 	switch ($('#provider').val()) {
+		case 'https://www.messagebird.com':	// provider is Messagebird
+			$('#api_id').prop('disabled', false);
+			$('#username').val('');
+			$('#password').val('');
+			$('#from').prop('disabled', false);
+			break;
 		case 'https://46elks.com':	// provider is 46Elks
 			$('#api_id').val('');
 			$('#username').prop('disabled', false);

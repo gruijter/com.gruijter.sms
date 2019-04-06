@@ -84,6 +84,9 @@ class SendSMSApp extends Homey.App {
 			this.log(`${service.provider.replace('https://', '')} to ${number}: ${msg}`);
 			let result = null;
 			switch (service.provider) {
+				case 'https://www.messagebird.com':	// provider is messagebird
+					result = await this._messagebird(service, number, msg);
+					break;
 				case 'https://46elks.com':	// provider is 46Elks
 					result = await this._46Elks(service, number, msg);
 					break;
@@ -118,6 +121,40 @@ class SendSMSApp extends Homey.App {
 			return Promise.resolve(result);
 		} catch (error) {
 			this.log(error);
+			return Promise.reject(error);
+		}
+	}
+
+	async _messagebird(service, number, msg) {
+		// this.log('messagebird sending SMS to', number);
+		try {
+			const headers = {
+				'Content-Type': 'application/json',
+				'Cache-Control': 'no-cache',
+			};
+			const options = {
+				hostname: 'rest.messagebird.com',
+				path: '/messages',
+				headers,
+				auth: `AccessKey:${service.api_id}`,
+				method: 'POST',
+			};
+			const postData = {
+				originator: service.from,
+				recipients: [number],
+				body: msg,
+			};
+			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
+			if (result.statusCode !== 200 && result.statusCode !== 201) {
+				throw Error(`${result.statusCode}: ${result.body.substr(0, 250)}`);
+			}
+			const messagebirdStatus = JSON.parse(result.body);
+			if (!messagebirdStatus.id || !messagebirdStatus.recipients || !messagebirdStatus.recipients.items
+				|| !messagebirdStatus.recipients.items[0] || messagebirdStatus.recipients.items[0].status !== 'sent') {
+				throw Error(messagebirdStatus);
+			}
+			return Promise.resolve(JSON.stringify(messagebirdStatus));
+		} catch (error) {
 			return Promise.reject(error);
 		}
 	}
