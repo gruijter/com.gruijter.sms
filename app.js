@@ -162,23 +162,25 @@ class SendSMSApp extends Homey.App {
 	async _46Elks(service, number, msg) {
 		// this.log('24Elks sending SMS to', number);
 		try {
+			const postData = qs.stringify({
+				from: service.from,
+				to: number,
+				message: msg,
+			});
 			const headers = {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/x-www-form-urlencoded', // 'application/json'
 				'Cache-Control': 'no-cache',
+				'Content-Length': Buffer.byteLength(postData),
+				// Authorization: 'Basic ' + Buffer.from(service.username + ":" + service.password).toString('base64'),
 			};
 			const options = {
 				hostname: 'api.46elks.com',
-				path: '/a1/SMS',
+				path: '/a1/sms',
 				headers,
 				auth: `${service.username}:${service.password}`,
 				method: 'POST',
 			};
-			const postData = {
-				from: service.from,
-				to: number,
-				message: msg,
-			};
-			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
+			const result = await this._makeHttpsRequest(options, postData);
 			if (result.statusCode !== 200) {
 				throw Error(`${result.statusCode}: ${result.body.substr(0, 250)}`);
 			}
