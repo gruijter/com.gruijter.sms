@@ -23,7 +23,9 @@
     },
     "tab2": {
       "title": "Logs",
-      "deleteLogs": "lösche Logs"
+      "deleteLogs": "lösche Logs",
+      "deleteWarning": "sind Sie sicher?",
+      "deleted": "Logs gelöscht"
     }
   }
 }

@@ -23,7 +23,9 @@
     },
     "tab2": {
       "title": "Logs",
-      "deleteLogs": "Verwijder logs"
+      "deleteLogs": "Verwijder logs",
+      "deleteWarning": "Weet je het zeker?",
+      "deleted": "Logs verwijderd"
     }
   }
 }

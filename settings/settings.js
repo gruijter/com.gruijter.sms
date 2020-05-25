@@ -13,6 +13,17 @@ function providerSelected() {
 	$('#from').prop('disabled', true);
 
 	switch ($('#provider').val()) {
+		case 'https://mobile.free.fr':	// provider is Free mobile
+			$('#username').prop('disabled', false);
+			$('#password').prop('disabled', false);
+			$('#from').prop('disabled', false);
+			break;
+		case 'https://www.sendinblue.com':	// provider is sendInBlue
+			$('#api_id').prop('disabled', false);
+			$('#username').val('');
+			$('#password').val('');
+			$('#from').prop('disabled', false);
+			break;
 		case 'https://www.messagebird.com':	// provider is Messagebird
 			$('#api_id').prop('disabled', false);
 			$('#username').val('');
@@ -35,7 +46,7 @@ function providerSelected() {
 			$('#api_id').val('');
 			$('#username').prop('disabled', false);
 			$('#password').prop('disabled', false);
-			$('#from').val('');
+			$('#from').prop('disabled', false);
 			break;
 		case 'https://api.clickatell.com':	// provider is clickatell
 			selectedProviderUrl = 'https://www.clickatell.com';

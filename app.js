@@ -84,6 +84,9 @@ class SendSMSApp extends Homey.App {
 			this.log(`${service.provider.replace('https://', '')} to ${number}: ${msg}`);
 			let result = null;
 			switch (service.provider) {
+				case 'https://mobile.free.fr':	// provider is messagebird
+					result = await this._freeMobile(service, number, msg);
+					break;
 				case 'https://www.messagebird.com':	// provider is messagebird
 					result = await this._messagebird(service, number, msg);
 					break;
@@ -114,13 +117,83 @@ class SendSMSApp extends Homey.App {
 				case 'https://json.aspsms.com':	// provider is aspSMS
 					result = await this.aspSms(service, number, msg);
 					break;
+				case 'https://www.sendinblue.com':	// provider is sendinblue
+					result = await this._sendinblue(service, number, msg);
+					break;
 				default:	// provider is a dellMont brand
 					result = await this.dellMont(service, number, msg);
 			}
 			this.log(result);
 			return Promise.resolve(result);
 		} catch (error) {
-			this.log(error);
+			this.error(error.message);
+			return Promise.reject(error);
+		}
+	}
+
+
+	async _freeMobile(service, number, msg) {
+		// console.log('freeMobile.fr sending SMS to', number);
+		try {
+			const query = {
+				user: service.username,
+				pass: service.password,
+				to: number,
+				msg,
+			};
+			const headers = {
+				'Content-Length': 0,
+			};
+			const options = {
+				hostname: 'smsapi.free-mobile.fr',
+				path: `/sendmsg?${qs.stringify(query)}`,
+				headers,
+				method: 'GET',
+			};
+			const result = await this._makeHttpsRequest(options, '');
+			if (result.statusCode !== 200 || result.statusCode !== 201) {
+				throw Error(`error: ${result.statusCode} ${result.body.substr(0, 20)}`);
+			}
+			// if (result.body.substr(0, 4) !== 'ID: ') {
+			// 	throw Error(result.body);
+			// }
+			return Promise.resolve(result.body);
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+
+	async _sendinblue(service, number, msg) {
+		// this.log('sendinblue sending SMS to', number);
+		try {
+			const headers = {
+				'Content-Type': 'application/json',
+				accept: 'application/json',
+				'Cache-Control': 'no-cache',
+				'api-key': service.api_id,
+			};
+			const options = {
+				hostname: 'api.sendinblue.com',
+				path: '/v3/transactionalSMS/sms',
+				headers,
+				method: 'POST',
+			};
+			const postData = {
+				type: 'transactional',
+				sender: service.from,
+				recipient: number,
+				content: msg,
+			};
+			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
+			if (result.statusCode !== 200 && result.statusCode !== 201) {
+				throw Error(`${result.statusCode}: ${result.body.substr(0, 250)}`);
+			}
+			const response = JSON.parse(result.body);
+			if (!response.messageId) {
+				throw Error(response);
+			}
+			return Promise.resolve(JSON.stringify(response));
+		} catch (error) {
 			return Promise.reject(error);
 		}
 	}
@@ -198,31 +271,31 @@ class SendSMSApp extends Homey.App {
 		// this.log('bulkSMS sending SMS to', number);
 		try {
 			const headers = {
-				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Type': 'application/json', // deprecated: application/x-www-form-urlencoded',
 				'Cache-Control': 'no-cache',
+				'auto-unicode': true,
 			};
 			const options = {
-				hostname: 'bulksms.vsms.net', // 'bulksms.2way.co.za',
-				// port: 5567,
-				path: '/eapi/submission/send_sms/2/2.0',
+				hostname: 'api.bulksms.com',
+				path: '/v1/messages',
 				headers,
+				auth: `${service.username}:${service.password}`,
 				method: 'POST',
 			};
 			const postData = {
-				username: service.username,
-				password: service.password,
-				message: msg,
-				msisdn: number,
-				// sender: service.from,
+				body: msg,
+				to: number,
 			};
-			const result = await this._makeHttpsRequest(options, qs.stringify(postData));
-			if (result.statusCode !== 200) {
+			if (service.from && service.from.length > 0) postData.from = service.from;
+			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
+			if (result.statusCode !== 200 && result.statusCode !== 201) {
 				throw Error(`${result.statusCode}: ${result.body}`);
 			}
-			if (result.body[0] !== '0') {
+			const body = JSON.parse(result.body);
+			if (!body[0] || body[0].status.subtype) {
 				throw Error(result.body);
 			}
-			return Promise.resolve(result.body);
+			return Promise.resolve(body);
 		} catch (error) {
 			return Promise.reject(error);
 		}

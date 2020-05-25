@@ -1,5 +1,6 @@
 Version changelog
 
+v2.3.0  2020.25.05 Fixed BulkSMS. Added SendInBlue.com. Added FreeMobile.fr. Added readme.txt
 v2.2.3  2019.10.08 Fix 46elks.
 v2.2.2  2019.04.06 Added Messagebird.
 v2.2.1  2019.03.16 German translation added.
