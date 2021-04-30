@@ -1,0 +1,16 @@
+{
+  "name": "com.gruijter.sms",
+  "version": "3.0.0",
+  "private": false,
+  "license": "GPL-3.0-or-later",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gruijter/com.gruijter.sms.git"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "fixture-stdout": "^0.2.1"
+  }
+}
+

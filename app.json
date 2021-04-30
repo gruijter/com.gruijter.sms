@@ -15,9 +15,10 @@
     "de": [ "Nachrichten", "SMS" ],  
     "nl": [ "Berichten", "SMS"]
   },
-  "version": "2.3.0",
-  "sdk": 2,
-  "compatibility": ">= 3",
+  "brandColor": "#26df20",
+  "version": "3.0.0",
+  "sdk": 3,
+  "compatibility": ">= 5.0.0",
   "author": {
       "name": "Robin de Gruijter",
       "email": "gruijter@hotmail.com"
@@ -43,6 +44,21 @@
   "images": {
   "large": "./assets/images/large.jpg",
   "small": "./assets/images/small.jpg"
+  },
+  "api": {
+    "getLogs": {
+      "method": "get",
+      "path": "/getlogs"
+    },
+    "deleteLogs": {
+      "method": "get",
+      "path": "/deletelogs"
+    },
+    "testSMS": {
+      "method": "post",
+      "path": "/testSMS",
+      "public": true
+    }
   },
   "flow": {
     "actions": [

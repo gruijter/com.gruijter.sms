@@ -8,7 +8,7 @@
       "provider": "Provider",
       "openURL": "Provider Webseite",
       "loadSettings": "Aktualisiere die gespeicherten Einstellungen",
-      "apiID": "Api ID/Kürzel",
+      "apiID": "Api ID/Kürzel/token",
       "username": "Benutzername",
       "password": "Passwort/ID",
       "from": "Absender",

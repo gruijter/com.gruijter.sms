@@ -8,7 +8,7 @@
       "provider": "Provider",
       "openURL": "Provider website",
       "loadSettings": "Reload stored settings",
-      "apiID": "Api ID/handle",
+      "apiID": "Api ID/handle/token",
       "username": "Username",
       "password": "Password/id",
       "from": "From",

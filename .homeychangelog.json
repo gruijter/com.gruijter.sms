@@ -1,5 +1,8 @@
 {
   "2.3.0": {
     "en": "Fixed BulkSMS. Added SendInBlue.com. Added FreeMobile.fr. Added readme.txt"
+  },
+  "3.0.0": {
+    "en": "Rewrite to SDK3. Fix HTTP(S) timeout. Improved settings page. Added gatewayapi."
   }
 }

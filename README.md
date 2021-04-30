@@ -5,7 +5,7 @@ A small Homey app to send text messages via a choice of over 80 SMS providers.
 In this age of IoT there is still a need to send messages by SMS. This small app
 supports about 80 SMS providers. These are paid SMS services where you need an account.
 
-46elks, AspSMS, BulkSMS, Clickatell, CM Direct, Free Mobile (fr), Messagebird, TargetSMS,
+46elks, AspSMS, BulkSMS, Clickatell, CM Direct, Free Mobile (fr), Gatewayapi, Messagebird, TargetSMS,
 TextBelt, Twilio, SendInBlue, Spryng.
 
 DellMont: This includes more than 60 voipservices like Voipbuster, Freecall,

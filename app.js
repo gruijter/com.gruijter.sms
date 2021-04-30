@@ -1,5 +1,5 @@
 /*
-Copyright 2016 - 2019, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2016 - 2021, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.sms.
 
@@ -29,16 +29,17 @@ const Logger = require('./captureLogs.js');
 class SendSMSApp extends Homey.App {
 
 	onInit() {
+		process.env.LOG_LEVEL = 'info'; // info or debug
+		if (!this.logger) this.logger = new Logger({ name: 'log', length: 200, homey: this.homey });
 		this.log('Send SMS app is running!');
-		this.logger = new Logger('log', 200);
 		// register some listeners
 		process.on('unhandledRejection', (error) => {
-			this.error('unhandledRejection! ', error);
+			this.error('unhandledRejection! ', error.message);
 		});
 		process.on('uncaughtException', (error) => {
 			this.error('uncaughtException! ', error);
 		});
-		Homey
+		this.homey
 			.on('unload', () => {
 				this.log('app unload called');
 				// save logs to persistant storage
@@ -47,15 +48,8 @@ class SendSMSApp extends Homey.App {
 			.on('memwarn', () => {
 				this.log('memwarn!');
 			});
-		// ==============FLOW CARD STUFF======================================
-		const sendSMS = new Homey.FlowCardAction('send_sms');
-		sendSMS
-			.register()
-			.registerRunListener(async (args) => {
-				const service = Homey.ManagerSettings.get('settings');
-				const result = await this.sendSMS(service, args.number, args.msg);
-				return Promise.resolve(result);
-			});
+		this.registerFlowListeners();
+
 	}
 
 	//  stuff for frontend API
@@ -67,14 +61,20 @@ class SendSMSApp extends Homey.App {
 		return this.logger.logArray;
 	}
 
-	async testSMS(service) {
+	testSMS(service) {
 		this.log('sending test SMS from settings page');
-		try {
-			const result = await this.sendSMS(service, service.toTest, service.testMessage);
-			return result;
-		} catch (error) {
-			return error;
-		}
+		return this.sendSMS(service, service.toTest, service.testMessage);
+	}
+
+	// ==============FLOW CARD STUFF======================================
+	registerFlowListeners() {
+		// action cards
+		const sendSMS = this.homey.flow.getActionCard('send_sms');
+		sendSMS.registerRunListener(async (args) => {
+			const service = this.homey.settings.get('settings');
+			const result = await this.sendSMS(service, args.number, args.msg);
+			return Promise.resolve(result);
+		});
 	}
 
 	// sms functions and services
@@ -85,10 +85,10 @@ class SendSMSApp extends Homey.App {
 			let result = null;
 			switch (service.provider) {
 				case 'https://mobile.free.fr':	// provider is messagebird
-					result = await this._freeMobile(service, number, msg);
+					result = await this.freeMobile(service, number, msg);
 					break;
 				case 'https://www.messagebird.com':	// provider is messagebird
-					result = await this._messagebird(service, number, msg);
+					result = await this.messagebird(service, number, msg);
 					break;
 				case 'https://46elks.com':	// provider is 46Elks
 					result = await this._46Elks(service, number, msg);
@@ -118,7 +118,10 @@ class SendSMSApp extends Homey.App {
 					result = await this.aspSms(service, number, msg);
 					break;
 				case 'https://www.sendinblue.com':	// provider is sendinblue
-					result = await this._sendinblue(service, number, msg);
+					result = await this.sendinblue(service, number, msg);
+					break;
+				case 'https://gatewayapi.com':	// provider is gatewayapi
+					result = await this.gatewayapi(service, number, msg);
 					break;
 				default:	// provider is a dellMont brand
 					result = await this.dellMont(service, number, msg);
@@ -131,8 +134,39 @@ class SendSMSApp extends Homey.App {
 		}
 	}
 
+	async gatewayapi(service, number, msg) {
+		// this.log('gatewayapi sending SMS to', number);
+		try {
+			const headers = {
+				'Cache-Control': 'no-cache',
+			};
+			const query = {
+				token: service.apiid,
+				sender: service.from,
+				'recipients.0.msisdn': number,
+				message: msg,
+			};
+			const options = {
+				hostname: 'gatewayapi.com',
+				path: `/rest/mtsms?${qs.stringify(query)}`,
+				headers,
+				method: 'GET',
+			};
+			const result = await this._makeHttpsRequest(options, '');
+			if (result.statusCode !== 200) {
+				throw Error(`${result.statusCode}: ${result.body.substr(0, 250)}`);
+			}
+			const response = JSON.parse(result.body);
+			if (!response.ids) {
+				throw Error(response);
+			}
+			return Promise.resolve(JSON.stringify(response));
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
 
-	async _freeMobile(service, number, msg) {
+	async freeMobile(service, number, msg) {
 		// console.log('freeMobile.fr sending SMS to', number);
 		try {
 			const query = {
@@ -163,14 +197,14 @@ class SendSMSApp extends Homey.App {
 		}
 	}
 
-	async _sendinblue(service, number, msg) {
+	async sendinblue(service, number, msg) {
 		// this.log('sendinblue sending SMS to', number);
 		try {
 			const headers = {
 				'Content-Type': 'application/json',
 				accept: 'application/json',
 				'Cache-Control': 'no-cache',
-				'api-key': service.api_id,
+				'api-key': service.apiid,
 			};
 			const options = {
 				hostname: 'api.sendinblue.com',
@@ -198,7 +232,7 @@ class SendSMSApp extends Homey.App {
 		}
 	}
 
-	async _messagebird(service, number, msg) {
+	async messagebird(service, number, msg) {
 		// this.log('messagebird sending SMS to', number);
 		try {
 			const headers = {
@@ -209,7 +243,7 @@ class SendSMSApp extends Homey.App {
 				hostname: 'rest.messagebird.com',
 				path: '/messages',
 				headers,
-				auth: `AccessKey:${service.api_id}`,
+				auth: `AccessKey:${service.apiid}`,
 				method: 'POST',
 			};
 			const postData = {
@@ -317,7 +351,7 @@ class SendSMSApp extends Homey.App {
 			const postData = {
 				phone: number,
 				message: msg,
-				key: service.api_id,
+				key: service.apiid,
 			};
 			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 			if (result.statusCode !== 200) {
@@ -339,7 +373,7 @@ class SendSMSApp extends Homey.App {
 			const query = {
 				user: service.username,
 				password: service.password,
-				api_id: service.api_id,
+				apiid: service.apiid,
 				to: number,
 				text: msg,
 				from: service.from,
@@ -348,7 +382,7 @@ class SendSMSApp extends Homey.App {
 				'Content-Length': 0,
 			};
 			const options = {
-				hostname: service.url.replace('https://', ''),
+				hostname: 'api.clickatell.com',
 				path: `/http/sendmsg?${qs.stringify(query)}`,
 				headers,
 				method: 'GET',
@@ -371,7 +405,7 @@ class SendSMSApp extends Homey.App {
 		try {
 			const query = {
 				username: service.username,
-				handle: service.api_id,
+				handle: service.apiid,
 				aff: service.password,
 				soort: 'sms',
 				originator: service.from,
@@ -382,7 +416,7 @@ class SendSMSApp extends Homey.App {
 				'Content-Length': 0,
 			};
 			const options = {
-				hostname: service.url.replace('http://', ''),
+				hostname: 'www.targetsms.nl',
 				path: `/service/sendsms?${qs.stringify(query)}`,
 				headers,
 				method: 'GET',
@@ -444,46 +478,6 @@ class SendSMSApp extends Homey.App {
 		}
 	}
 
-	// smsGatewayMe(service, number, msg) {
-	// 	// this.log('smsGateway sending SMS to', number);
-	// 	return new Promise(async (resolve, reject) => {
-	// 		try {
-	// 			const postData = [
-	// 				{
-	// 					phone_number: number,
-	// 					message: msg,
-	// 					device_id: service.from,
-	// 				},
-	// 			];
-	// 			const headers = {
-	// 				'Content-Type': 'application/json',
-	// 				Authorization: service.api_id,
-	// 				'Cache-Control': 'no-cache',
-	// 			};
-	// 			const options = {
-	// 				hostname: 'smsgateway.me',
-	// 				path: '/api/v4/message/send',
-	// 				headers,
-	// 				method: 'POST',
-	// 			};
-	// 			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
-	// 			if ((result.statusCode !== 200)) {
-	// 				// this.error(result.statusCode, result.body);
-	// 				return reject(Error(`error: ${result.statusCode} ${result.body.substr(0, 100)}`));
-	// 			}
-	// 			const smsGatewayResponse = JSON.parse(result.body);
-	// 			// this.log(util.inspect(smsGatewayResponse, { depth: null }));
-	// 			if (smsGatewayResponse.status) { // === 'fail') {
-	// 				return reject(Error(`error: ${smsGatewayResponse.message}`));
-	// 			}
-	// 			return resolve(smsGatewayResponse[0].status);
-	// 		} catch (error) {
-	// 			// this.error(error);
-	// 			return reject(error);
-	// 		}
-	// 	});
-	// }
-
 	async spryngSms(service, number, msg) {
 		// this.log('spryngSms sending SMS to', number);
 		try {
@@ -498,7 +492,7 @@ class SendSMSApp extends Homey.App {
 				'Content-Length': 0,
 			};
 			const options = {
-				hostname: service.url.replace('https://', ''),
+				hostname: 'api.spryngsms.com',
 				path: `/api/send.php?${qs.stringify(query)}`,
 				headers,
 				method: 'GET',
@@ -574,7 +568,7 @@ class SendSMSApp extends Homey.App {
 		try {
 			const regexStatus = new RegExp(/<Status>(.*)<\/Status>/);
 			const regexMessage = new RegExp(/<Message>(.*)<\/Message>/);
-			const accountSid = service.api_id;
+			const accountSid = service.apiid;
 			const authToken = service.password;
 			const headers = {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -611,7 +605,7 @@ class SendSMSApp extends Homey.App {
 		// this.log('cm sending SMS to', number);
 		try {
 			const query = {
-				producttoken: service.api_id,
+				producttoken: service.apiid,
 				body: msg,
 				to: number,
 				username: service.username,
@@ -621,7 +615,7 @@ class SendSMSApp extends Homey.App {
 				'Content-Length': 0,
 			};
 			const options = {
-				hostname: service.url.replace('https://', ''),
+				hostname: 'sgw01.cm.nl',
 				path: `/gateway.ashx?${qs.stringify(query)}`,
 				headers,
 				method: 'GET',
@@ -650,7 +644,7 @@ class SendSMSApp extends Homey.App {
 				method: 'POST',
 			};
 			const postData = {
-				UserName: service.api_id,
+				UserName: service.apiid,
 				Password: service.password,
 				Originator: service.from,
 				Recipients: [number],
@@ -708,53 +702,65 @@ class SendSMSApp extends Homey.App {
 
 	}
 
-	_makeHttpsRequest(options, postData) {
+	_makeHttpsRequest(options, postData, timeout) {
 		return new Promise((resolve, reject) => {
-			const req = https.request(options, (res) => {
+			const opts = options;
+			opts.timeout = timeout || 20000;
+			const req = https.request(opts, (res) => {
 				let resBody = '';
 				res.on('data', (chunk) => {
 					resBody += chunk;
 				});
-				res.on('end', () => {
+				res.once('end', () => {
+					if (!res.complete) {
+						this.error('The connection was terminated while the message was still being sent');
+						return reject(Error('The connection was terminated while the message was still being sent'));
+					}
 					res.body = resBody;
 					return resolve(res); // resolve the request
 				});
 			});
 			req.on('error', (e) => {
-				this.log(e);
-				reject(e);
+				req.destroy();
+				this.error(e);
+				return reject(e);
 			});
-			req.setTimeout(50000, () => {
-				req.abort();
-				reject(Error('Connection timeout'));
+			req.on('timeout', () => {
+				req.destroy();
 			});
-			req.write(postData);
-			req.end();
+			// req.write(postData);
+			req.end(postData);
 		});
 	}
 
-	_makeHttpRequest(options, postData) {
+	_makeHttpRequest(options, postData, timeout) {
 		return new Promise((resolve, reject) => {
-			const req = http.request(options, (res) => {
+			const opts = options;
+			opts.timeout = timeout || 20000;
+			const req = http.request(opts, (res) => {
 				let resBody = '';
 				res.on('data', (chunk) => {
 					resBody += chunk;
 				});
-				res.on('end', () => {
+				res.once('end', () => {
+					if (!res.complete) {
+						this.error('The connection was terminated while the message was still being sent');
+						return reject(Error('The connection was terminated while the message was still being sent'));
+					}
 					res.body = resBody;
 					return resolve(res); // resolve the request
 				});
 			});
 			req.on('error', (e) => {
-				this.log(e);
-				reject(e);
+				req.destroy();
+				this.error(e);
+				return reject(e);
 			});
-			req.setTimeout(50000, () => {
-				req.abort();
-				reject(Error('Connection timeout'));
+			req.on('timeout', () => {
+				req.destroy();
 			});
-			req.write(postData);
-			req.end();
+			// req.write(postData);
+			req.end(postData);
 		});
 	}
 

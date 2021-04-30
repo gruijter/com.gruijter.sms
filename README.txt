@@ -8,6 +8,7 @@ After setting up the SMS-service provider you want to use, you have the possibil
 * Clickatell
 * CM Direct
 * Free Mobile (fr)
+* Gatewayapi
 * Messagebird
 * SendInBlue
 * TargetSMS
