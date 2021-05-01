@@ -16,7 +16,7 @@
     "nl": [ "Berichten", "SMS"]
   },
   "brandColor": "#26df20",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "sdk": 3,
   "compatibility": ">= 5.0.0",
   "author": {

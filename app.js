@@ -26,7 +26,7 @@ const qs = require('querystring');
 const Logger = require('./captureLogs.js');
 // const util = require('util');
 
-class SendSMSApp extends Homey.App {
+class App extends Homey.App {
 
 	onInit() {
 		process.env.LOG_LEVEL = 'info'; // info or debug
@@ -40,10 +40,10 @@ class SendSMSApp extends Homey.App {
 			this.error('uncaughtException! ', error);
 		});
 		this.homey
-			.on('unload', () => {
+			.on('unload', async () => {
 				this.log('app unload called');
 				// save logs to persistant storage
-				this.logger.saveLogs();
+				await this.logger.saveLogs();
 			})
 			.on('memwarn', () => {
 				this.log('memwarn!');
@@ -705,7 +705,7 @@ class SendSMSApp extends Homey.App {
 	_makeHttpsRequest(options, postData, timeout) {
 		return new Promise((resolve, reject) => {
 			const opts = options;
-			opts.timeout = timeout || 20000;
+			opts.timeout = timeout || 40000;
 			const req = https.request(opts, (res) => {
 				let resBody = '';
 				res.on('data', (chunk) => {
@@ -736,7 +736,7 @@ class SendSMSApp extends Homey.App {
 	_makeHttpRequest(options, postData, timeout) {
 		return new Promise((resolve, reject) => {
 			const opts = options;
-			opts.timeout = timeout || 20000;
+			opts.timeout = timeout || 40000;
 			const req = http.request(opts, (res) => {
 				let resBody = '';
 				res.on('data', (chunk) => {
@@ -766,4 +766,4 @@ class SendSMSApp extends Homey.App {
 
 }
 
-module.exports = SendSMSApp;
+module.exports = App;

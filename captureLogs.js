@@ -32,32 +32,35 @@ class captureLogs {
 		this.logLength = opts.length || 50;
 		this.logFile = `/userdata/${this.logName}.json`;
 		this.logArray = [];
-		this.getLogs();
 		this.captureStdOut();
 		this.captureStdErr();
+		this.readLogs();
 	}
 
-	getLogs() {
+	readLogs() {
 		try {
 			const log = fs.readFileSync(this.logFile, 'utf8');
 			this.logArray = JSON.parse(log);
 			this.homey.log('logfile retrieved');
-			return this.logArray;
+			return Promise.resolve(this.logArray);
 		} catch (error) {
-			if (error.message.includes('ENOENT')) return [];
+			if (error.message.includes('ENOENT')) {
+				this.homey.log('logfile not found');
+				return Promise.resolve(this.logArray);
+			}
 			this.homey.error('error parsing logfile: ', error.message);
-			return [];
+			return Promise.reject(error);
 		}
 	}
 
 	saveLogs() {
 		try {
+			this.homey.log('saving logfile...');
 			fs.writeFileSync(this.logFile, JSON.stringify(this.logArray));
-			this.homey.log('logfile saved');
-			return true;
+			return Promise.resolve('logfile saved');
 		} catch (error) {
 			this.homey.error('error writing logfile: ', error.message);
-			return false;
+			return Promise.reject(error);
 		}
 	}
 
@@ -66,11 +69,14 @@ class captureLogs {
 			fs.unlinkSync(this.logFile);
 			this.logArray = [];
 			this.homey.log('logfile deleted');
-			return true;
+			return Promise.resolve('logfile deleted');
 		} catch (error) {
-			if (error.message.includes('ENOENT')) return false;
+			if (error.message.includes('ENOENT')) {
+				this.logArray = [];
+				return Promise.resolve(this.homey.log('logfile not found, in-memory logs deleted'));
+			}
 			this.homey.error('error deleting logfile: ', error.message);
-			return false;
+			return Promise.reject(error);
 		}
 	}
 
