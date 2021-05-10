@@ -141,7 +141,7 @@ class App extends Homey.App {
 				'Cache-Control': 'no-cache',
 			};
 			const query = {
-				token: service.apiid,
+				token: service.api_id,
 				sender: service.from,
 				'recipients.0.msisdn': number,
 				message: msg,
@@ -204,7 +204,7 @@ class App extends Homey.App {
 				'Content-Type': 'application/json',
 				accept: 'application/json',
 				'Cache-Control': 'no-cache',
-				'api-key': service.apiid,
+				'api-key': service.api_id,
 			};
 			const options = {
 				hostname: 'api.sendinblue.com',
@@ -243,7 +243,7 @@ class App extends Homey.App {
 				hostname: 'rest.messagebird.com',
 				path: '/messages',
 				headers,
-				auth: `AccessKey:${service.apiid}`,
+				auth: `AccessKey:${service.api_id}`,
 				method: 'POST',
 			};
 			const postData = {
@@ -251,6 +251,7 @@ class App extends Homey.App {
 				recipients: [number],
 				body: msg,
 			};
+			console.log(options);
 			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 			if (result.statusCode !== 200 && result.statusCode !== 201) {
 				throw Error(`${result.statusCode}: ${result.body.substr(0, 250)}`);
@@ -351,7 +352,7 @@ class App extends Homey.App {
 			const postData = {
 				phone: number,
 				message: msg,
-				key: service.apiid,
+				key: service.api_id,
 			};
 			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 			if (result.statusCode !== 200) {
@@ -373,7 +374,7 @@ class App extends Homey.App {
 			const query = {
 				user: service.username,
 				password: service.password,
-				apiid: service.apiid,
+				apiid: service.api_id,
 				to: number,
 				text: msg,
 				from: service.from,
@@ -405,7 +406,7 @@ class App extends Homey.App {
 		try {
 			const query = {
 				username: service.username,
-				handle: service.apiid,
+				handle: service.api_id,
 				aff: service.password,
 				soort: 'sms',
 				originator: service.from,
@@ -568,7 +569,7 @@ class App extends Homey.App {
 		try {
 			const regexStatus = new RegExp(/<Status>(.*)<\/Status>/);
 			const regexMessage = new RegExp(/<Message>(.*)<\/Message>/);
-			const accountSid = service.apiid;
+			const accountSid = service.api_id;
 			const authToken = service.password;
 			const headers = {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -605,7 +606,7 @@ class App extends Homey.App {
 		// this.log('cm sending SMS to', number);
 		try {
 			const query = {
-				producttoken: service.apiid,
+				producttoken: service.api_id,
 				body: msg,
 				to: number,
 				username: service.username,
@@ -644,7 +645,7 @@ class App extends Homey.App {
 				method: 'POST',
 			};
 			const postData = {
-				UserName: service.apiid,
+				UserName: service.api_id,
 				Password: service.password,
 				Originator: service.from,
 				Recipients: [number],
