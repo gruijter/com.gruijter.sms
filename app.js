@@ -251,7 +251,6 @@ class App extends Homey.App {
 				recipients: [number],
 				body: msg,
 			};
-			console.log(options);
 			const result = await this._makeHttpsRequest(options, JSON.stringify(postData));
 			if (result.statusCode !== 200 && result.statusCode !== 201) {
 				throw Error(`${result.statusCode}: ${result.body.substr(0, 250)}`);
