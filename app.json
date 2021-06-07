@@ -1,34 +1,58 @@
 {
   "id": "com.gruijter.sms",
   "name": {
-      "en": "Send SMS",
-      "de": "Sende SMS",
-      "nl": "Stuur SMS"
+    "en": "Send SMS",
+    "de": "Sende SMS",
+    "nl": "Stuur SMS"
   },
   "description": {
-      "en": "Homey app to send text messages over SMS",
-      "de": "Homey App zum senden von Textnachrichten via SMS",
-      "nl": "Homey app om SMS te versturen"
+    "en": "Homey app to send text messages over SMS",
+    "de": "Homey App zum senden von Textnachrichten via SMS",
+    "nl": "Homey app om SMS te versturen"
   },
   "tags": {
-    "en": [ "Text messages", "SMS" ],
-    "de": [ "Nachrichten", "SMS" ],  
-    "nl": [ "Berichten", "SMS"]
+    "en": [
+      "Text messages",
+      "SMS"
+    ],
+    "de": [
+      "Nachrichten",
+      "SMS"
+    ],
+    "nl": [
+      "Berichten",
+      "SMS"
+    ]
   },
   "brandColor": "#26df20",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "sdk": 3,
   "compatibility": ">= 5.0.0",
   "author": {
-      "name": "Robin de Gruijter",
-      "email": "gruijter@hotmail.com"
+    "name": "Robin de Gruijter",
+    "email": "gruijter@hotmail.com"
   },
   "copyright": "Robin de Gruijter (gruijter@hotmail.com)",
   "license": " GPL-3.0-or-later",
   "contributors": {
-		"developers": [{"name": "Robin de Gruijter","email": "gruijter@hotmail.com"}],
-		"translators": [{"name": "🇬🇧 Robin"},{"name": "🇳🇱 Robin"},{"name": "🇩🇪 Tino"}]
-	},
+    "developers": [
+      {
+        "name": "Robin de Gruijter",
+        "email": "gruijter@hotmail.com"
+      }
+    ],
+    "translators": [
+      {
+        "name": "🇬🇧 Robin"
+      },
+      {
+        "name": "🇳🇱 Robin"
+      },
+      {
+        "name": "🇩🇪 Tino"
+      }
+    ]
+  },
   "contributing": {
     "donate": {
       "paypal": {
@@ -36,14 +60,17 @@
       }
     }
   },
-	"bugs": {
-	"url": "https://github.com/gruijter/com.gruijter.sms/issues"
-	},
-	"homeyCommunityTopicId": 3025,
-  "category": ["internet","tools"],
+  "bugs": {
+    "url": "https://github.com/gruijter/com.gruijter.sms/issues"
+  },
+  "homeyCommunityTopicId": 3025,
+  "category": [
+    "internet",
+    "tools"
+  ],
   "images": {
-  "large": "./assets/images/large.jpg",
-  "small": "./assets/images/small.jpg"
+    "large": "./assets/images/large.jpg",
+    "small": "./assets/images/small.jpg"
   },
   "api": {
     "getLogs": {
@@ -65,9 +92,9 @@
       {
         "id": "send_sms",
         "title": {
-            "en": "Send an SMS",
-            "de": "Sende eine SMS",
-            "nl": "Stuur een SMS"
+          "en": "Send an SMS",
+          "de": "Sende eine SMS",
+          "nl": "Stuur een SMS"
         },
         "args": [
           {
@@ -77,7 +104,7 @@
               "en": "Number",
               "de": "Nummer",
               "nl": "Nummer"
-             }
+            }
           },
           {
             "name": "msg",
@@ -86,7 +113,7 @@
               "en": "Text",
               "de": "Text",
               "nl": "Tekst"
-             }
+            }
           }
         ]
       }

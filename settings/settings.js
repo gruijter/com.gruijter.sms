@@ -89,7 +89,7 @@ function loadSettings() {
 			$('#toTest').val(storedData.toTest);
 			$('#testMessage').val(storedData.testMessage);
 			providerSelected();
-		}
+		} else showInputFields(['username', 'password', 'from']);
 	});
 }
 
