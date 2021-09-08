@@ -1,6 +1,6 @@
 {
   "name": "com.gruijter.sms",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "private": false,
   "license": "GPL-3.0-or-later",
   "main": "app.js",
