@@ -1,5 +1,6 @@
 Version changelog
 
+v3.0.4  2021.09.08 Added sms77.
 v3.0.3  2021.06.07 Fix empty settings 46Elks.
 v3.0.2  2021.05.10 Fix all services that use an API ID.
 v3.0.1  2021.05.01 Http(s) timeout doubled. App logger improved.

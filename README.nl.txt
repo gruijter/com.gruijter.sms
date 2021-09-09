@@ -11,6 +11,7 @@ Nadat de instellingen zijn gedaan voor de SMS provider die je wilt gebruiken, ku
 * Gatewayapi
 * Messagebird
 * SendInBlue
+* Sms77
 * TargetSMS
 * Twilio
 * Spryng

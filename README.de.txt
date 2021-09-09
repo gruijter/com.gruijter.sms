@@ -11,6 +11,7 @@ Nachdem die Einstellungen für den SMS-Anbieter vorgenommen wurden, den Sie verw
 * Gatewayapi
 * Messagebird
 * SendInBlue
+* Sms77
 * TargetSMS
 * Twilio
 * Spryng
