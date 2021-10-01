@@ -13,5 +13,8 @@
   },
   "3.0.3": {
     "en": "Fix empty settings 46Elks."
+  },
+  "3.0.4": {
+    "en": "Added sms77."
   }
 }
