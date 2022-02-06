@@ -5,6 +5,7 @@ After setting up the SMS-service provider you want to use, you have the possibil
 * 46elks
 * AspSMS
 * BulkSMS
+* Cheapconnect.net (nl)
 * Clickatell
 * CM Direct
 * Free Mobile (fr)

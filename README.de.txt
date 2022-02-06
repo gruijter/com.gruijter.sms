@@ -5,6 +5,7 @@ Nachdem die Einstellungen für den SMS-Anbieter vorgenommen wurden, den Sie verw
 * 46elks
 * AspSMS
 * BulkSMS
+* Cheapconnect.net (nl)
 * Clickatell
 * CM Direct
 * Free Mobile (fr)

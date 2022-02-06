@@ -30,16 +30,20 @@ function providerSelected() {
 			selectedProviderUrl = 'https://www.aspsms.com';
 			showInputFields(['api_id', 'password', 'from']);
 			break;
-		case 'https://gateway.sms77.io':  // provider is sms77
+		case 'https://gateway.sms77.io': // provider is sms77
 			selectedProviderUrl = 'https://www.sms77.io';
 			showInputFields(['api_id', 'from']);
 			break;
 		case 'https://www.bulksms.com':	// provider is bulksms
 			showInputFields(['username', 'password', 'from']);
 			break;
+		case 'https://cheapconnect.net': // provider is cheapconnect
+			selectedProviderUrl = 'https://cheapconnect.net';
+			showInputFields(['api_id', 'from']);
+			break;
 		case 'https://api.clickatell.com':	// provider is clickatell
 			selectedProviderUrl = 'https://www.clickatell.com';
-			showInputFields(['api_id', 'username', 'password', 'from']);
+			showInputFields(['api_id']);
 			break;
 		case 'https://sgw01.cm.nl':	// provider is cm.nl
 			selectedProviderUrl = 'https://www.cm.nl';

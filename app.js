@@ -1,5 +1,5 @@
 /*
-Copyright 2016 - 2021, Robin de Gruijter (gruijter@hotmail.com)
+Copyright 2016 - 2022, Robin de Gruijter (gruijter@hotmail.com)
 
 This file is part of com.gruijter.sms.
 
@@ -99,6 +99,9 @@ class App extends Homey.App {
 				case 'https://www.bulksms.com':	// provider is bulksms
 					result = await this.bulkSms(service, number, msg);
 					break;
+				case 'https://cheapconnect.net':	// provider is cheapConnect
+					result = await this.cheapconnect(service, number, msg);
+					break;
 				case 'https://api.clickatell.com':	// provider is clickatell
 					result = await this.clickatell(service, number, msg);
 					break;
@@ -123,7 +126,7 @@ class App extends Homey.App {
 				case 'https://gatewayapi.com':	// provider is gatewayapi
 					result = await this.gatewayapi(service, number, msg);
 					break;
-				case 'https://gateway.sms77.io':  // provider is sms77
+				case 'https://gateway.sms77.io': // provider is sms77
 					result = await this.sms77(service, number, msg);
 					break;
 				default:	// provider is a dellMont brand
@@ -133,6 +136,38 @@ class App extends Homey.App {
 			return Promise.resolve(result);
 		} catch (error) {
 			this.error(error.message);
+			return Promise.reject(error.message);
+		}
+	}
+
+	async cheapconnect(service, number, msg) {
+		// console.log('cheapconnect sending SMS to', number, service);
+		try {
+			const headers = {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				// 'Cache-Control': 'no-cache',
+			};
+			const options = {
+				hostname: 'account.cheapconnect.net',
+				path: '/API/v1/sms/SendSMS',
+				headers,
+				method: 'POST',
+			};
+			const postData = {
+				apikey: service.api_id,
+				from: service.from,
+				to: number,
+				msg,
+			};
+			const result = await this._makeHttpsRequest(options, qs.stringify(postData));
+			if (result.statusCode !== 200 && result.statusCode !== 201) {
+				throw Error(`${result.statusCode}: ${result.body}`);
+			}
+			if (!result.body.includes('success')) throw Error(result.body);
+			// const status = JSON.parse(result.body);
+			// if (status.APIstatus !== 'success') throw Error(result.body);
+			return Promise.resolve(result.body);
+		} catch (error) {
 			return Promise.reject(error);
 		}
 	}
@@ -374,29 +409,25 @@ class App extends Homey.App {
 		// this.log('clickatell sending SMS to', number);
 		try {
 			const query = {
-				user: service.username,
-				password: service.password,
-				apiid: service.api_id,
+				apiKey: service.api_id,
 				to: number,
-				text: msg,
-				from: service.from,
+				content: msg,
 			};
 			const headers = {
 				'Content-Length': 0,
 			};
 			const options = {
-				hostname: 'api.clickatell.com',
-				path: `/http/sendmsg?${qs.stringify(query)}`,
+				hostname: 'platform.clickatell.com',
+				path: `/messages/http/send?${qs.stringify(query)}`,
 				headers,
 				method: 'GET',
 			};
 			const result = await this._makeHttpsRequest(options, '');
-			if (result.statusCode !== 200) {
-				throw Error(`error: ${result.statusCode} ${result.body.substr(0, 20)}`);
+			if ((result.statusCode !== 200) && (result.statusCode !== 202)) {
+				throw Error(`error: ${result.statusCode} ${result.body}`);
 			}
-			if (result.body.substr(0, 4) !== 'ID: ') {
-				throw Error(result.body);
-			}
+			if (!result.body.includes('"accepted":true')) throw Error(result.body);
+			// const status = JSON.parse(result.body);
 			return Promise.resolve(result.body);
 		} catch (error) {
 			return Promise.reject(error);
@@ -673,8 +704,8 @@ class App extends Homey.App {
 		try {
 			const headers = {
 				'Content-Type': 'application/json',
-				'SentWith': 'Homey-SMS',
-				'X-Api-Key': service.api_id
+				SentWith: 'Homey-SMS',
+				'X-Api-Key': service.api_id,
 			};
 			const options = {
 				hostname: 'gateway.sms77.io',

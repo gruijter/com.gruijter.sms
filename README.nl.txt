@@ -5,6 +5,7 @@ Nadat de instellingen zijn gedaan voor de SMS provider die je wilt gebruiken, ku
 * 46elks
 * AspSMS
 * BulkSMS
+* Cheapconnect.net (nl)
 * Clickatell
 * CM Direct
 * Free Mobile (fr)

@@ -16,5 +16,8 @@
   },
   "3.0.4": {
     "en": "Added sms77."
+  },
+  "3.1.0": {
+    "en": "Added Cheapconnect.net (nl). Fix Clickatell."
   }
 }
