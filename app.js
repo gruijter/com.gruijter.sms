@@ -23,7 +23,7 @@ const Homey = require('homey');
 const http = require('http');
 const https = require('https');
 const qs = require('querystring');
-const Logger = require('./captureLogs.js');
+const Logger = require('./captureLogs');
 // const util = require('util');
 
 class App extends Homey.App {
@@ -223,7 +223,7 @@ class App extends Homey.App {
 				method: 'GET',
 			};
 			const result = await this._makeHttpsRequest(options, '');
-			if (result.statusCode !== 200 || result.statusCode !== 201) {
+			if (result.statusCode !== 200 && result.statusCode !== 201) {
 				throw Error(`error: ${result.statusCode} ${result.body.substr(0, 20)}`);
 			}
 			// if (result.body.substr(0, 4) !== 'ID: ') {
@@ -600,8 +600,8 @@ class App extends Homey.App {
 	async twilio(service, number, msg) {
 		// this.log('Twilio sending SMS to', number);
 		try {
-			const regexStatus = new RegExp(/<Status>(.*)<\/Status>/);
-			const regexMessage = new RegExp(/<Message>(.*)<\/Message>/);
+			const regexStatus = /<Status>(.*)<\/Status>/;
+			const regexMessage = /<Message>(.*)<\/Message>/;
 			const accountSid = service.api_id;
 			const authToken = service.password;
 			const headers = {
@@ -736,8 +736,8 @@ class App extends Homey.App {
 	async dellMont(service, number, msg) {
 		// this.log('DellMont sending SMS to', number);
 		try {
-			const regexResult = new RegExp(/<result>(.*)<\/result>/);
-			const regexDescription = new RegExp(/<description>(.*)<\/description>/);
+			const regexResult = /<result>(.*)<\/result>/;
+			const regexDescription = /<description>(.*)<\/description>/;
 			const query = {
 				username: service.username,
 				password: service.password,
