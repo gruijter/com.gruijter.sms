@@ -30,8 +30,8 @@ function providerSelected() {
 			selectedProviderUrl = 'https://www.aspsms.com';
 			showInputFields(['api_id', 'password', 'from']);
 			break;
-		case 'https://gateway.sms77.io': // provider is sms77
-			selectedProviderUrl = 'https://www.sms77.io';
+		case 'https://gateway.sms77.io': // provider is seven
+			selectedProviderUrl = 'https://www.seven.io';
 			showInputFields(['api_id', 'from']);
 			break;
 		case 'https://www.bulksms.com':	// provider is bulksms
