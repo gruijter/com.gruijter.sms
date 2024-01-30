@@ -12,7 +12,7 @@ After setting up the SMS-service provider you want to use, you have the possibil
 * Gatewayapi
 * Messagebird
 * SendInBlue
-* Sms77
+* Seven
 * TargetSMS
 * Twilio
 * Spryng

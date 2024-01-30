@@ -126,7 +126,7 @@ class App extends Homey.App {
 				case 'https://gatewayapi.com':	// provider is gatewayapi
 					result = await this.gatewayapi(service, number, msg);
 					break;
-				case 'https://gateway.sms77.io': // provider is sms77
+				case 'https://gateway.sms77.io': // provider is seven
 					result = await this.sms77(service, number, msg);
 					break;
 				default:	// provider is a dellMont brand
@@ -700,7 +700,7 @@ class App extends Homey.App {
 	}
 
 	async sms77(service, number, msg) {
-		// this.log('sms77 sending SMS to', number);
+		// this.log('seven sending SMS to', number);
 		try {
 			const headers = {
 				'Content-Type': 'application/json',
@@ -708,7 +708,7 @@ class App extends Homey.App {
 				'X-Api-Key': service.api_id,
 			};
 			const options = {
-				hostname: 'gateway.sms77.io',
+				hostname: 'gateway.seven.io',
 				path: '/api/sms',
 				headers,
 				method: 'POST',
@@ -723,11 +723,11 @@ class App extends Homey.App {
 			if (result.statusCode !== 200) {
 				throw Error(`${result.statusCode}: ${result.body.substr(0, 20)}`);
 			}
-			const sms77SmsStatus = JSON.parse(result.body);
-			if (sms77SmsStatus.success !== '100' && sms77SmsStatus.success !== '101') {
-				throw Error(JSON.stringify(sms77SmsStatus));
+			const sevenSmsStatus = JSON.parse(result.body);
+			if (sevenSmsStatus.success !== '100' && sevenSmsStatus.success !== '101') {
+				throw Error(JSON.stringify(sevenSmsStatus));
 			}
-			return Promise.resolve(JSON.stringify(sms77SmsStatus));
+			return Promise.resolve(JSON.stringify(sevenSmsStatus));
 		} catch (error) {
 			return Promise.reject(error);
 		}
