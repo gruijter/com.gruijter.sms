@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "Deja que Homey envíe mensajes de texto SMS desde un flujo",
+    "tab1": {
+      "title": "Configuración",
+      "instructionsTitle": "Instrucciones",
+      "instructions": "Selecciona un proveedor y completa los datos de tu cuenta. Envía un SMS de prueba para verificar que la configuración es correcta y guárdala. Ahora puedes empezar a enviar mensajes de texto desde un flujo.",
+      "provider": "Proveedor",
+      "providersGroup": "Proveedores",
+      "dellmontGroup": "Proveedores DellMont",
+      "openURL": "Sitio web del proveedor",
+      "loadSettings": "Recargar configuración guardada",
+      "apiID": "Api ID/handle/token",
+      "username": "Usuario",
+      "password": "Contraseña/id",
+      "from": "De",
+      "toTest": "Para",
+      "testMessage": "Mensaje",
+      "test": "Enviar mensaje de prueba",
+      "testingNow": "Probando ahora. Espera........",
+      "testResult": "Resultado de la prueba",
+      "testOk": "¡OK! Ahora guarda la configuración.\r\n__result__",
+      "error": "Error",
+      "save": "Guardar",
+      "settingsSaved": "La configuración del proveedor se ha guardado"
+    },
+    "tab2": {
+      "title": "Registros",
+      "deleteLogs": "Eliminar registros",
+      "deleteWarning": "¿Estás seguro?",
+      "deleted": "Registros eliminados"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "ID de usuario", "password": "Clave API" },
+      "hint": "Activa primero 'Notifications par SMS' en Mes options de tu cuenta Free Mobile, o recibirás un error 403."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Clave de acceso" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "Clave API" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "Clave API" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "Clave API" },
+      "hint": "Usa la clave API de una 'Integration' creada en el portal de Clickatell, no la contraseña de acceso a tu cuenta."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "ID de afiliado" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Token de producto" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Usuario" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "Clave API" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Token" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "Clave API" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "Clave API" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "Clave API", "password": "Secreto API" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "Clave API" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "Clave API" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "Clave API", "password": "Secreto API" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "Clave API" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "Clave API" },
+      "hint": "Usa 'sandbox' como usuario mientras pruebas, o tu usuario de la app en vivo del panel de Africa's Talking una vez recargado. Solo admite el envío a números móviles africanos."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "Clave API", "from": "Número del teléfono emparejado" },
+      "hint": "No necesitas cuenta de proveedor, pero tampoco es gratis: instala primero la app Android de httpSMS en tu propio teléfono y empárejala en httpsms.com. 'De' debe coincidir exactamente con el número propio de ese teléfono - el envío se realiza a través de la SIM propia del teléfono, que cobra los SMS de forma normal (saldo prepago/plan), no a través de un número alojado. Riesgo: la app no está en la Play Store, así que esto implica instalar un APK fuera de la tienda - descárgalo solo desde apk.httpsms.com o la página oficial de releases de GitHub, y usa un dispositivo de repuesto, no tu teléfono principal."
+    }
+  }
+}

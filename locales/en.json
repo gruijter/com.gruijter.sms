@@ -6,6 +6,8 @@
       "instructionsTitle": "Instructions",
       "instructions": "Select a provider and fill in your account data. Send a test SMS to verify if the settings are correct, and save the settings. Now you can start sending text messages from a flow.",
       "provider": "Provider",
+      "providersGroup": "Providers",
+      "dellmontGroup": "DellMont Providers",
       "openURL": "Provider website",
       "loadSettings": "Reload stored settings",
       "apiID": "Api ID/handle/token",
@@ -18,6 +20,7 @@
       "testingNow": "Testing now. Hang on........",
       "testResult": "Test result",
       "testOk": "OK! Now save the settings.\r\n__result__",
+      "error": "Error",
       "save": "Save",
       "settingsSaved": "Provider settings are saved"
     },
@@ -26,6 +29,75 @@
       "deleteLogs": "Delete logs",
       "deleteWarning": "Are you sure?",
       "deleted": "Logs deleted"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "User ID", "password": "API Key" },
+      "hint": "Activate 'Notifications par SMS' under Mes options in your Free Mobile account first, or you'll get a 403 error."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Access Key" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "API Key" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "API Key" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "API Key" },
+      "hint": "Use the API Key from an 'Integration' you created in the Clickatell portal, not your account login password."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "Affiliate ID" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Product Token" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Username" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "API Key" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Token" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "API Key" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "API Key" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "API Key", "password": "API Secret" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "API Key" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "API Key" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "API Key", "password": "API Secret" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "API Key" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "API Key" },
+      "hint": "Use 'sandbox' as Username while testing, or your live app username from the Africa's Talking dashboard once topped up. Only supports sending to African mobile numbers."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "API Key", "from": "Paired Phone Number" },
+      "hint": "No provider account needed, but not free either: install the httpSMS Android app on your own phone and pair it at httpsms.com first. 'From' must exactly match that phone's own number - this sends through your phone's own SIM, which bills SMS normally (prepaid credit/plan), not a hosted number. Risk: the app isn't on the Play Store, so this means sideloading an APK - only get it from apk.httpsms.com or their GitHub releases page, and use a spare device, not your primary phone."
     }
   }
 }

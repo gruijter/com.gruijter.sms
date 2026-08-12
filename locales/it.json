@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "Lascia che Homey invii SMS da un flow",
+    "tab1": {
+      "title": "Impostazioni",
+      "instructionsTitle": "Istruzioni",
+      "instructions": "Seleziona un fornitore e inserisci i dati del tuo account. Invia un SMS di prova per verificare che le impostazioni siano corrette, quindi salvale. Ora puoi iniziare a inviare messaggi di testo da un flow.",
+      "provider": "Fornitore",
+      "providersGroup": "Fornitori",
+      "dellmontGroup": "Fornitori DellMont",
+      "openURL": "Sito del fornitore",
+      "loadSettings": "Ricarica impostazioni salvate",
+      "apiID": "Api ID/handle/token",
+      "username": "Nome utente",
+      "password": "Password/id",
+      "from": "Da",
+      "toTest": "A",
+      "testMessage": "Messaggio",
+      "test": "Invia messaggio di prova",
+      "testingNow": "Test in corso. Attendere........",
+      "testResult": "Risultato del test",
+      "testOk": "OK! Ora salva le impostazioni.\r\n__result__",
+      "error": "Errore",
+      "save": "Salva",
+      "settingsSaved": "Le impostazioni del fornitore sono state salvate"
+    },
+    "tab2": {
+      "title": "Log",
+      "deleteLogs": "Elimina log",
+      "deleteWarning": "Sei sicuro?",
+      "deleted": "Log eliminati"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "ID utente", "password": "Chiave API" },
+      "hint": "Attiva prima 'Notifications par SMS' in Mes options nel tuo account Free Mobile, altrimenti riceverai un errore 403."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Chiave di accesso" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "Chiave API" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "Chiave API" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "Chiave API" },
+      "hint": "Usa la chiave API di una 'Integration' creata nel portale Clickatell, non la password di accesso al tuo account."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "ID affiliato" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Token prodotto" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Nome utente" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "Chiave API" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Token" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "Chiave API" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "Chiave API" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "Chiave API", "password": "Secret API" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "Chiave API" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "Chiave API" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "Chiave API", "password": "Secret API" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "Chiave API" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "Chiave API" },
+      "hint": "Usa 'sandbox' come nome utente durante i test, oppure il tuo nome utente dell'app live dalla dashboard di Africa's Talking una volta ricaricato. Supporta solo l'invio a numeri di cellulare africani."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "Chiave API", "from": "Numero del telefono associato" },
+      "hint": "Non serve un account fornitore, ma non è nemmeno gratis: installa prima l'app Android httpSMS sul tuo telefono e associala su httpsms.com. 'Da' deve corrispondere esattamente al numero proprio di quel telefono - l'invio avviene tramite la SIM del telefono stesso, che addebita gli SMS normalmente (credito prepagato/piano), non tramite un numero ospitato. Rischio: l'app non è sul Play Store, quindi significa installare un APK sideload - scaricalo solo da apk.httpsms.com o dalla pagina ufficiale delle release GitHub, e usa un dispositivo di riserva, non il tuo telefono principale."
+    }
+  }
+}

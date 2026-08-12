@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "Laissez Homey envoyer des SMS depuis un flux",
+    "tab1": {
+      "title": "Paramètres",
+      "instructionsTitle": "Instructions",
+      "instructions": "Sélectionnez un fournisseur et renseignez vos données de compte. Envoyez un SMS de test pour vérifier que les paramètres sont corrects, puis enregistrez-les. Vous pouvez ensuite envoyer des messages texte depuis un flux.",
+      "provider": "Fournisseur",
+      "providersGroup": "Fournisseurs",
+      "dellmontGroup": "Fournisseurs DellMont",
+      "openURL": "Site du fournisseur",
+      "loadSettings": "Recharger les paramètres enregistrés",
+      "apiID": "Api ID/handle/jeton",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe/id",
+      "from": "De",
+      "toTest": "À",
+      "testMessage": "Message",
+      "test": "Envoyer un message test",
+      "testingNow": "Test en cours. Patientez........",
+      "testResult": "Résultat du test",
+      "testOk": "OK ! Enregistrez maintenant les paramètres.\r\n__result__",
+      "error": "Erreur",
+      "save": "Enregistrer",
+      "settingsSaved": "Les paramètres du fournisseur sont enregistrés"
+    },
+    "tab2": {
+      "title": "Journaux",
+      "deleteLogs": "Supprimer les journaux",
+      "deleteWarning": "Êtes-vous sûr ?",
+      "deleted": "Journaux supprimés"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "Identifiant", "password": "Clé API" },
+      "hint": "Activez d'abord 'Notifications par SMS' dans Mes options de votre compte Free Mobile, sinon vous obtiendrez une erreur 403."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Clé d'accès" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "Clé API" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "Clé API" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "Clé API" },
+      "hint": "Utilisez la clé API d'une 'Integration' créée dans le portail Clickatell, pas votre mot de passe de connexion au compte."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "ID affilié" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Jeton produit" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Nom d'utilisateur" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "Clé API" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Jeton" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "Clé API" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "Clé API" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "Clé API", "password": "Secret API" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "Clé API" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "Clé API" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "Clé API", "password": "Secret API" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "Clé API" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "Clé API" },
+      "hint": "Utilisez 'sandbox' comme nom d'utilisateur pendant les tests, ou votre nom d'utilisateur d'application en direct du tableau de bord Africa's Talking une fois rechargé. Ne prend en charge que l'envoi vers des numéros mobiles africains."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "Clé API", "from": "Numéro du téléphone jumelé" },
+      "hint": "Aucun compte fournisseur nécessaire, mais pas gratuit non plus : installez d'abord l'application Android httpSMS sur votre propre téléphone et jumelez-la sur httpsms.com. 'De' doit correspondre exactement au numéro propre de ce téléphone - l'envoi se fait via la propre carte SIM du téléphone, qui facture les SMS normalement (crédit prépayé/forfait), pas via un numéro hébergé. Risque : l'application n'est pas sur le Play Store, il s'agit donc d'installer un APK en dehors du store - téléchargez-le uniquement depuis apk.httpsms.com ou la page officielle des releases GitHub, et utilisez un appareil de rechange, pas votre téléphone principal."
+    }
+  }
+}

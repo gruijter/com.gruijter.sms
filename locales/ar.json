@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "دع Homey يرسل رسائل SMS نصية من مسار (flow)",
+    "tab1": {
+      "title": "الإعدادات",
+      "instructionsTitle": "التعليمات",
+      "instructions": "اختر مزود خدمة واملأ بيانات حسابك. أرسل رسالة SMS تجريبية للتحقق من صحة الإعدادات، ثم احفظ الإعدادات. يمكنك الآن البدء في إرسال الرسائل النصية من مسار (flow).",
+      "provider": "مزود الخدمة",
+      "providersGroup": "مزودو الخدمة",
+      "dellmontGroup": "مزودو DellMont",
+      "openURL": "موقع مزود الخدمة",
+      "loadSettings": "إعادة تحميل الإعدادات المحفوظة",
+      "apiID": "معرّف API/handle/token",
+      "username": "اسم المستخدم",
+      "password": "كلمة المرور/المعرف",
+      "from": "من",
+      "toTest": "إلى",
+      "testMessage": "الرسالة",
+      "test": "إرسال رسالة تجريبية",
+      "testingNow": "جارٍ الاختبار الآن. يرجى الانتظار........",
+      "testResult": "نتيجة الاختبار",
+      "testOk": "تم! احفظ الإعدادات الآن.\r\n__result__",
+      "error": "خطأ",
+      "save": "حفظ",
+      "settingsSaved": "تم حفظ إعدادات مزود الخدمة"
+    },
+    "tab2": {
+      "title": "السجلات",
+      "deleteLogs": "حذف السجلات",
+      "deleteWarning": "هل أنت متأكد؟",
+      "deleted": "تم حذف السجلات"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "معرّف المستخدم", "password": "مفتاح API" },
+      "hint": "فعّل أولاً خيار 'Notifications par SMS' ضمن Mes options في حساب Free Mobile الخاص بك، وإلا ستحصل على خطأ 403."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "مفتاح الوصول" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "مفتاح API" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "مفتاح API" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "مفتاح API" },
+      "hint": "استخدم مفتاح API الخاص بـ 'Integration' أنشأتها في بوابة Clickatell، وليس كلمة مرور تسجيل الدخول لحسابك."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "معرّف الشريك" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "رمز المنتج" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "اسم المستخدم" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "مفتاح API" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "الرمز (Token)" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "مفتاح API" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "مفتاح API" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "مفتاح API", "password": "سر API" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "مفتاح API" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "مفتاح API" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "مفتاح API", "password": "سر API" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "مفتاح API" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "مفتاح API" },
+      "hint": "استخدم 'sandbox' كاسم مستخدم أثناء الاختبار، أو اسم مستخدم تطبيقك الفعلي من لوحة تحكم Africa's Talking بعد شحن الرصيد. يدعم الإرسال فقط إلى أرقام الهواتف المحمولة الأفريقية."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "مفتاح API", "from": "رقم الهاتف المقترن" },
+      "hint": "لا حاجة لحساب مزود خدمة، لكنها ليست مجانية أيضاً: ثبّت أولاً تطبيق httpSMS لأندرويد على هاتفك الخاص واقرنه عبر httpsms.com. يجب أن يطابق حقل 'من' رقم ذلك الهاتف تماماً - يتم الإرسال عبر شريحة SIM الخاصة بالهاتف نفسه، والتي تُحاسب على الرسائل النصية بشكل عادي (رصيد مسبق الدفع/باقة)، وليس عبر رقم مستضاف. المخاطرة: التطبيق غير متوفر على متجر Play، لذا يعني هذا تثبيت APK من خارج المتجر - حمّله فقط من apk.httpsms.com أو صفحة إصدارات GitHub الرسمية، واستخدم جهازاً احتياطياً وليس هاتفك الأساسي."
+    }
+  }
+}

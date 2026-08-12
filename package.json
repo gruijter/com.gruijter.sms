@@ -1,6 +1,6 @@
 {
   "name": "com.gruijter.sms",
-  "version": "3.0.4",
+  "version": "4.0.0",
   "private": false,
   "license": "GPL-3.0-or-later",
   "main": "app.js",
@@ -8,7 +8,16 @@
     "type": "git",
     "url": "git://github.com/gruijter/com.gruijter.sms.git"
   },
-  "devDependencies": {},
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js --ignore-path .gitignore ."
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-athom": "^3.1.5"
+  },
   "dependencies": {
     "fixture-stdout": "^0.2.1"
   }

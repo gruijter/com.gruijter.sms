@@ -1,17 +1,20 @@
+'use strict';
+
 module.exports = {
-	// retrieve logs
-	async getLogs({ homey }) {
-		const result = await homey.app.getLogs();
-		return result;
-	},
-	// delete logs
-	async deleteLogs({ homey }) {
-		const result = await homey.app.deleteLogs();
-		return result;
-	},
-	// send test SMS from frontend
-	async testSMS({ homey, body }) {
-		const result = await homey.app.testSMS(body);
-		return result;
-	},
+  // retrieve logs
+  async getLogs({ homey }) {
+    return homey.app.getLogs();
+  },
+  // delete logs
+  async deleteLogs({ homey }) {
+    return homey.app.deleteLogs();
+  },
+  // send test SMS from frontend
+  async testSMS({ homey, body }) {
+    return homey.app.testSMS(body);
+  },
+  // provider list for the settings page
+  async getProviders({ homey }) {
+    return homey.app.getProviders();
+  },
 };

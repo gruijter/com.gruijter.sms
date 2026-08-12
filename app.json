@@ -3,12 +3,32 @@
   "name": {
     "en": "Send SMS",
     "de": "Sende SMS",
-    "nl": "Stuur SMS"
+    "nl": "Stuur SMS",
+    "fr": "Envoyer SMS",
+    "es": "Enviar SMS",
+    "it": "Invia SMS",
+    "da": "Send SMS",
+    "sv": "Skicka SMS",
+    "no": "Send SMS",
+    "pl": "Wyślij SMS",
+    "ru": "Отправить SMS",
+    "ar": "إرسال رسالة نصية",
+    "ko": "SMS 보내기"
   },
   "description": {
     "en": "Homey app to send text messages over SMS",
     "de": "Homey App zum senden von Textnachrichten via SMS",
-    "nl": "Homey app om SMS te versturen"
+    "nl": "Homey app om SMS te versturen",
+    "fr": "Application Homey pour envoyer des messages texte par SMS",
+    "es": "Aplicación de Homey para enviar mensajes de texto por SMS",
+    "it": "App Homey per inviare messaggi di testo via SMS",
+    "da": "Homey-app til at sende tekstbeskeder via SMS",
+    "sv": "Homey-app för att skicka textmeddelanden via SMS",
+    "no": "Homey-app for å sende tekstmeldinger via SMS",
+    "pl": "Aplikacja Homey do wysyłania wiadomości tekstowych SMS",
+    "ru": "Приложение Homey для отправки текстовых сообщений по SMS",
+    "ar": "تطبيق Homey لإرسال الرسائل النصية عبر SMS",
+    "ko": "SMS로 문자 메시지를 보내는 Homey 앱"
   },
   "tags": {
     "en": [
@@ -22,12 +42,52 @@
     "nl": [
       "Berichten",
       "SMS"
+    ],
+    "fr": [
+      "Messages texte",
+      "SMS"
+    ],
+    "es": [
+      "Mensajes de texto",
+      "SMS"
+    ],
+    "it": [
+      "Messaggi di testo",
+      "SMS"
+    ],
+    "da": [
+      "Tekstbeskeder",
+      "SMS"
+    ],
+    "sv": [
+      "Textmeddelanden",
+      "SMS"
+    ],
+    "no": [
+      "Tekstmeldinger",
+      "SMS"
+    ],
+    "pl": [
+      "Wiadomości tekstowe",
+      "SMS"
+    ],
+    "ru": [
+      "Текстовые сообщения",
+      "SMS"
+    ],
+    "ar": [
+      "رسائل نصية",
+      "SMS"
+    ],
+    "ko": [
+      "문자 메시지",
+      "SMS"
     ]
   },
   "brandColor": "#26df20",
-  "version": "3.1.3",
+  "version": "4.0.0",
   "sdk": 3,
-  "compatibility": ">= 5.0.0",
+  "compatibility": ">=12.11.0",
   "author": {
     "name": "Robin de Gruijter",
     "email": "gruijter@hotmail.com"
@@ -85,6 +145,10 @@
       "method": "post",
       "path": "/testSMS",
       "public": true
+    },
+    "getProviders": {
+      "method": "get",
+      "path": "/getProviders"
     }
   },
   "flow": {
@@ -94,7 +158,32 @@
         "title": {
           "en": "Send an SMS",
           "de": "Sende eine SMS",
-          "nl": "Stuur een SMS"
+          "nl": "Stuur een SMS",
+          "fr": "Envoyer un SMS",
+          "es": "Enviar un SMS",
+          "it": "Invia un SMS",
+          "da": "Send en SMS",
+          "sv": "Skicka ett SMS",
+          "no": "Send en SMS",
+          "pl": "Wyślij SMS",
+          "ru": "Отправить SMS",
+          "ar": "إرسال رسالة SMS",
+          "ko": "SMS 보내기"
+        },
+        "titleFormatted": {
+          "en": "Send SMS to [[number]]: [[msg]]",
+          "de": "Sende SMS an [[number]]: [[msg]]",
+          "nl": "Stuur SMS naar [[number]]: [[msg]]",
+          "fr": "Envoyer un SMS à [[number]] : [[msg]]",
+          "es": "Enviar SMS a [[number]]: [[msg]]",
+          "it": "Invia SMS a [[number]]: [[msg]]",
+          "da": "Send SMS til [[number]]: [[msg]]",
+          "sv": "Skicka SMS till [[number]]: [[msg]]",
+          "no": "Send SMS til [[number]]: [[msg]]",
+          "pl": "Wyślij SMS do [[number]]: [[msg]]",
+          "ru": "Отправить SMS на [[number]]: [[msg]]",
+          "ar": "إرسال SMS إلى [[number]]: [[msg]]",
+          "ko": "[[number]]로 SMS 보내기: [[msg]]"
         },
         "args": [
           {
@@ -103,7 +192,17 @@
             "placeholder": {
               "en": "Number",
               "de": "Nummer",
-              "nl": "Nummer"
+              "nl": "Nummer",
+              "fr": "Numéro",
+              "es": "Número",
+              "it": "Numero",
+              "da": "Nummer",
+              "sv": "Nummer",
+              "no": "Nummer",
+              "pl": "Numer",
+              "ru": "Номер",
+              "ar": "الرقم",
+              "ko": "번호"
             }
           },
           {
@@ -112,7 +211,17 @@
             "placeholder": {
               "en": "Text",
               "de": "Text",
-              "nl": "Tekst"
+              "nl": "Tekst",
+              "fr": "Texte",
+              "es": "Texto",
+              "it": "Testo",
+              "da": "Tekst",
+              "sv": "Text",
+              "no": "Tekst",
+              "pl": "Tekst",
+              "ru": "Текст",
+              "ar": "النص",
+              "ko": "문자"
             }
           }
         ]

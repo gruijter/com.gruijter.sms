@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "Låt Homey skicka SMS-textmeddelanden från ett flöde",
+    "tab1": {
+      "title": "Inställningar",
+      "instructionsTitle": "Instruktioner",
+      "instructions": "Välj en leverantör och fyll i dina kontouppgifter. Skicka ett test-SMS för att kontrollera att inställningarna är korrekta, och spara inställningarna. Nu kan du börja skicka textmeddelanden från ett flöde.",
+      "provider": "Leverantör",
+      "providersGroup": "Leverantörer",
+      "dellmontGroup": "DellMont-leverantörer",
+      "openURL": "Leverantörens webbplats",
+      "loadSettings": "Läs in sparade inställningar igen",
+      "apiID": "Api-ID/handle/token",
+      "username": "Användarnamn",
+      "password": "Lösenord/id",
+      "from": "Från",
+      "toTest": "Till",
+      "testMessage": "Meddelande",
+      "test": "Skicka testmeddelande",
+      "testingNow": "Testar nu. Vänta........",
+      "testResult": "Testresultat",
+      "testOk": "OK! Spara nu inställningarna.\r\n__result__",
+      "error": "Fel",
+      "save": "Spara",
+      "settingsSaved": "Leverantörsinställningarna har sparats"
+    },
+    "tab2": {
+      "title": "Loggar",
+      "deleteLogs": "Ta bort loggar",
+      "deleteWarning": "Är du säker?",
+      "deleted": "Loggar borttagna"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "Användar-ID", "password": "API-nyckel" },
+      "hint": "Aktivera 'Notifications par SMS' under Mes options i ditt Free Mobile-konto först, annars får du ett 403-fel."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Åtkomstnyckel" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "API-nyckel" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "API-nyckel" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "API-nyckel" },
+      "hint": "Använd API-nyckeln från en 'Integration' du skapat i Clickatell-portalen, inte ditt kontos inloggningslösenord."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "Affiliate-ID" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Produkt-token" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Användarnamn" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "API-nyckel" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Token" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "API-nyckel" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "API-nyckel" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "API-nyckel", "password": "API Secret" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "API-nyckel" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "API-nyckel" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "API-nyckel", "password": "API Secret" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "API-nyckel" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "API-nyckel" },
+      "hint": "Använd 'sandbox' som användarnamn under testning, eller ditt live-appanvändarnamn från Africa's Talking-instrumentpanelen när du fyllt på. Stöder endast sändning till afrikanska mobilnummer."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "API-nyckel", "from": "Ihopparad telefonnummer" },
+      "hint": "Inget leverantörskonto behövs, men det är inte heller gratis: installera först httpSMS Android-appen på din egen telefon och para ihop den på httpsms.com. 'Från' måste exakt matcha den telefonens eget nummer - detta skickar via telefonens eget SIM-kort, som fakturerar SMS normalt (kontantkort/abonnemang), inte via ett hostat nummer. Risk: appen finns inte i Play Store, så detta innebär sidoladdning av en APK - hämta den bara från apk.httpsms.com eller den officiella GitHub-utgåvesidan, och använd en extra enhet, inte din primära telefon."
+    }
+  }
+}

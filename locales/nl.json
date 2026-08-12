@@ -6,6 +6,8 @@
       "instructionsTitle": "Instructies",
       "instructions": "Selecteer een provider en vul je account gegevens in. Stuur een test SMS om de instellingen te verifieren, en sla ze op. Nu kun je SMS gaan versturen vanuit een flow.",
       "provider": "Provider",
+      "providersGroup": "Providers",
+      "dellmontGroup": "DellMont Providers",
       "openURL": "Provider website",
       "loadSettings": "Herlaad opgeslagen instellingen",
       "apiID": "Api ID/handle/token",
@@ -18,6 +20,7 @@
       "testingNow": "Test loopt. Moment geduld........",
       "testResult": "Test resultaat",
       "testOk": "OK! Sla de instellingen nu op.\r\n__result__",
+      "error": "Fout",
       "save": "Opslaan",
       "settingsSaved": "Provider instellingen zijn opgeslagen"
     },
@@ -26,6 +29,75 @@
       "deleteLogs": "Verwijder logs",
       "deleteWarning": "Weet je het zeker?",
       "deleted": "Logs verwijderd"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "Gebruikers-ID", "password": "API-sleutel" },
+      "hint": "Activeer eerst 'Notifications par SMS' onder Mes options in je Free Mobile account, anders krijg je een 403-fout."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Toegangssleutel" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "API-sleutel" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "API-sleutel" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "API-sleutel" },
+      "hint": "Gebruik de API-sleutel van een 'Integration' die je hebt aangemaakt in het Clickatell-portaal, niet je account-inlogwachtwoord."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "Affiliate-ID" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Product Token" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Gebruikersnaam" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "API-sleutel" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Token" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "API-sleutel" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "API-sleutel" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "API-sleutel", "password": "API Secret" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "API-sleutel" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "API-sleutel" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "API-sleutel", "password": "API Secret" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "API-sleutel" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "API-sleutel" },
+      "hint": "Gebruik 'sandbox' als gebruikersnaam tijdens het testen, of je live app-gebruikersnaam uit het Africa's Talking-dashboard zodra je hebt opgewaardeerd. Ondersteunt alleen verzenden naar Afrikaanse mobiele nummers."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "API-sleutel", "from": "Gekoppeld telefoonnummer" },
+      "hint": "Geen provider-account nodig, maar ook niet gratis: installeer eerst de httpSMS Android-app op je eigen telefoon en koppel die op httpsms.com. 'Van' moet exact overeenkomen met het eigen nummer van die telefoon - dit verstuurt via de eigen simkaart van je telefoon, die sms gewoon normaal in rekening brengt (prepaid tegoed/abonnement), niet via een gehost nummer. Risico: de app staat niet in de Play Store, dus dit betekent een APK sideloaden - download die alleen via apk.httpsms.com of de officiële GitHub releases-pagina, en gebruik een reservetoestel, niet je hoofdtelefoon."
     }
   }
 }

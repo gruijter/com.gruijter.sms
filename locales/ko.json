@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "Homey가 flow에서 SMS 문자 메시지를 보낼 수 있도록 합니다",
+    "tab1": {
+      "title": "설정",
+      "instructionsTitle": "안내",
+      "instructions": "공급자를 선택하고 계정 정보를 입력하세요. 테스트 SMS를 보내 설정이 올바른지 확인한 다음 설정을 저장하세요. 이제 flow에서 문자 메시지를 보낼 수 있습니다.",
+      "provider": "공급자",
+      "providersGroup": "공급자",
+      "dellmontGroup": "DellMont 공급자",
+      "openURL": "공급자 웹사이트",
+      "loadSettings": "저장된 설정 다시 불러오기",
+      "apiID": "Api ID/handle/토큰",
+      "username": "사용자 이름",
+      "password": "비밀번호/ID",
+      "from": "보낸 사람",
+      "toTest": "받는 사람",
+      "testMessage": "메시지",
+      "test": "테스트 메시지 보내기",
+      "testingNow": "테스트 중입니다. 잠시만 기다려 주세요........",
+      "testResult": "테스트 결과",
+      "testOk": "확인! 이제 설정을 저장하세요.\r\n__result__",
+      "error": "오류",
+      "save": "저장",
+      "settingsSaved": "공급자 설정이 저장되었습니다"
+    },
+    "tab2": {
+      "title": "로그",
+      "deleteLogs": "로그 삭제",
+      "deleteWarning": "정말 삭제하시겠습니까?",
+      "deleted": "로그가 삭제되었습니다"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "사용자 ID", "password": "API 키" },
+      "hint": "먼저 Free Mobile 계정의 Mes options에서 'Notifications par SMS'를 활성화하세요. 그렇지 않으면 403 오류가 발생합니다."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "액세스 키" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "API 키" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "API 키" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "API 키" },
+      "hint": "계정 로그인 비밀번호가 아니라 Clickatell 포털에서 만든 'Integration'의 API 키를 사용하세요."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "제휴사 ID" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "제품 토큰" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "사용자 이름" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "API 키" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "토큰" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "API 키" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "API 키" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "API 키", "password": "API 시크릿" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "API 키" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "API 키" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "API 키", "password": "API 시크릿" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "API 키" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "API 키" },
+      "hint": "테스트 중에는 사용자 이름으로 'sandbox'를 사용하고, 충전 후에는 Africa's Talking 대시보드의 실제 앱 사용자 이름을 사용하세요. 아프리카 휴대폰 번호로만 발송할 수 있습니다."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "API 키", "from": "페어링된 전화번호" },
+      "hint": "공급자 계정은 필요 없지만 완전 무료도 아닙니다: 먼저 본인 휴대폰에 httpSMS Android 앱을 설치하고 httpsms.com에서 페어링하세요. '보낸 사람'은 그 휴대폰의 실제 번호와 정확히 일치해야 합니다 - 호스팅된 번호가 아니라 휴대폰 자체의 SIM을 통해 발송되며, 선불 잔액/요금제 등 평소처럼 SMS 요금이 청구됩니다. 위험 요소: 이 앱은 Play 스토어에 없으므로 APK를 사이드로드해야 합니다 - apk.httpsms.com 또는 공식 GitHub 릴리스 페이지에서만 다운로드하고, 주 사용 휴대폰이 아닌 예비 기기를 사용하세요."
+    }
+  }
+}

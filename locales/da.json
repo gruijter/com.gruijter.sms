@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "Lad Homey sende SMS-tekstbeskeder fra en flow",
+    "tab1": {
+      "title": "Indstillinger",
+      "instructionsTitle": "Instruktioner",
+      "instructions": "Vælg en udbyder og udfyld dine kontooplysninger. Send en test-SMS for at kontrollere, at indstillingerne er korrekte, og gem indstillingerne. Nu kan du begynde at sende tekstbeskeder fra en flow.",
+      "provider": "Udbyder",
+      "providersGroup": "Udbydere",
+      "dellmontGroup": "DellMont-udbydere",
+      "openURL": "Udbyderens hjemmeside",
+      "loadSettings": "Genindlæs gemte indstillinger",
+      "apiID": "Api ID/handle/token",
+      "username": "Brugernavn",
+      "password": "Adgangskode/id",
+      "from": "Fra",
+      "toTest": "Til",
+      "testMessage": "Besked",
+      "test": "Send testbesked",
+      "testingNow": "Tester nu. Vent venligst........",
+      "testResult": "Testresultat",
+      "testOk": "OK! Gem nu indstillingerne.\r\n__result__",
+      "error": "Fejl",
+      "save": "Gem",
+      "settingsSaved": "Udbyderindstillinger er gemt"
+    },
+    "tab2": {
+      "title": "Logs",
+      "deleteLogs": "Slet logs",
+      "deleteWarning": "Er du sikker?",
+      "deleted": "Logs slettet"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "Bruger-ID", "password": "API-nøgle" },
+      "hint": "Aktivér først 'Notifications par SMS' under Mes options i din Free Mobile-konto, ellers får du en 403-fejl."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Adgangsnøgle" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "API-nøgle" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "API-nøgle" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "API-nøgle" },
+      "hint": "Brug API-nøglen fra en 'Integration', du har oprettet i Clickatell-portalen, ikke din konto-loginadgangskode."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "Affiliate-ID" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Produkt-token" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Brugernavn" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "API-nøgle" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Token" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "API-nøgle" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "API-nøgle" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "API-nøgle", "password": "API Secret" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "API-nøgle" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "API-nøgle" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "API-nøgle", "password": "API Secret" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "API-nøgle" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "API-nøgle" },
+      "hint": "Brug 'sandbox' som brugernavn under test, eller dit live app-brugernavn fra Africa's Talking-dashboardet, når du har fyldt op. Understøtter kun afsendelse til afrikanske mobilnumre."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "API-nøgle", "from": "Parret telefonnummer" },
+      "hint": "Ingen udbyderkonto nødvendig, men heller ikke gratis: installer først httpSMS Android-appen på din egen telefon, og par den på httpsms.com. 'Fra' skal nøjagtigt matche den telefons eget nummer - dette sender via telefonens eget SIM-kort, som fakturerer SMS'er normalt (forudbetalt saldo/abonnement), ikke via et hostet nummer. Risiko: appen findes ikke i Play Store, så dette betyder sideloading af en APK - hent den kun fra apk.httpsms.com eller den officielle GitHub-udgivelsesside, og brug en ekstra enhed, ikke din primære telefon."
+    }
+  }
+}

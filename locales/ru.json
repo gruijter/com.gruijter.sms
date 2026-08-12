@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "Позвольте Homey отправлять SMS-сообщения из flow",
+    "tab1": {
+      "title": "Настройки",
+      "instructionsTitle": "Инструкции",
+      "instructions": "Выберите провайдера и заполните данные своей учётной записи. Отправьте тестовое SMS, чтобы проверить правильность настроек, и сохраните их. Теперь вы можете отправлять текстовые сообщения из flow.",
+      "provider": "Провайдер",
+      "providersGroup": "Провайдеры",
+      "dellmontGroup": "Провайдеры DellMont",
+      "openURL": "Сайт провайдера",
+      "loadSettings": "Обновить сохранённые настройки",
+      "apiID": "Api ID/handle/токен",
+      "username": "Имя пользователя",
+      "password": "Пароль/id",
+      "from": "От",
+      "toTest": "Кому",
+      "testMessage": "Сообщение",
+      "test": "Отправить тестовое сообщение",
+      "testingNow": "Идёт тестирование. Подождите........",
+      "testResult": "Результат теста",
+      "testOk": "OK! Теперь сохраните настройки.\r\n__result__",
+      "error": "Ошибка",
+      "save": "Сохранить",
+      "settingsSaved": "Настройки провайдера сохранены"
+    },
+    "tab2": {
+      "title": "Журналы",
+      "deleteLogs": "Удалить журналы",
+      "deleteWarning": "Вы уверены?",
+      "deleted": "Журналы удалены"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "ID пользователя", "password": "API-ключ" },
+      "hint": "Сначала активируйте 'Notifications par SMS' в разделе Mes options вашей учётной записи Free Mobile, иначе вы получите ошибку 403."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Ключ доступа" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "API-ключ" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "API-ключ" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "API-ключ" },
+      "hint": "Используйте API-ключ из 'Integration', созданной в портале Clickatell, а не пароль входа в учётную запись."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "ID партнёра" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Токен продукта" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Имя пользователя" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "API-ключ" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Токен" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "API-ключ" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "API-ключ" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "API-ключ", "password": "API Secret" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "API-ключ" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "API-ключ" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "API-ключ", "password": "API Secret" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "API-ключ" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "API-ключ" },
+      "hint": "Используйте 'sandbox' в качестве имени пользователя во время тестирования, либо имя вашего рабочего приложения из панели Africa's Talking после пополнения баланса. Поддерживает отправку только на африканские мобильные номера."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "API-ключ", "from": "Номер сопряжённого телефона" },
+      "hint": "Учётная запись провайдера не нужна, но и бесплатным это не назвать: сначала установите приложение httpSMS для Android на свой телефон и сопрягите его на httpsms.com. Поле 'От' должно точно совпадать с собственным номером этого телефона - отправка идёт через собственную SIM-карту телефона, за SMS с которой оператор списывает средства как обычно (предоплаченный баланс/тариф), а не через хостируемый номер. Риск: приложения нет в Play Store, поэтому это означает установку APK не из магазина - скачивайте его только с apk.httpsms.com или официальной страницы релизов на GitHub, и используйте запасное устройство, а не основной телефон."
+    }
+  }
+}

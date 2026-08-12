@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "benefit": "La Homey sende SMS-tekstmeldinger fra en flyt",
+    "tab1": {
+      "title": "Innstillinger",
+      "instructionsTitle": "Instruksjoner",
+      "instructions": "Velg en leverandør og fyll inn kontoopplysningene dine. Send en test-SMS for å bekrefte at innstillingene er riktige, og lagre innstillingene. Nå kan du begynne å sende tekstmeldinger fra en flyt.",
+      "provider": "Leverandør",
+      "providersGroup": "Leverandører",
+      "dellmontGroup": "DellMont-leverandører",
+      "openURL": "Leverandørens nettsted",
+      "loadSettings": "Last inn lagrede innstillinger på nytt",
+      "apiID": "Api-ID/handle/token",
+      "username": "Brukernavn",
+      "password": "Passord/id",
+      "from": "Fra",
+      "toTest": "Til",
+      "testMessage": "Melding",
+      "test": "Send testmelding",
+      "testingNow": "Tester nå. Vent........",
+      "testResult": "Testresultat",
+      "testOk": "OK! Lagre nå innstillingene.\r\n__result__",
+      "error": "Feil",
+      "save": "Lagre",
+      "settingsSaved": "Leverandørinnstillingene er lagret"
+    },
+    "tab2": {
+      "title": "Logger",
+      "deleteLogs": "Slett logger",
+      "deleteWarning": "Er du sikker?",
+      "deleted": "Logger slettet"
+    }
+  },
+  "providers": {
+    "freeMobile": {
+      "fieldLabels": { "username": "Bruker-ID", "password": "API-nøkkel" },
+      "hint": "Aktiver 'Notifications par SMS' under Mes options i Free Mobile-kontoen din først, ellers får du en 403-feil."
+    },
+    "messageBird": {
+      "fieldLabels": { "api_id": "Tilgangsnøkkel" }
+    },
+    "textbelt": {
+      "fieldLabels": { "api_id": "API-nøkkel" }
+    },
+    "cheapconnect": {
+      "fieldLabels": { "api_id": "API-nøkkel" }
+    },
+    "clickatell": {
+      "fieldLabels": { "api_id": "API-nøkkel" },
+      "hint": "Bruk API-nøkkelen fra en 'Integration' du har opprettet i Clickatell-portalen, ikke passordet du logger inn med på kontoen."
+    },
+    "targetSms": {
+      "fieldLabels": { "api_id": "Handle", "password": "Affiliate-ID" }
+    },
+    "twilio": {
+      "fieldLabels": { "api_id": "Account SID", "password": "Auth Token" }
+    },
+    "cm": {
+      "fieldLabels": { "api_id": "Produkt-token" }
+    },
+    "aspSms": {
+      "fieldLabels": { "api_id": "Brukernavn" }
+    },
+    "sendinblue": {
+      "fieldLabels": { "api_id": "API-nøkkel" }
+    },
+    "gatewayapi": {
+      "fieldLabels": { "api_id": "Token" }
+    },
+    "seven": {
+      "fieldLabels": { "api_id": "API-nøkkel" }
+    },
+    "clicksend": {
+      "fieldLabels": { "password": "API-nøkkel" }
+    },
+    "vonage": {
+      "fieldLabels": { "api_id": "API-nøkkel", "password": "API Secret" }
+    },
+    "plivo": {
+      "fieldLabels": { "api_id": "Auth ID", "password": "Auth Token" }
+    },
+    "textmagic": {
+      "fieldLabels": { "password": "API-nøkkel" }
+    },
+    "clockworksms": {
+      "fieldLabels": { "api_id": "API-nøkkel" }
+    },
+    "burstSms": {
+      "fieldLabels": { "api_id": "API-nøkkel", "password": "API Secret" }
+    },
+    "telnyx": {
+      "fieldLabels": { "api_id": "API-nøkkel" }
+    },
+    "africasTalking": {
+      "fieldLabels": { "api_id": "API-nøkkel" },
+      "hint": "Bruk 'sandbox' som brukernavn under testing, eller ditt live app-brukernavn fra Africa's Talking-dashbordet når du har fylt på. Støtter bare sending til afrikanske mobilnumre."
+    },
+    "httpsms": {
+      "fieldLabels": { "api_id": "API-nøkkel", "from": "Parret telefonnummer" },
+      "hint": "Ingen leverandørkonto nødvendig, men heller ikke gratis: installer først httpSMS Android-appen på din egen telefon og par den på httpsms.com. 'Fra' må nøyaktig samsvare med den telefonens eget nummer - dette sender via telefonens eget SIM-kort, som fakturerer SMS normalt (forhåndsbetalt saldo/abonnement), ikke via et vertsnummer. Risiko: appen er ikke i Play Store, så dette betyr sideloading av en APK - last den bare ned fra apk.httpsms.com eller den offisielle GitHub-utgivelsessiden, og bruk en ekstra enhet, ikke hovedtelefonen din."
+    }
+  }
+}
